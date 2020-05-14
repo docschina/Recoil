@@ -9,7 +9,7 @@
 
 module.exports = {
   someSidebar: {
-    Introduction: [
+    '简介': [
       'introduction/motivation',
       'introduction/core-concepts',
       'introduction/installation',

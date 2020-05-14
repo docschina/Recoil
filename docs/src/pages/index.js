@@ -17,32 +17,29 @@ import styles from './styles.module.css';
 
 const features = [
   {
-    title: <>Minimal and Reactish</>,
+    title: <>最小且具有响应式</>,
     // imageUrl: 'img/undraw_docusaurus_mountain.svg',
     description: (
       <>
-        Recoil works and thinks like React. Add some to your app and get fast and
-        flexible shared state.
+        Recoil 拥有与 React 一样的工作方式与原理。将其添加到您的应用中可快速获得灵活的状态共享。
       </>
     ),
   },
   {
-    title: <>Data-Flow Graph</>,
+    title: <>数据流图</>,
     // imageUrl: 'img/undraw_docusaurus_tree.svg',
     description: (
       <>
-        Derived data and asynchronous queries are tamed with pure functions and
-        efficient subscriptions.
+        针对派生数据（Derived data）和异步查询采用纯函数以及高效订阅的方式进行处理。
       </>
     ),
   },
   {
-    title: <>Cross-App Observation</>,
+    title: <>应用程序全局监听</>,
     // imageUrl: 'img/undraw_docusaurus_react.svg',
     description: (
       <>
-        Implement persistence, routing, time-travel debugging, or undo by observing
-        all state changes across your app, without impairing code-splitting.
+        通过监听应用程序中所有状态的变化来实现持久化存储，路由，时间旅行调试或撤消，并且不会影响代码分割。
       </>
     ),
   },
