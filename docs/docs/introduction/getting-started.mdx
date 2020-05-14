@@ -4,25 +4,25 @@ title: Getting Started
 
 ## Create React App
 
-Recoil is a state management library for React, so you need to have React installed and running to use Recoil. The easiest and recommended way for bootstrapping a React application is to use [Create React App](https://github.com/facebook/create-react-app#creating-an-app):
+Recoil 是 React 的状态管理库，因此你需要在 React 工程中安装并使用 Recoil。创建 React 项目最为推荐的方式是使用 [Create React App](https://github.com/facebook/create-react-app#creating-an-app)：
 
 ```shell
 npx create-react-app my-app
 ```
 
-> [`npx`](https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b) is a package runner tool that comes with npm 5.2+ and higher, see [instructions for older npm versions](https://gist.github.com/gaearon/4064d3c23a77c74a3614c498a8bb1c5f).
+> [`npx`](https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b) 是 npm 5.2 版本之后支持的 package 运行工具，请参阅 [npm 相关文档的介绍](https://gist.github.com/gaearon/4064d3c23a77c74a3614c498a8bb1c5f)。
 
-For more ways to install Create React App, see the [official documentation](https://github.com/facebook/create-react-app#creating-an-app).
+有很多种方式安装 Create React App，具体参见[官方文档](https://github.com/facebook/create-react-app#creating-an-app)。
 
-## Installation
+## 安装
 
-The Recoil package lives in <a href="https://www.npmjs.com/get-npm" target="_blank">npm</a>. To install the latest stable version, run the following command:
+使用 <a href="https://www.npmjs.com/get-npm" target="_blank">npm</a> 安装 Recoil 的最新版本。执行如下命令：
 
 ```shell
 npm install recoil
 ```
 
-Or if you're using <a href="https://classic.yarnpkg.com/en/docs/install/" target="_blank">yarn</a>:
+或者使用 <a href="https://classic.yarnpkg.com/en/docs/install/" target="_blank">yarn</a>：
 
 ```shell
 yarn add recoil
@@ -30,7 +30,7 @@ yarn add recoil
 
 ## RecoilRoot
 
-Components that use recoil state need `RecoilRoot` to appear somewhere in the parent tree. A good place to put this is in your root component:
+如需在组件中使用 Recoil，则可以将 `RecoilRoot` 放置在父组件的某个位置。将他设为根组件为最佳：
 
 ```jsx
 import React from 'react';
@@ -51,11 +51,11 @@ function App() {
 }
 ```
 
-We'll implement the `CharacterCounter` component in the following section.
+接下来，我们将实现 `CharacterCounter` 组件。
 
 ## Atom
 
-An **atom** represents a piece of **state**. Atoms can be read from and written to from any component. Components that read the value of an atom are implicitly **subscribed** to that atom, so any atom updates will result in a re-render of all components subscribed to that atom:
+一个 **atom** 代表一个**状态**。Atom 可在任意组件中进行读写。读取 atom 值的组件隐式订阅了该 atom，因此任何 atom 的更新都将致使使用对应 atom 的组件重新渲染：
 
 ```javascript
 const textState = atom({
@@ -64,7 +64,7 @@ const textState = atom({
 });
 ```
 
-Components that need to read from _and_ write to an atom should use `useRecoilState()` as shown below:
+在需要使用的组件中，你应该引入并使用 `useRecoilState()`，如下所示：
 
 ```jsx
 function CharacterCounter() {
@@ -95,7 +95,7 @@ function TextInput() {
 
 ## Selector
 
-A **selector** represents a piece of **derived state**. Derived state is a **transformation** of state. You can think of derived state as the output of passing state to a pure function that modifies the given state in some way:
+**selector** 代表一个**派生状态**，派生状态是状态的**转换**。你可以将派生状态视为将状态传递给以某种方式修改给定状态的纯函数的输出：
 
 ```jsx
 const charCountState = selector({
@@ -108,7 +108,7 @@ const charCountState = selector({
 });
 ```
 
-We can use the `useRecoilValue()` hook to read the value of `charCountState`:
+我们可以使用 `useRecoilValue()` 的 hook，来读取 `charCountState` 的值：
 
 ```jsx
 function CharacterCount() {
@@ -118,9 +118,9 @@ function CharacterCount() {
 }
 ```
 
-## Demo
+## 示例
 
-Below is the finished product:
+这是一个完整项目示例。
 
 import GettingStarted from '../../src/components/introduction/GettingStarted';
 
