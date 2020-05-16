@@ -3,23 +3,23 @@ title: atom(options)
 sidebar_label: atom()
 ---
 
-Returns writeable Recoil state.
+返回可写的 Recoil 状态。
 
 ---
 
 - `options`
-  - `key`: A unique string used to identify the atom internally. This string should be unique with respect to other atoms and selectors in the entire application.
-  - `default`: The initial value of the atom.
+  - `key`: 一个在内部用来标识 atom 的唯一字符串。在整个应用中，该字符串必须相对于其他 atom 和 selector 保持唯一。
+  - `default`: atom 的初始值。
 
-Most often, you'll use the following hooks to interact with atoms:
+通常，你需要使用以下 hook 来与 atom 进行交流。
 
-- [`useRecoilState()`](/docs/api-reference/core/useRecoilState): use this hook when you intend on both reading and writing to the atom. This hook subscribes the component the atom.
-- [`useRecoilValue()`](/docs/api-reference/core/useRecoilValue): use this hook when you intend on only reading the atom. This hook subscribes the component to the atom.
-- [`useSetRecoilState()`](/docs/api-reference/core/useRecoilState): use this hook when you intend on only writing to the atom.
+- [`useRecoilState()`](/docs/api-reference/core/useRecoilState): 当你同时需要对 atom 进行读写时，使用此 hook。这个 hook 订阅了组件的 atom。
+- [`useRecoilValue()`](/docs/api-reference/core/useRecoilValue): 当你仅需要读取 atom 时，使用此 hook。这个 Hook 订阅了组件的 atom。
+- [`useSetRecoilState()`](/docs/api-reference/core/useRecoilState): 当你仅需要写入 atom 时，使用此 hook。
 
-For rare cases where you need to read an atom's value without subscribing the component, see [`useRecoilCallback()`](/docs/api-reference/core/useRecoilCallback).
+在一些罕见的场景下，你需要在不订阅组件的情况下读取 atom 的值，请参考 [`useRecoilCallback()`](/docs/api-reference/core/useRecoilCallback)。
 
-### Example
+### 示例
 
 ```javascript
 import {atom, useRecoilState} from 'recoil';

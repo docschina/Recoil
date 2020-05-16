@@ -3,10 +3,10 @@ title: useSetRecoilState(state)
 sidebar_label: useSetRecoilState()
 ---
 
-Returns a setter function for updating the value of writeable Recoil state.
+返回一个 setter 函数，用来更新可写 Recoil state 的值。
 
 ---
 
-- `state`: writeable Recoil state.
+- `state`: 可写的 Recoil state.
 
-### Example
+### 示例

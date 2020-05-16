@@ -3,17 +3,17 @@ title: useRecoilValue(state)
 sidebar_label: useRecoilValue()
 ---
 
-Returns the value of the given Recoil state.
+返回给定 Recoil state 的值。
 
-This hook will implicitly subscribe the component to the given state.
+这个 hook 会隐式地订阅给定 state 的组件。
 
 ---
 
-- `state`: an [`atom`](/docs/api-reference/core/atom) or [`selector`](/docs/api-reference/core/selector)
+- `state`: 一个 [`atom`](/docs/api-reference/core/atom) 或 [`selector`](/docs/api-reference/core/selector)
 
-This is the recommended hook to use when a component intends to read state without writing to it as this hook works with both **read-only state** and **writeable state**. Atoms are writeable state while selectors may be either read-only or writeable. See [`selector()`](/docs/api-reference/core/selector) for more info.
+当一个组件需要在不写入 state 的情况下读取 state 时，推荐使用该 hook，因为该 hook 可以同时在**只读 state** 和 **可写 state**中使用。Atom 是可写 state，而 selector 可以是只读，也可以是可写的。更多信息，参考 [`selector()`](/docs/api-reference/core/selector)。
 
-### Example
+### 示例
 
 ```javascript
 import {atom, selector, useRecoilValue} from 'recoil';

@@ -2,10 +2,10 @@
 title: useResetRecoilState(state)
 ---
 
-Returns a function that will reset the value of the given state to its default value.
+返回一个函数，用来把给定 state 重置为其初始值。
 
 ---
 
-- `state`: a writeable Recoil state
+- `state`: 一个可写的 Recoil state
 
-### Example
+### 示例
