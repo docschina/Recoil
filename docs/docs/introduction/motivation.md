@@ -10,7 +10,7 @@ title: 动机
 
 我们希望在保持 API 以及语义和行为尽可能接近 React 的同时，对上述问题进行改进。
 
-Recoil 定义了一个正交有向图（directed graph orthogonal），并附加在 React 树中。State 变化从该图的根（我们称之为 atom）开始，通过纯函数（选择器）的方式传入组件。具体原理如下：
+Recoil 定义了一个正交有向图（directed graph orthogonal），并附加在 React 树中。State 变化从该图的根（我们称之为 atom）开始，通过纯函数（我们称之为 selector）的方式传入组件。具体原理如下：
 
 - 我们创建了无模板 API，其共享 state 的方式与 React 内部的 state 一致，拥有相同的 get/set 接口（如果需要，也可以使用 reducer 等）。
 - 我们可能会与 Concurrent 模式及其他 React 新特性兼容。
