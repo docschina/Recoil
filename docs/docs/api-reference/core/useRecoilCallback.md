@@ -2,7 +2,7 @@
 title: useRecoilCallback()
 ---
 
-### Example
+### 示例
 
 ```javascript
 import {atom, useRecoilCallback} from 'recoil';

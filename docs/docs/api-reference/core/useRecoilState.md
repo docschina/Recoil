@@ -3,17 +3,17 @@ title: useRecoilState()
 sidebar_label: useRecoilState()
 ---
 
-Returns a tuple where the first element is the value of state and the second element is a setter function that will update the value of the given state when called.
+返回一个数组，第一个元素是 state 的值，第二个元素是一个 setter 函数，调用该函数时会更新为给定 state 的值。
 
-This hook will implicitly subscribe the component to the given state.
+这个 hook 会隐式地订阅给定 state 的组件。
 
 ---
 
-- `state`: an [`atom`](/docs/api-reference/core/atom) or a _writeable_ [`selector`](/docs/api-reference/core/selector). Writeable selectors are selectors that were have both a `get` and `set` in their definition while read-only selectors only have a `get`.
+- `state`: 一个 [`atom`](/docs/api-reference/core/atom) 或一个 _可写_ 的 [`selector`](/docs/api-reference/core/selector)。可写的 selector 在其定义的同时具有 `get` 和 `set` 函数，而只读 selector 只有一个 `get`。
 
-This is the recommended hook to use when a component intends to read and write state.
+当组件同时需要读写状态时，推荐使用该 hook。
 
-### Example
+### 示例
 
 ```javascript
 import {atom, selector, useRecoilState} from 'recoil';
