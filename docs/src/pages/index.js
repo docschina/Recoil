@@ -103,14 +103,13 @@ function Home() {
             <div className="row">
               <div className="container">
                 <div className="row" style={{justifyContent: 'center'}}>
-                  <iframe
-                    width="560"
+                  <iframe 
                     height="315"
-                    src="https://v.youku.com/v_show/id_XNDY3MzIxNzY0MA==.html"
+                    width="560"
+                    src="https://player.youku.com/embed/XNDY3MzIxNzY0MA=="
                     frameborder="0"
-                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen
-                  />{' '}
+                    allowfullscreen="true">
+                  </iframe>{' '}
                 </div>
               </div>
             </div>
