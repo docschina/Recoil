@@ -21,12 +21,7 @@ const features = [
     // imageUrl: 'img/undraw_docusaurus_mountain.svg',
     description: (
       <>
-<<<<<<< HEAD
         Recoil 拥有与 React 一样的工作方式与原理。将其添加到您的应用中可快速获得灵活的状态共享。
-=======
-        Recoil works and thinks like React. Add some to your app and get fast
-        and flexible shared state.
->>>>>>> upstream/docs
       </>
     ),
   },
@@ -44,13 +39,7 @@ const features = [
     // imageUrl: 'img/undraw_docusaurus_react.svg',
     description: (
       <>
-<<<<<<< HEAD
         通过监听应用程序中所有状态的变化来实现持久化存储，路由，时间旅行调试或撤消，并且不会影响代码分割。
-=======
-        Implement persistence, routing, time-travel debugging, or undo by
-        observing all state changes across your app, without impairing
-        code-splitting.
->>>>>>> upstream/docs
       </>
     ),
   },
