@@ -9,7 +9,7 @@ sidebar_label: useRecoilState()
 
 ---
 
-- `state`: 一个 [`atom`](/docs/api-reference/core/atom) 或一个 _可写_ 的 [`selector`](/docs/api-reference/core/selector)。可写的 selector 在其定义时同时具有 `get` 和 `set` 函数，而只读 selector 只有一个 `get`。
+- `state`: 一个 [`atom`](/docs/api-reference/core/atom) 或一个 _可写_ 的 [`selector`](/docs/api-reference/core/selector)。可写的 selector 在其定义的同时具有 `get` 和 `set` 函数，而只读 selector 只有一个 `get`。
 
 当组件同时需要读写状态时，推荐使用该 hook。
 

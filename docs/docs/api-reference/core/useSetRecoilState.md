@@ -7,6 +7,6 @@ sidebar_label: useSetRecoilState()
 
 ---
 
-- `state`: 可写的 Recoil state.
+- `state`：可写的 Recoil state.
 
 ### 示例

@@ -10,12 +10,12 @@ sidebar_label: selector()
 ---
 
 - `options`
-  - `key`: 一个在内部用来标识 atom 的唯一字符串。在整个应用中，该字符串必须相对于其他 atom 和 selector 保持唯一。
-  - `get`: 一个传入具有如下属性的对象作为第一个参数的函数：
-    - `get`: 一个用来从其他 atom 或 selector 获取值的函数。所有传入该函数的 atom 或 selector 将会隐式地被添加到此 selector 的一个**依赖**列表中。如果这个 selector 的任何一个依赖发生改变，这个 selector 就会重新计算值。
-  - `set?`: 如果设置了该属性，selector 就会返回一个**可写**的 state。该函数需要传入具有如下属性的对象作为其第一个参数：
-    - `get`: 一个用来从其他 atom 或 selector 或缺值的函数。该函数不会为 selector 订阅给定的 atom 或 selector。
-    - `set`: 一个用来设置 Recoil 状态的函数。第一个参数时 Recoil 的 state，第二个参数时新的值。
+  - `key`：一个在内部用来标识 atom 的唯一字符串。在整个应用中，该字符串必须相对于其他 atom 和 selector 保持唯一。
+  - `get`：一个传入具有如下属性的对象作为第一个参数的函数：
+    - `get`：一个用来从其他 atom 或 selector 获取值的函数。所有传入该函数的 atom 或 selector 将会隐式地被添加到此 selector 的一个**依赖**列表中。如果这个 selector 的任何一个依赖发生改变，这个 selector 就会重新计算值。
+  - `set?`：如果设置了该属性，selector 就会返回一个**可写**的 state。该函数需要传入具有如下属性的对象作为其第一个参数：
+    - `get`：一个用来从其他 atom 或 selector 或缺值的函数。该函数不会为 selector 订阅给定的 atom 或 selector。
+    - `set`：一个用来设置 Recoil 状态的函数。第一个参数时 Recoil 的 state，第二个参数时新的值。
 
 ### 示例 (同步)
 

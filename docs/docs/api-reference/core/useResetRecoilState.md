@@ -6,6 +6,6 @@ title: useResetRecoilState(state)
 
 ---
 
-- `state`: 一个可写的 Recoil state
+- `state`：一个可写的 Recoil state
 
 ### 示例
