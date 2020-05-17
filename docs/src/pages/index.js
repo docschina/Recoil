@@ -104,7 +104,7 @@ function Home() {
           <div className="row">
             <div className="container">
               <div className="row" style={{justifyContent: 'center'}}>
-                <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/fb3cOMFkEzs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                </div>
+                <iframe width="560" height="315" src="https://v.youku.com/v_show/id_XNDY3MzIxNzY0MA==.html" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                </div>
               </div>
             </div>
           </div>
