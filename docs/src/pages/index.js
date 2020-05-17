@@ -21,7 +21,12 @@ const features = [
     // imageUrl: 'img/undraw_docusaurus_mountain.svg',
     description: (
       <>
+<<<<<<< HEAD
         Recoil 拥有与 React 一样的工作方式与原理。将其添加到您的应用中可快速获得灵活的状态共享。
+=======
+        Recoil works and thinks like React. Add some to your app and get fast
+        and flexible shared state.
+>>>>>>> upstream/docs
       </>
     ),
   },
@@ -39,7 +44,13 @@ const features = [
     // imageUrl: 'img/undraw_docusaurus_react.svg',
     description: (
       <>
+<<<<<<< HEAD
         通过监听应用程序中所有状态的变化来实现持久化存储，路由，时间旅行调试或撤消，并且不会影响代码分割。
+=======
+        Implement persistence, routing, time-travel debugging, or undo by
+        observing all state changes across your app, without impairing
+        code-splitting.
+>>>>>>> upstream/docs
       </>
     ),
   },
@@ -64,8 +75,7 @@ function Home() {
   const context = useDocusaurusContext();
   const {siteConfig = {}} = context;
   return (
-    <Layout
-      description="A state management library for React.">
+    <Layout description="A state management library for React.">
       <header className={classnames('hero hero--primary', styles.heroBanner)}>
         <div className="container">
           <h1 className="hero__title">{siteConfig.title}</h1>
@@ -100,11 +110,19 @@ function Home() {
           </section>
         )}
         <section className={styles.features}>
-         <div className="container">
-          <div className="row">
-            <div className="container">
-              <div className="row" style={{justifyContent: 'center'}}>
-                <iframe width="560" height="315" src="https://v.youku.com/v_show/id_XNDY3MzIxNzY0MA==.html" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                </div>
+          <div className="container">
+            <div className="row">
+              <div className="container">
+                <div className="row" style={{justifyContent: 'center'}}>
+                  <iframe
+                    width="560"
+                    height="315"
+                    src="https://v.youku.com/v_show/id_XNDY3MzIxNzY0MA==.html"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                  />{' '}
+                </div>
               </div>
             </div>
           </div>
