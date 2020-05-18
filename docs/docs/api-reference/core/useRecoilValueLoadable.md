@@ -5,7 +5,7 @@ sidebar_label: useRecoilValueLoadable()
 
 返回一个 `Loadable`.
 
-该 hook 用来读取异步的 selector。该 hook 会隐式地订阅给定 state 的组件。
+该 hook 用来读取异步的 selector。使用此 hook 会使组件隐式地订阅给定的 state。
 
 与 `useRecoilValue()` 不同，当从一个挂起的异步 selector 中读取值时，这个 hook 不会抛出一个 `Promise`（为了可以和 Suspense 一起使用）。而是会返回一个 `Loadable`，这是一个具有以下接口的对象：
 

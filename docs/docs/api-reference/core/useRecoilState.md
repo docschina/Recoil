@@ -5,7 +5,7 @@ sidebar_label: useRecoilState()
 
 返回一个数组，第一个元素是 state 的值，第二个元素是一个 setter 函数，调用该函数时会更新为给定 state 的值。
 
-这个 hook 会隐式地订阅给定 state 的组件。
+使用此 hook 会使组件隐式地订阅给定的 state。
 
 ---
 
