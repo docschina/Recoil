@@ -5,7 +5,7 @@ sidebar_label: useRecoilValue()
 
 返回给定 Recoil state 的值。
 
-这个 hook 会隐式地订阅给定 state 的组件。
+使用此 hook 会使组件隐式地订阅给定的 state。
 
 ---
 

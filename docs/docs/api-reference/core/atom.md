@@ -13,8 +13,8 @@ sidebar_label: atom()
 
 通常，你需要使用以下 hook 来与 atom 搭配使用。
 
-- [`useRecoilState()`](/docs/api-reference/core/useRecoilState)：当你同时需要对 atom 进行读写时，使用此 hook。这个 hook 订阅了组件的 atom。
-- [`useRecoilValue()`](/docs/api-reference/core/useRecoilValue)：当你仅需要读取 atom 时，使用此 hook。这个 hook 订阅了组件的 atom。
+- [`useRecoilState()`](/docs/api-reference/core/useRecoilState)：当你同时需要对 atom 进行读写时，使用此 hook。使用此 hook 会使组件订阅 atom。
+- [`useRecoilValue()`](/docs/api-reference/core/useRecoilValue)：当你仅需要读取 atom 时，使用此 hook。使用此 hook 会使组件订阅 atom。
 - [`useSetRecoilState()`](/docs/api-reference/core/useRecoilState)：当你仅需要写入 atom 时，使用此 hook。
 
 在一些罕见的场景下，你需要在不订阅组件的情况下读取 atom 的值，请参考 [`useRecoilCallback()`](/docs/api-reference/core/useRecoilCallback)。
