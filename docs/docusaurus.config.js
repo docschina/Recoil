@@ -119,12 +119,12 @@ module.exports = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl:
-            'https://github.com/facebookexperimental/Recoil/edit/docs/docs/',
+            'https://github.com/docschina/Recoil/edit/docs/docs/',
         },
         blog: {
           showReadingTime: true,
           editUrl:
-            'https://github.com/facebookexperimental/Recoil/edit/docs/docs/blog/',
+            'https://github.com/docschina/Recoil/edit/docs/docs/blog/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),

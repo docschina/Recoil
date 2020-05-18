@@ -15,14 +15,14 @@ module.exports = {
       'introduction/installation',
       'introduction/getting-started',
     ],
-    'Basic Tutorial': [
+    '基础教程': [
       'basic-tutorial/intro',
       'basic-tutorial/atoms',
       'basic-tutorial/selectors',
       // 'basic-tutorial/demo',
       // 'basic-tutorial/performance',
     ],
-    Guides: [
+    '指南': [
       //   {
       //     'Migrating to Recoil': [
       //       'guides/migrating/from-react-state',
@@ -40,14 +40,14 @@ module.exports = {
 
     'API Reference': [
       {
-        Core: [
+        '核心': [
           'api-reference/core/RecoilRoot',
           'api-reference/core/atom',
           'api-reference/core/selector',
           'api-reference/core/isRecoilValue',
           // 'api-reference/core/DefaultValue',
           {
-            Hooks: [
+            Hook: [
               'api-reference/core/useRecoilState',
               'api-reference/core/useRecoilValue',
               'api-reference/core/useSetRecoilState',
@@ -60,7 +60,7 @@ module.exports = {
         ],
       },
       {
-        Utils: [
+        '工具': [
           'api-reference/utils/atomFamily',
           'api-reference/utils/selectorFamily',
           'api-reference/utils/constSelector',
