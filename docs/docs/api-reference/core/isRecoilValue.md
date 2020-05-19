@@ -9,7 +9,7 @@ sidebar_label: isRecoilValue()
 
 ### 示例
 
-```javascript
+```jsx
 import {atom, isRecoilValue} from 'recoil';
 
 const counter = atom({
