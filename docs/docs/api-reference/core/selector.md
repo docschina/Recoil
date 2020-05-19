@@ -19,7 +19,7 @@ sidebar_label: selector()
 
 ### 示例 (同步)
 
-```javascript
+```jsx
 import {atom, selector, useRecoilState} from 'recoil';
 
 const tempFahrenheit = atom({

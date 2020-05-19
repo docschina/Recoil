@@ -4,7 +4,7 @@ title: useRecoilCallback()
 
 ### 示例
 
-```javascript
+```jsx
 import {atom, useRecoilCallback} from 'recoil';
 
 const itemsInCart = atom({

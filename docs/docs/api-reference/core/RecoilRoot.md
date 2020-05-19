@@ -17,7 +17,7 @@ sidebar_label: <RecoilRoot />
 
 ### 示例
 
-```javascript
+```jsx
 import {RecoilRoot} from 'recoil';
 
 function AppRoot() {

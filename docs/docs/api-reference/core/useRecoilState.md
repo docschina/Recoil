@@ -15,7 +15,7 @@ sidebar_label: useRecoilState()
 
 ### 示例
 
-```javascript
+```jsx
 import {atom, selector, useRecoilState} from 'recoil';
 
 const tempFahrenheit = atom({

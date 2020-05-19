@@ -15,7 +15,7 @@ sidebar_label: useRecoilValue()
 
 ### 示例
 
-```javascript
+```jsx
 import {atom, selector, useRecoilValue} from 'recoil';
 
 const namesState = atom({
