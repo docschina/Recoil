@@ -9,3 +9,12 @@ title: useResetRecoilState()
 - `state`：一个可写的 Recoil state
 
 ### 示例
+
+```jsx
+import {todoListState} from "../atoms/todoListState";
+
+const TodoResetButton = () => {
+  const resetList = useResetRecoilState(todoListState);
+  return <button onClick={resetList}>Reset</button>;
+};
+```
