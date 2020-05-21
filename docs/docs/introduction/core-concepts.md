@@ -4,19 +4,11 @@ title: 核心概念
 
 ## 概览
 
-<<<<<<< HEAD
 使用 Recoil 会为你创建一个数据流向图，从 _atom_（共享状态）到 _selector_（纯函数），再流向 React 组件。Atom 是组件可以订阅的 state 单位。selector 可以同步或异步改变此 state。
-=======
-Recoil lets you create a data-flow graph that flows from _atoms_ (shared state) through _selectors_ (pure functions) and down into your React components. Atoms are units of state that components can subscribe to. Selectors transform this state either synchronously or asynchronously.
->>>>>>> 13f61990ca195ee6bcfe36411caf4f2aab073ff4
 
 ## Atom
 
-<<<<<<< HEAD
 Atom 是状态的单位。它们可更新也可订阅：当 atom 被更新，每个被订阅的组件都将使用新值进行重渲染。它们也可以在运行时创建。可以使用 atom 替代组件内部的 state。如果多个组件使用相同的 atom，则这些组件共享 atom 的状态。
-=======
-Atoms are units of state. They're updateable and subscribable: when an atom is updated, each subscribed component is re-rendered with the new value. They can be created at runtime, too. Atoms can be used in place of React local component state. If the same atom is used from multiple components, all those components share their state.
->>>>>>> 13f61990ca195ee6bcfe36411caf4f2aab073ff4
 
 Atom 是使用 `atom` 函数创建的：
 
