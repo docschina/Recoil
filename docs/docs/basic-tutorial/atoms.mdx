@@ -2,7 +2,7 @@
 title: Atoms
 ---
 
-Atoms 包含我们应用中状态的来源。在我们的待办事项清单(todo-list)中，来源将会是一个对象数组，每个对象代表一个待办事项(todo-item)。
+Atoms 包含我们应用中状态的来源。在我们的待办事项清单（todo-list）中，来源将会是一个对象数组，每个对象代表一个待办事项（todo-item）。
 
 我们将列表的 atom 称为`todoListState`，并使用`atom（)`函数创建它：
 
@@ -13,7 +13,7 @@ const todoListState = atom({
 });
 ```
 
-我们为该 atom 设定一个唯一的`键(key)`，并将`默认值`设置为一个空数组。 要读取该 atom 的内容，我们可以在`TodoList`组件中使用`useRecoilValue()` hook：
+我们为该 atom 设定一个唯一的`键（key）`，并将`默认值`设置为一个空数组。 要读取该 atom 的内容，我们可以在`TodoList`组件中使用`useRecoilValue()` hook：
 
 ```jsx
 function TodoList() {
@@ -73,7 +73,7 @@ function getId() {
 }
 ```
 
-注意，我们在 setter 函数中使用**更新器(updater)**的形式，以便我们可以基于旧的待办事项列表创建新的待办事项列表。
+注意，我们在 setter 函数中使用**更新器（updater）**的形式，以便我们可以基于旧的待办事项列表创建新的待办事项列表。
 
 `TodoItem`组件将显示待办事项的值，同时允许你更改其文本和删除它。 我们使用`useRecoilState()`读取`todoListState`并获取一个 setter 函数，该函数用于更新项目文本，将其标记为完成并删除它：
 

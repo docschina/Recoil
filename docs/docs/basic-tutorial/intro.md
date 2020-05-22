@@ -6,10 +6,10 @@ title: 介绍
 
 在本教程中，我们将构建一个简单的待办事项列表（todo-list）应用程序。 我们的应用程序将能够执行以下操作：
 
-- 添加待办事项
-- 编辑待办事项
-- 删除待办事项
-- 过滤待办事项
-- 显示有用的统计信息
+- 添加待办事项（Add todo items）
+- 编辑待办事项（Edit todo items）
+- 删除待办事项（Delete todo items）
+- 过滤待办事项（Filter todo items）
+- 显示有用的统计信息（Display useful stats）
 
 在此过程中，我们将介绍 atoms，selectors，atom families 以及 Recoil API 的 Hooks。 我们还将涵盖优化的内容。
