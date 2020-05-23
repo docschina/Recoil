@@ -75,7 +75,7 @@ function getId() {
 
 注意，我们在 setter 函数中使用**更新器（updater）**的形式，以便我们可以基于旧的待办事项列表创建新的待办事项列表。
 
-`TodoItem`组件将显示待办事项的值，同时允许你更改其文本和删除它。 我们使用`useRecoilState()`读取`todoListState`并获取一个 setter 函数，该函数用于更新项目文本，将其标记为完成并删除它：
+`TodoItem` 组件将显示待办事项的值，同时允许你更改其文本和删除它。我们使用 `useRecoilState()` 读取 `todoListState` 并获取一个 setter 函数，该函数用于更新项目文本，将其标记为完成并删除它：
 
 ```jsx
 function TodoItem({item}) {
