@@ -43,7 +43,7 @@ const filteredTodoListState = selector({
 
 > 从组件的角度来看，selector 可以使用与读取 atom 相同的 hook 来读取。不过务必注意，某些 hook 仅适用于**可写状态（writable state）**，例如 `useRecoilState()`。所有 atom 都是可写状态，但只有一些 selector 可被视为可写状态（同时具有 `get` 和 `set` 属性的 selector）。请参阅[核心概念](/docs/introduction/core-concepts)页面了解更多关于此主题的信息。
 
-要显示过滤后的待办事项列表只需要在`TodoList`组件中更改一行代码就能实现：
+要显示过滤后的 TodoList 只需要在 `TodoList` 组件中更改一行代码就能实现：
 
 ```jsx
 function TodoList() {
