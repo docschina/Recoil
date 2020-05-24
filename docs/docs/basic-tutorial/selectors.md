@@ -91,7 +91,7 @@ function TodoListFilters() {
 
 我们要显示以下统计信息：
 
-- 待办事项总数
+- Todo Item 总数
 - 完成的项目总数
 - 未完成的项目总数
 - 已完成项目的百分比
