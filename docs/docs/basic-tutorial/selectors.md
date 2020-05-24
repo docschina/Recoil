@@ -1,16 +1,15 @@
 ---
-title: Selectors
+title: Selector
 ---
 
-**selector**代表一个**派生状态**，你可以将派生状态视为将状态传递给以某种方式修改给定状态的纯函数的输出。
+**Selector** 代表一个**派生状态**，你可以将派生状态视为将状态传递给以某种方式修改给定状态的纯函数的输出。
 
-派生状态(**Derived state**)是一个强大的概念，因为它使我们可以构建依赖于其他数据的动态数据。 在我们的待办事项列表(todo-list)应用程序的中，以下内容被视为派生数据：
+派生状态（Derived state）是一个强大的概念，因为它使我们可以构建依赖于其他数据的动态数据。 在我们的 Todo List 应用程序的中，以下内容被视为派生数据：
 
--**经筛选后的待办事项列表(Filtered todo list)**：通过创建一个新列表，该新列表是从完整的待办事项列表中根据某些条件过滤筛选后派生而来（例如，筛选出已经完成的项目） 。
+- **过滤筛选后的 Todo List**：通过创建一个新列表，该新列表是从完整的 Todo List 中根据某些条件过滤筛选后派生而来（例如，筛选出已经完成的项目）。
+- **Todo List 的信息统计**：通过计算列表的有用属性（例如列表中的项目总数，已完成项目的数量以及已完成项目的百分比）从完整的 Todo List 中派生出来。
 
--**待办事项列表统计(Todo list statistics)**：通过计算列表的有用属性（例如列表中的项目总数，已完成项目的数量以及已完成项目的百分比）从完整的待办事项列表中派生出来。
-
-要实现过滤的待办事项列表（todo-list），我们需要选择一组过滤条件，其值可以保存在一个 atom 中。 我们将使用的过滤器选项为：“显示全部（Show All）”，“显示完成（Show Completed）”和“显示未完成（Show Uncompleted）”。 默认值为“全部显示（Show All）”：
+要实现过滤的 Todo List，我们需要选择一组过滤条件，其值可以保存在一个 atom 中。 我们将使用的过滤器选项为：“显示全部（Show All）”，“显示完成（Show Completed）”和“显示未完成（Show Uncompleted）”。 默认值为“全部显示（Show All）”：
 
 ```javascript
 const todoListFilterState = atom({
@@ -19,7 +18,7 @@ const todoListFilterState = atom({
 });
 ```
 
-使用`todoListFilterState`和`todoListState`，我们可以构建一个`filteredTodoListState`的 selector，该 selector 派生一个过滤列表：
+使用 `todoListFilterState` 和 `todoListState`，我们可以构建一个 `filteredTodoListState` 的 selector，该 selector 派生一个过滤列表：
 
 ```javascript
 const filteredTodoListState = selector({
@@ -40,9 +39,9 @@ const filteredTodoListState = selector({
 });
 ```
 
-`filteredTodoListState`在内部跟踪两个依赖项：`todoListFilterState`和`todoListState`，以便在其中任何一个更改时重新运行。
+`filteredTodoListState` 在内部跟踪两个依赖项：`todoListFilterState` 和 `todoListState`，以便在其中任何一个更改时重新运行。
 
-> 从组件的角度来看，selectors 可以使用与读取 atoms 相同的 hooks 来读取。不过务必注意，某些 hooks 仅适用于**可写状态（writable state）**，例如`useRecoilState()`。所有 atoms 都是可写状态，但只有一些 selectors 可被视为可写状态（同时具有`get`和`set`属性的 selectors）。请参阅[核心概念](/docs/introduction/core-concepts)页面了解更多关于此主题的信息。
+> 从组件的角度来看，selector 可以使用与读取 atom 相同的 hook 来读取。不过务必注意，某些 hook 仅适用于**可写状态（writable state）**，例如 `useRecoilState()`。所有 atom 都是可写状态，但只有一些 selector 可被视为可写状态（同时具有 `get` 和 `set` 属性的 selector）。请参阅[核心概念](/docs/introduction/core-concepts)页面了解更多关于此主题的信息。
 
 要显示过滤后的待办事项列表只需要在`TodoList`组件中更改一行代码就能实现：
 
@@ -65,7 +64,7 @@ function TodoList() {
 }
 ```
 
-注意，UI 与`todoListFilterState`的默认值相同，即“显示全部（Show All）”。 为了更改过滤器，我们需要创建`TodoListFilters`组件：
+注意，UI 与 `todoListFilterState` 的默认值相同，即“显示全部（Show All）”。 为了更改过滤器，我们需要创建 `TodoListFilters` 组件：
 
 ```jsx
 function TodoListFilters() {
@@ -88,7 +87,7 @@ function TodoListFilters() {
 }
 ```
 
-通过几行代码，我们成功实现了过滤筛选！ 我们将使用相同的概念来实现`TodoListStats`组件。
+通过几行代码，我们成功实现了过滤筛选！ 我们将使用相同的概念来实现 `TodoListStats` 组件。
 
 我们要显示以下统计信息：
 
@@ -97,7 +96,7 @@ function TodoListFilters() {
 - 未完成的项目总数
 - 已完成项目的百分比
 
-尽管我们可以为每个统计信息创建一个 selector，但一种更简单的方法是创建一个 selector，该 selector 返回包含我们所需数据的对象。 我们将这个 selector 称为`todoListStatsState`：
+尽管我们可以为每个统计信息创建一个 selector，但一种更简单的方法是创建一个 selector，该 selector 返回包含我们所需数据的对象。 我们将这个 selector 称为 `todoListStatsState`：
 
 ```javascript
 const todoListStatsState = selector({
@@ -119,7 +118,7 @@ const todoListStatsState = selector({
 });
 ```
 
-为了读取`todoListStatsState`的值，我们再次使用`useRecoilValue()`：
+为了读取 `todoListStatsState` 的值，我们再次使用 `useRecoilValue()`：
 
 ```jsx
 function TodoListStats() {
@@ -143,10 +142,10 @@ function TodoListStats() {
 }
 ```
 
-总而言之，我们创建了一个满足所有需求的待办事项列表（todo-list）应用程序：
+总而言之，我们创建了一个满足所有需求的 Todo List 应用程序：
 
-- 添加待办事项（Add todo items）
-- 编辑待办事项（Edit todo items）
-- 删除待办事项（Delete todo items）
-- 过滤待办事项（Filter todo items）
-- 显示有用的统计信息（Display useful stats）
+- 添加 Todo Item
+- 编辑 Todo Item
+- 删除 Todo Item
+- 过滤 Todo Item
+- 显示有用的统计信息
