@@ -2,9 +2,6 @@
 title: useRecoilCallback()
 ---
 
-<<<<<<< HEAD
-### 示例
-=======
 ***NOTE***: *Minor changes to this API are expected soon.*
 
 ----
@@ -40,7 +37,6 @@ Callback Interface:
 * **`reset`** - Reset the value of an atom or selector to its default.
 
 ### Example
->>>>>>> 36d72df4b8d13386d26b3c4c33042c086d638e80
 
 ```jsx
 import {atom, useRecoilCallback} from 'recoil';
