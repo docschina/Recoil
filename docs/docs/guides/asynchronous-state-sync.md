@@ -33,7 +33,7 @@ function CurrentUserIDSubscription() {
     RemoteStateAPI.subscribeToCurrentUserID(setCurrentUserID);
     // Specify how to cleanup after this effect
     return function cleanup() {
-      RemoteServerAPI.unsubscribeFromFriendStatus(setCurrentUserID);
+      RemoteServerAPI.unsubscribeFromCurrentUserID(setCurrentUserID);
     };
   }, []);
 
@@ -54,7 +54,7 @@ If you want to handle synchronization of multiple atoms in a single place, you c
 
 ## Bi-Directional Synching
 
-You can also sync the state so local changes are updated on the server:
+You can also sync the state so local changes are updated on the server.  Note that this is a simplified example, please take care to avoid feedback loops.
 
 ```jsx
 function CurrentUserIDSubscription() {
@@ -71,7 +71,7 @@ function CurrentUserIDSubscription() {
     RemoteStateAPI.subscribeToCurrentUserID(handleUserChange);
     // Specify how to cleanup after this effect
     return function cleanup() {
-      RemoteServerAPI.unsubscribeFromFriendStatus(handleUserChange);
+      RemoteServerAPI.unsubscribeFromCurrentUserID(handleUserChange);
     };
   }, [knownServerCurrentUserID]);
 
@@ -89,7 +89,7 @@ function CurrentUserIDSubscription() {
 
 ## Synching State with Parameters
 
-You can also use the [`atomFamily`](/docs/api-reference/utils/atomFamily) helper to sync local state based on parameters.
+You can also use the [`atomFamily`](/docs/api-reference/utils/atomFamily) helper to sync local state based on parameters.  Note that each call of this example hook will create a subscription, so take care to avoid redundant usage.
 
 ```jsx
 const friendStatusState = atomFamily({
