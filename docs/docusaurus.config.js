@@ -33,7 +33,7 @@ module.exports = {
           label: '文档',
           position: 'left',
         },
-        // {to: 'blog', label: 'Blog', position: 'left'},
+        {to: 'blog', label: 'Blog', position: 'left'},
         // Please keep GitHub link to the right for consistency.
         {
           href: 'https://github.com/facebookexperimental/Recoil',
