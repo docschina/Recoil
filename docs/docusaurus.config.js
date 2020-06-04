@@ -128,15 +128,11 @@ module.exports = {
         blog: {
           showReadingTime: true,
           editUrl:
-<<<<<<< HEAD
             'https://github.com/docschina/Recoil/edit/docs/docs/blog/',
-=======
-            'https://github.com/facebookexperimental/Recoil/edit/docs/docs/blog/',
            feedOptions: {
             type: 'all',
             copyright: `Copyright © ${new Date().getFullYear()} Facebook, Inc.`,
           },
->>>>>>> d2be29b43b2441d1de0f4ab5072c4f333c516c08
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
