@@ -64,11 +64,7 @@ function TodoList() {
 }
 ```
 
-<<<<<<< HEAD
-Note the UI is showing every todo because `todoListFilterState` was given a default value of `"Show All"`. In order to change the filter, we need to implement the `TodoListFilters` component:
-=======
-注意，UI 与 `todoListFilterState` 的默认值相同，即“显示全部（Show All）”。 为了更改过滤器，我们需要创建 `TodoListFilters` 组件：
->>>>>>> origin/docs
+注意，UI 展示了每一项 todo，因为传给了 `todoListFilterState` 一个默认值，即“显示全部（Show All）”。 为了更改过滤器，我们需要创建 `TodoListFilters` 组件：
 
 ```jsx
 function TodoListFilters() {
