@@ -9,7 +9,7 @@
 
 module.exports = {
   title: 'Recoil',
-  tagline: 'A state management library for React',
+  tagline: 'React 状态管理库',
   url: 'https://recoiljs.org',
   baseUrl: '/',
   favicon: 'img/favicon.ico',
@@ -30,7 +30,7 @@ module.exports = {
         {
           to: 'docs/introduction/installation',
           activeBasePath: 'docs',
-          label: 'Docs',
+          label: '文档',
           position: 'left',
         },
         {to: 'blog', label: 'Blog', position: 'left'},
@@ -46,20 +46,20 @@ module.exports = {
       style: 'dark',
       links: [
         {
-          title: 'Learn',
+          title: '学习',
           items: [
             {
               label: 'Getting Started',
               to: 'docs/introduction/getting-started',
             },
             {
-              label: 'Core Concepts',
+              label: '核心概念',
               to: 'docs/introduction/core-concepts',
             },
           ],
         },
         {
-          title: 'Community',
+          title: '社区',
           items: [
             // {
             //   label: 'Stack Overflow',
@@ -76,7 +76,7 @@ module.exports = {
           ],
         },
         {
-          title: 'More',
+          title: '更多',
           items: [
             // {
             //   label: 'Blog',
@@ -89,17 +89,17 @@ module.exports = {
           ],
         },
         {
-          title: 'Legal',
+          title: '隐私政策',
           // Please do not remove the privacy and terms, it's a legal requirement.
           items: [
             {
-              label: 'Privacy',
+              label: '隐私策略',
               href: 'https://opensource.facebook.com/legal/privacy/',
               target: '_blank',
               rel: 'noreferrer noopener',
             },
             {
-              label: 'Terms',
+              label: '条款',
               href: 'https://opensource.facebook.com/legal/terms/',
               target: '_blank',
               rel: 'noreferrer noopener',
@@ -113,7 +113,7 @@ module.exports = {
         href: 'https://opensource.facebook.com',
       },
       // Please do not remove the credits, help to publicize Docusaurus :)
-      copyright: `Copyright © ${new Date().getFullYear()} Facebook, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Facebook, Inc. Built with Docusaurus. Translate by docschina.`,
     },
   },
   presets: [
@@ -123,12 +123,12 @@ module.exports = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl:
-            'https://github.com/facebookexperimental/Recoil/edit/docs/docs/',
+            'https://github.com/docschina/Recoil/edit/docs/docs/',
         },
         blog: {
           showReadingTime: true,
           editUrl:
-            'https://github.com/facebookexperimental/Recoil/edit/docs/docs/blog/',
+            'https://github.com/docschina/Recoil/edit/docs/docs/blog/',
            feedOptions: {
             type: 'all',
             copyright: `Copyright © ${new Date().getFullYear()} Facebook, Inc.`,

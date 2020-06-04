@@ -3,11 +3,11 @@ title: isRecoilValue(value)
 sidebar_label: isRecoilValue()
 ---
 
-Returns `true` if `value` is either an atom or selector and `false` otherwise.
+如果 `value` 是一个 atom 或者 selector 则返回 `true`，反之，返回 `false`。
 
 ---
 
-### Example
+### 示例
 
 ```jsx
 import {atom, isRecoilValue} from 'recoil';
