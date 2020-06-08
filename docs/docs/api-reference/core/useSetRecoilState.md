@@ -7,25 +7,19 @@ sidebar_label: useSetRecoilState()
 
 ---
 
-<<<<<<< HEAD
-- `state`：可写的 Recoil state （[`atom`](/docs/api-reference/core/atom) 或可写的 [`selector`](/docs/api-reference/core/selector)）
-
-当一个组件需要写入而不需要读取 state 时，推荐使用此 hook。如果组件使用了 `useRecoilState()` 来获取 setter 函数，那么同时它也会订阅更新，并在 atom 或 selector 更新时重新渲染。使用 `useSetRecoilState()` 允许组件在值发生改变时而不重新渲染的情况下设置值。
-=======
 ```jsx
 function useSetRecoilState<T>(state: RecoilState<T>): SetterOrUpdater<T>;
 
 type SetterOrUpdater<T> = (T | (T => T)) => void;
 ```
 
-- `state`: writeable Recoil state (an [`atom`](/docs/api-reference/core/atom) or a _writeable_ [`selector`](/docs/api-reference/core/selector))
+- `state`：可写的 Recoil state （[`atom`](/docs/api-reference/core/atom) 或可写的 [`selector`](/docs/api-reference/core/selector)）
 
-Returns a setter function which can be used asynchronously to change the state.  The setter may either be passed a new value or an updater function which receives the previous value as an argument.
+返回一个可以用来异步改变 state 的 setter 函数。可以传给此 setter 函数一个新的值，也可以传入一个更新函数，此函数接受上一次的值作为其参数。
 
 ---
 
-This is the recommended hook to use when a component intends to write to state without reading it. If a component used the [`useRecoilState()`](/docs/api-reference/core/useRecoilState) hook to get the setter, it would also subscribe to updates and re-render when the atom or selector updated. Using `useSetRecoilState()` allows a component to set the value without re-rendering when the value changes.
->>>>>>> 78d7c93b23261f3dcfae1680a3480b1d4b9db7e7
+当一个组件需要写入而不需要读取 state 时，推荐使用此 hook。如果组件使用了 [`useRecoilState()`](/docs/api-reference/core/useRecoilState) 来获取 setter 函数，那么同时它也会订阅更新，并在 atom 或 selector 更新时重新渲染。使用 `useSetRecoilState()` 允许组件在值发生改变时而不重新渲染的情况下设置值。
 
 ### 示例
 

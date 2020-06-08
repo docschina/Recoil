@@ -7,24 +7,14 @@ sidebar_label: <RecoilRoot />
 
 ---
 
-<<<<<<< HEAD
-- `props`
-  - `initializeState?`：`({set, setUnvalidatedAtomValues}) => void`.
-    - 此函数会在 RecoilStore 第一次渲染的时候被调用，可以用来设置 atom 的初始值。需要提供 2 个参数：
-      - `set`：`<T>(RecoilValue<T>, T) => void`
-        - 把单个 atom 的初始值设置为所传入的值，
-      - `setUnvalidatedAtomValues`：`(Map<string, mixed>) => void`
-        - 设置任意个 atom 的初始值，这些 atom 的 key 就是所传入 map 的 key。和 `useSetUnvalidatedAtomValues` 一样，每个 atom 的 validator 都会在它即将被读取的时候调用，如果设置 atom 时没有配置 validator，会导致异常。
-=======
-- `props` - ***NOTE:*** **This API is expected to change.**
+- `props` - ***注意：*** **该 API 可能会改变。**
   - `initializeState?`: `({set, setUnvalidatedAtomValues}) => void`.
-    - A function that will be called when RecoilStore is first rendered which can set initial values for atoms. It is provided with two arguments:
+    - 此函数会在 RecoilStore 第一次渲染的时候被调用，可以用来设置 atom 的初始值。需要提供 2 个参数：
       - `set`: `<T>(RecoilValue<T>, T) => void`
-        - Sets the initial value of a single atom to the provided value.
+        - 把单个 atom 的初始值设置为所传入的值。
       - `setUnvalidatedAtomValues`: `(Map<string, mixed>) => void`
-        - ***NOTE:*** **This API is expected to change.**
-        - Sets the initial value for any number of atoms whose keys are the keys in the provided map. As with `useSetUnvalidatedAtomValues`, the validator for each atom will be called when it is next read, and setting an atom without a configured validator will result in an exception.
->>>>>>> 78d7c93b23261f3dcfae1680a3480b1d4b9db7e7
+        - ***注意：*** **该 API 可能会改变。**
+        - 设置任意个 atom 的初始值，这些 atom 的 key 就是所传入 map 的 key。和 `useSetUnvalidatedAtomValues` 一样，每个 atom 的 validator 都会在它即将被读取的时候调用，如果设置 atom 时没有配置 validator，会导致异常。
 
 ### 示例
 

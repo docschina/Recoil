@@ -7,15 +7,11 @@ sidebar_label: useResetRecoilState()
 
 ---
 
-<<<<<<< HEAD
-- `state`：一个可写的 Recoil state
-=======
 ```jsx
 function useResetRecoilState<T>(state: RecoilState<T>): () => void;
 ```
 
-- `state`: a writeable Recoil state
->>>>>>> 78d7c93b23261f3dcfae1680a3480b1d4b9db7e7
+- `state`：一个可写的 Recoil state
 
 ### 示例
 
