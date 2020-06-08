@@ -1,5 +1,5 @@
 ---
-title: useRecoilValue()
+title: useRecoilValue(state)
 sidebar_label: useRecoilValue()
 ---
 
@@ -9,9 +9,17 @@ sidebar_label: useRecoilValue()
 
 ---
 
+```jsx
+function useRecoilValue<T>(state: RecoilValue<T>): T;
+```
+
 - `state`：一个 [`atom`](/docs/api-reference/core/atom) 或 [`selector`](/docs/api-reference/core/selector)
 
+---
+
 当一个组件需要在不写入 state 的情况下读取 state 时，推荐使用该 hook，因为该 hook 可以同时在**只读 state** 和**可写 state** 中使用。Atom 是可写 state，而 selector 可以是只读，也可以是可写的。更多信息，参考 [`selector()`](/docs/api-reference/core/selector)。
+
+Using this hook in a React component will subscibe the component to re-render when the state is updated.  This hook may throw if the state has an error or is pending asynchronous resolution.  Please see [this guide](/docs/guides/asynchronous-data-queries).
 
 ### 示例
 
