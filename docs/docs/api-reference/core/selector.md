@@ -45,9 +45,6 @@ type ResetRecoilState = <T>(RecoilState<T>) => void;
 
 ---
 
-<<<<<<< HEAD
-### 示例 (同步)
-=======
 A selector with a simple static dependency:
 
 ```jsx
@@ -114,8 +111,7 @@ const myQuery = selector({
 });
 ```
 
-### Example (Synchronous)
->>>>>>> 0e21be768030f2b9f0e075783b9552b0c5df0fcf
+### 示例 (同步)
 
 ```jsx
 import {atom, selector, useRecoilState} from 'recoil';
@@ -191,8 +187,4 @@ function ResultsSection() {
 }
 ```
 
-<<<<<<< HEAD
-更多复杂的示例，请参考[这篇教程](/docs/guides/asynchronous-data-queries)。
-=======
-Please see [this guide](/docs/guides/asynchronous-data-queries) for more complex examples.
->>>>>>> 0e21be768030f2b9f0e075783b9552b0c5df0fcf
+更多复杂的示例，请参考[这篇指南](/docs/guides/asynchronous-data-queries)。
