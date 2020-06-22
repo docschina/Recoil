@@ -7,21 +7,10 @@ sidebar_label: <RecoilRoot />
 
 ---
 
-<<<<<<< HEAD
-- `props` - ***注意：*** **该 API 可能会改变。**
-  - `initializeState?`: `({set, setUnvalidatedAtomValues}) => void`.
-    - 此函数会在 RecoilStore 第一次渲染的时候被调用，可以用来设置 atom 的初始值。需要提供 2 个参数：
-      - `set`: `<T>(RecoilValue<T>, T) => void`
-        - 把单个 atom 的初始值设置为所传入的值。
-      - `setUnvalidatedAtomValues`: `(Map<string, mixed>) => void`
-        - ***注意：*** **该 API 可能会改变。**
-        - 设置任意个 atom 的初始值，这些 atom 的 key 就是所传入 map 的 key。和 `useSetUnvalidatedAtomValues` 一样，每个 atom 的 validator 都会在它即将被读取的时候调用，如果设置 atom 时没有配置 validator，会导致异常。
-=======
 **Props**:
 - `initializeState?`: `({set, setUnvalidatedAtomValues}) => void`。
   - 可选函数，可使用 [`MutableSnapshot`](/docs/api-reference/core/Snapshot#Transforming_Snapshots) 来初始化全局状态。
 
->>>>>>> 8c61ff5a8f8ecf991c2eee2dac106b7c4f97a77b
 
 ### 示例
 
