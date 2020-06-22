@@ -17,15 +17,9 @@ function atom<T>({
 ```
 
 
-<<<<<<< HEAD
   - `key` - 在内部用于标识 atom 的唯一字符串。在整个应用中，该字符串必须相对于其他 atom 和 selector 保持唯一。
   - `default` - atom 的初始值，或一个 `Promise`，或另一个 atom，或一个用来表示相同类型的值的 selector。
   - `dangerouslyAllowMutability` - Recoil depends on atom state changes to know when to notify components that use the atoms to re-render.  If an atom's value were mutated, it may bypass this and cause state to change without properly notifying subscribing compoennts.  To help protect against this all stored values are frozen.  In some cases it may be desireable to override this using this option.
-=======
-  - `key` - A unique string used to identify the atom internally. This string should be unique with respect to other atoms and selectors in the entire application.
-  - `default` - The initial value of the atom or a `Promise` or another atom or selector representing a value of the same type.
-  - `dangerouslyAllowMutability` - Recoil depends on atom state changes to know when to notify components that use the atoms to re-render.  If an atom's value were mutated, it may bypass this and cause state to change without properly notifying subscribing components.  To help protect against this all stored values are frozen.  In some cases it may be desireable to override this using this option.
->>>>>>> 8c61ff5a8f8ecf991c2eee2dac106b7c4f97a77b
 
 ---
 

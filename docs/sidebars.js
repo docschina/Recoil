@@ -44,16 +44,6 @@ module.exports = {
         '核心': [
           'api-reference/core/RecoilRoot',
           {
-<<<<<<< HEAD
-            Hook: [
-              'api-reference/core/useRecoilState',
-              'api-reference/core/useRecoilValue',
-              'api-reference/core/useSetRecoilState',
-              'api-reference/core/useResetRecoilState',
-              'api-reference/core/useRecoilValueLoadable',
-              'api-reference/core/useRecoilStateLoadable',
-              'api-reference/core/useRecoilCallback',
-=======
             State: [
               'api-reference/core/atom',
               'api-reference/core/selector',
@@ -70,7 +60,6 @@ module.exports = {
                   'api-reference/core/useRecoilStateLoadable',
                 ],
               },
->>>>>>> 8c61ff5a8f8ecf991c2eee2dac106b7c4f97a77b
             ],
             Snapshots: [
               'api-reference/core/Snapshot',
