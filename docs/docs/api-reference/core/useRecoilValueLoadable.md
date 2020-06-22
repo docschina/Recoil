@@ -5,7 +5,7 @@ sidebar_label: useRecoilValueLoadable()
 
 This hook is intended to be used for reading the value of asynchronous selectors. This hook will implicitly subscribe the component to the given state.
 
-Unlike `useRecoilValue()`, this hook will not throw a `Promise` when reading from a pending asynchronous selector (for the purpose of working alongside Suspense). Instead, this hook returns a `Loadable`, which is an object with the following interface:
+Unlike [`useRecoilValue()`](/docs/api-reference/core/useRecoilValue), this hook will not throw an `Error` or `Promise` when reading from an asynchronous selector (for the purpose of working alongside [React Suspense](https://reactjs.org/docs/concurrent-mode-suspense.html)). Instead, this hook returns a [`Loadable`](/docs/api-reference/core/Loadable) object.
 
 ---
 
@@ -18,8 +18,6 @@ function useRecoilValueLoadable<T>(state: RecoilValue<T>): Loadable<T>
 
 - `state`：表示 selector 的状态。可选的值有 `'hasValue'`，`'hasError'`，`'loading'`。
 - `contents`：此值代表 `Loadable` 的结果。如果状态为 `hasValue`，则值为实际结果；如果状态为 `hasError`，则会抛出一个错误对象；如果状态为 `loading`，则值为 `Promise`。
-- `getValue()`：如果有错误，这个函数会抛出这个错误。如果 selector 仍在加载中，它会抛出一个 Promise。否则，它就会返回这个 selector resolve 的值。
-- `toPromise()`：返回一个 `Promise`，当 selector resolve 时它也会 resolve。如果该 selector 是异步的或者已经 resolve 了，它就会返回一个立即 resolve 的 `Promise`。
 
 ---
 
