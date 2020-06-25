@@ -15,7 +15,11 @@ function useRecoilState<T>(state: RecoilState<T>): [T, SetterOrUpdater<T>];
 type SetterOrUpdater<T> = (T | (T => T)) => void;
 ```
 
+<<<<<<< HEAD
 - `state`: 一个 [`atom`](/docs/api-reference/core/atom) 或一个 _可写_ 的 [`selector`](/docs/api-reference/core/selector)。可写的 selector 在其定义的同时具有 `get` 和 `set` 函数，而只读 selector 只有一个 `get`。
+=======
+- `state`: an [`atom`](/docs/api-reference/core/atom) or a _writeable_ [`selector`](/docs/api-reference/core/selector). Writeable selectors are selectors that have both a `get` and `set` in their definition while read-only selectors only have a `get`.
+>>>>>>> df5b754c77f754b94fa4a73c10e8bf8d0e7e8188
 
 This API is similar to the React (`useState()`)[https://reactjs.org/docs/hooks-reference.html#usestate] hook except it takes a Recoil state instead of a default value as an argument.  It returns a tuple of the current value of the state and a setter function.  The setter function may either take a new value as an argument or an updater function which receives the previous value as a parameter.
 
