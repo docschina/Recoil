@@ -8,8 +8,13 @@ sidebar_label: <RecoilRoot />
 ---
 
 **Props**:
+<<<<<<< HEAD
 - `initializeState?`: `({set, setUnvalidatedAtomValues}) => void`。
   - 可选函数，可使用 [`MutableSnapshot`](/docs/api-reference/core/Snapshot#Transforming_Snapshots) 来初始化全局状态。
+=======
+- `initializeState?`: `(MutableSnapshot => void)`
+  - An optional function that takes a [`MutableSnapshot`](/docs/api-reference/core/Snapshot#transforming-snapshots) to initialize the `<RecoilRoot>` atom state.  This sets up the state for the initial render and is not intended for subsequent state changes or async initialization.  Use hooks such as [`useSetRecoilState()`](/docs/api-reference/core/useSetRecoilState) or [`useRecoilCallback()`](/docs/api-reference/core/useRecoilCallback) for async state changes.
+>>>>>>> 54fa001b814683eb57952781d4d3c66282980178
 
 
 ### 示例
