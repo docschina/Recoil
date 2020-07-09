@@ -5,6 +5,8 @@ sidebar_label: useResetRecoilState()
 
 返回一个函数，用来把给定 state 重置为其初始值。
 
+Using `useResetRecoilState()` allows a component to reset the state to its default value without subscribing the component to re-render whenever the state changes.
+
 ---
 
 ```jsx
