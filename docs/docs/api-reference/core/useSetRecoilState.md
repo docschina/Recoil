@@ -19,7 +19,11 @@ type SetterOrUpdater<T> = (T | (T => T)) => void;
 
 ---
 
+<<<<<<< HEAD
 当一个组件需要写入而不需要读取 state 时，推荐使用此 hook。如果组件使用了 [`useRecoilState()`](/docs/api-reference/core/useRecoilState) 来获取 setter 函数，那么同时它也会订阅更新，并在 atom 或 selector 更新时重新渲染。使用 `useSetRecoilState()` 允许组件在值发生改变时而不重新渲染的情况下设置值。
+=======
+This is the recommended hook to use when a component intends to write to state without reading it. If a component used the [`useRecoilState()`](/docs/api-reference/core/useRecoilState) hook to get the setter, it would also subscribe to updates and re-render when the atom or selector updated. Using `useSetRecoilState()` allows a component to set the value without subscribing the component to re-render when the value changes.
+>>>>>>> 0763345298a6eca3c31de8636b6fdc58513839b5
 
 ### 示例
 
