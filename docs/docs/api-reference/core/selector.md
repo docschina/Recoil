@@ -114,7 +114,7 @@ const myQuery = selector({
 ### 示例 (同步)
 
 ```jsx
-import {atom, selector, useRecoilState} from 'recoil';
+import {atom, selector, useRecoilState, DefaultValue} from 'recoil';
 
 const tempFahrenheit = atom({
   key: 'tempFahrenheit',
