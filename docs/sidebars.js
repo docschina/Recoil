@@ -8,8 +8,13 @@
  */
 
 module.exports = {
+<<<<<<< HEAD
   someSidebar: {
     '简介': [
+=======
+  docs: {
+    Introduction: [
+>>>>>>> 7b852c217487da6facdb16cc7420ac50cf3d1654
       'introduction/motivation',
       'introduction/core-concepts',
       'introduction/installation',
@@ -48,22 +53,27 @@ module.exports = {
               'api-reference/core/atom',
               'api-reference/core/selector',
               'api-reference/core/Loadable',
-              'api-reference/core/isRecoilValue',
-              // 'api-reference/core/DefaultValue',             
               'api-reference/core/useRecoilState',
               'api-reference/core/useRecoilValue',
               'api-reference/core/useSetRecoilState',
               'api-reference/core/useResetRecoilState',
               'api-reference/core/useRecoilValueLoadable',
-              'api-reference/core/useRecoilStateLoadable',              
+              'api-reference/core/useRecoilStateLoadable',
+              'api-reference/core/isRecoilValue',
+              // 'api-reference/core/DefaultValue',
             ],
             Snapshots: [
               'api-reference/core/Snapshot',
-              'api-reference/core/useRecoilCallback',
               'api-reference/core/useRecoilTransactionObserver',
               'api-reference/core/useRecoilSnapshot',
-              'api-reference/core/useGotoRecoilSnapshot',              
-            ]
+              'api-reference/core/useGotoRecoilSnapshot',
+            ],
+          },
+          'api-reference/core/useRecoilCallback',
+          {
+            Misc: [
+              'api-reference/core/useRecoilBridgeAcrossReactRoots',
+            ],
           },
         ],
       },
