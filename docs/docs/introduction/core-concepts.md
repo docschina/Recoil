@@ -21,7 +21,7 @@ const fontSizeState = atom({
 
 Atom 需要一个唯一的 key 值，该 key 可用于调试、持久化以及使用某些高级的 API，这些 API 可让你查看所有 atom 的图。两个 atom 不应拥有相同的 key 值，因此请确保它们在全局上的唯一性。合 React 组件中的 state 一致，它们也拥有默认值。
 
-要从组件中读取和写入 atom，我们需使用一个名为 `useRecoilState` 的 hook。和 React 的 `useState` 用法一致，但是 state 可以在组件间共享使用：
+要从组件中读取和写入 atom，我们需使用一个名为 `useRecoilState` 的 hook。和 React 的 `useState` 用法一致，但是这里的 state 可以在组件间共享使用：
 
 ```jsx
 function FontButton() {
