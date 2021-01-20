@@ -12,10 +12,13 @@ function atom<T>({
   key: string,
   default: T | Promise<T> | RecoilValue<T>,
 
+  effects_UNSTABLE?: $ReadOnlyArray<AtomEffect<T>>,
+
   dangerouslyAllowMutability?: boolean,
 }): RecoilState<T>
 ```
 
+<<<<<<< HEAD
 
   - `key` - 在内部用于标识 atom 的唯一字符串。在整个应用中，该字符串必须相对于其他 atom 和 selector 保持唯一。
   - `default` - atom 的初始值，或一个 `Promise`，或另一个 atom，或一个用来表示相同类型的值的 selector。
@@ -24,6 +27,18 @@ function atom<T>({
 ---
 
 通常，你需要使用以下 hook 来与 atom 搭配使用。
+=======
+  - `key` - A unique string used to identify the atom internally. This string should be unique with respect to other atoms and selectors in the entire application.
+  - `default` - The initial value of the atom or a `Promise` or another atom or selector representing a value of the same type.
+  - `effects_UNSTABLE` - An optional array of [Atom Effects](/docs/guides/atom-effects) for the atom.
+  - `dangerouslyAllowMutability` - In some cases it may be desireable allow mutating of objects stored in atoms that don't represent state changes.  Use this option to override freezing objects in development mode.
+
+---
+
+Recoil manages atom state changes to know when to notify components subscribing to that atom to re-render, so you should use the hooks listed below to change atom state.  If an object stored in an atom was mutated directly it may bypass this and cause state changes without properly notifying subscribing components.  To help detect bugs Recoil will freeze objects stored in atoms in development mode.
+
+Most often, you'll use the following hooks to interact with atoms:
+>>>>>>> a0c6f6a1286d98a03f049fde02aed397da7dc579
 
 - [`useRecoilState()`](/docs/api-reference/core/useRecoilState)：当你同时需要对 atom 进行读写时，使用此 hook。使用此 hook 会使组件订阅 atom。
 - [`useRecoilValue()`](/docs/api-reference/core/useRecoilValue)：当你仅需要读取 atom 时，使用此 hook。使用此 hook 会使组件订阅 atom。
@@ -34,7 +49,7 @@ function atom<T>({
 
 You can initialize an atom either with a static value or with a `Promise` or a `RecoilValue` representing a value of the same type.  Because the `Promise` may be pending or the default selector may be asynchronous it means that the atom value may also be pending or throw an error when reading.  Note that you cannot currently assign a `Promise` when setting an atom.  Please use [selectors](/docs/api-reference/core/selector) for async functions.
 
-Atoms cannot be used to store `Promise`s or `RecoilValues` directly, but they may be wrapped in an object.  Note that `Promises` may be mutable.
+Atoms cannot be used to store `Promise`'s or `RecoilValue`'s directly, but they may be wrapped in an object.  Note that `Promise`'s may be mutable.  Atoms can be set to a `function`, as long as it is pure, but to do so you may need to use the updater form of setters. (e.g. `set(myAtom, () => myFunc);`).
 
 ### 示例
 
