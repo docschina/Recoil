@@ -36,7 +36,7 @@ module.exports = {
         {to: 'blog', label: 'Blog', position: 'left'},
         // Please keep GitHub link to the right for consistency.
         {
-          href: 'https://github.com/facebookexperimental/Recoil',
+          href: 'https://github.com/docschina/Recoil',
           label: 'GitHub',
           position: 'right',
         },
