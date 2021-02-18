@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+    <channel>
+        <title>Recoil Blog</title>
+        <link>https://recoiljs.org/blog</link>
+        <description>Recoil Blog</description>
+        <lastBuildDate>Thu, 18 Jun 2020 00:00:00 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <copyright>Copyright © 2021 Facebook, Inc.</copyright>
+        <item>
+            <title><![CDATA[0.0.10-released]]></title>
+            <link>https://recoiljs.org/blog/2020/06/18/0.0.10-released</link>
+            <guid>0.0.10-released</guid>
+            <pubDate>Thu, 18 Jun 2020 00:00:00 GMT</pubDate>
+            <description><![CDATA[# Recoil 0.0.10]]></description>
+        </item>
+        <item>
+            <title><![CDATA[0.0.8-released]]></title>
+            <link>https://recoiljs.org/blog/2020/05/30/0.0.8-released</link>
+            <guid>0.0.8-released</guid>
+            <pubDate>Sat, 30 May 2020 00:00:00 GMT</pubDate>
+            <description><![CDATA[# Recoil 0.0.8]]></description>
+        </item>
+    </channel>
+</rss>
