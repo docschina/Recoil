@@ -47,7 +47,11 @@ function Text() {
 
 **selector** 是一个纯函数，入参为 atom 或者其他 selector。当上游 atom 或 selector 更新时，将重新执行 selector 函数。组件可以像 atom 一样订阅 selector，当 selector 发生变化时，重新渲染相关组件。
 
+<<<<<<< HEAD
 Selector 被用于计算基于 state 的派生数据。这使得我们避免了冗余 state，通常无需使用 reduce 来保持状态同步性和有效性。作为替代，将最小粒度的状态存储在 atom 中，而其它所有内容根据最小粒度的状态进行有效计算。由于 selector 会追踪需要哪些组件使用了相关的状态，因此它们使这种方式更加有效。
+=======
+Selectors are used to calculate derived data that is based on state. This lets us avoid redundant state because a minimal set of state is stored in atoms, while everything else is efficiently computed as a function of that minimal state. Since selectors keep track of what components need them and what state they depend on, they make this functional approach very efficient.
+>>>>>>> 54c92e2ec78db000e59581d748ac91737f879d84
 
 从组件的角度来看，selector 和 atom 具有相同的功能，因此可以交替使用。
 
@@ -78,7 +82,7 @@ function FontButton() {
 
   return (
     <>
-      <div>Current font size: ${fontSizeLabel}</div>
+      <div>Current font size: {fontSizeLabel}</div>
 
       <button onClick={() => setFontSize(fontSize + 1)} style={{fontSize}}>
         Click to Enlarge
