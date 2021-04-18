@@ -8,9 +8,17 @@ sidebar_label: <RecoilRoot />
 ---
 
 **Props**:
+<<<<<<< HEAD
 - `initializeState?`: `({set, setUnvalidatedAtomValues}) => void`。
   - 可选函数，可使用 [`MutableSnapshot`](/docs/api-reference/core/Snapshot#Transforming_Snapshots) 来初始化 `<RecoilRoot>` 类型的 atom 状态。This sets up the state for the initial render and is not intended for subsequent state changes or async initialization.  Use hooks such as [`useSetRecoilState()`](/docs/api-reference/core/useSetRecoilState) or [`useRecoilCallback()`](/docs/api-reference/core/useRecoilCallback) for async state changes.
+=======
+- `initializeState?`: `(MutableSnapshot => void)`
+  - An optional function that takes a [`MutableSnapshot`](/docs/api-reference/core/Snapshot#transforming-snapshots) to [initialize](/docs/api-reference/core/Snapshot#state-initialization) the `<RecoilRoot>` atom state.  This sets up the state for the initial render and is not intended for subsequent state changes or async initialization.  Use hooks such as [`useSetRecoilState()`](/docs/api-reference/core/useSetRecoilState) or [`useRecoilCallback()`](/docs/api-reference/core/useRecoilCallback) for async state changes.
+>>>>>>> bf08b76b9649710dce8da0194b7fc42cb6306049
 
+---
+
+`<RecoilRoot>`'s represent independent providers/stores of atom state.  Note that caches, such as selector caches, may be shared across roots.  Selector evaluations must be idempotent except for caching or logging, so this should not be a problem, but may be observable or may cause redundant queries to be cached across roots.
 
 ### 示例
 
