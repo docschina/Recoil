@@ -171,23 +171,13 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-<<<<<<< HEAD
-          editUrl:
-            'https://github.com/docschina/Recoil/edit/docs/docs/',
-=======
           editUrl: ({locale, docPath}) => makeDocsEditUrl(locale, docPath),
->>>>>>> 5917124eb8fc6293bef96c153dc9eb10d3f2174d
         },
         blog: {
           showReadingTime: true,
           editUrl:
-<<<<<<< HEAD
             'https://github.com/docschina/Recoil/edit/docs/docs/blog/',
-           feedOptions: {
-=======
-            'https://github.com/facebookexperimental/Recoil/edit/docs/docs/blog/',
           feedOptions: {
->>>>>>> 5917124eb8fc6293bef96c153dc9eb10d3f2174d
             type: 'all',
             copyright: `Copyright © ${new Date().getFullYear()} Facebook, Inc.`,
           },

@@ -21,60 +21,32 @@ import WordMarkImaage from '../../static/img/wordmark.svg';
 
 const features = [
   {
-<<<<<<< HEAD
-    title: <>最小且具有响应式</>,
-    // imageUrl: 'img/undraw_docusaurus_mountain.svg',
-    description: (
-      <>
-        Recoil 拥有与 React 一样的工作方式与原理。将其添加到您的应用中可快速获得灵活的状态共享。
-      </>
-    ),
-  },
-  {
-    title: <>数据流图</>,
-    // imageUrl: 'img/undraw_docusaurus_tree.svg',
-    description: (
-      <>
-        针对派生数据（Derived data）和异步查询采用纯函数以及高效订阅的方式进行处理。
-      </>
-    ),
-  },
-  {
-    title: <>应用程序全局监听</>,
-    // imageUrl: 'img/undraw_docusaurus_react.svg',
-    description: (
-      <>
-        通过监听应用程序中所有状态的变化来实现持久化存储，路由，时间旅行调试或撤消，并且不会影响代码分割。
-      </>
-=======
     title: (
-      <Translate id="homePage.minimal.title">Minimal and Reactish</Translate>
+      <Translate id="homePage.minimal.title">最小且具有响应式</Translate>
     ),
     imageUrl: 'img/icons/icon-reactish.svg',
     imageUrlDark: 'img/icons/icon-reactish--dark.svg',
     imageAlt: 'React logo.',
     description: (
       <Translate id="homePage.minimal.text">
-        Recoil works and thinks like React. Add some to your app and get fast
-        and flexible shared state.
+        Recoil 拥有与 React 一样的工作方式与原理。将其添加到您的应用中可快速获得灵活的状态共享。
       </Translate>
     ),
   },
   {
-    title: <Translate id="homePage.flow.title">Data-Flow Graph</Translate>,
+    title: <Translate id="homePage.flow.title">数据流图</Translate>,
     imageUrl: 'img/icons/icon-functional.svg',
     imageUrlDark: 'img/icons/icon-functional--dark.svg',
     imageAlt: 'F at x, representing functional programming.',
     description: (
       <Translate id="homePage.flow.text">
-        Derived data and asynchronous queries are tamed with pure functions and
-        efficient subscriptions.
+        针对派生数据（Derived data）和异步查询采用纯函数以及高效订阅的方式进行处理。
       </Translate>
     ),
   },
   {
     title: (
-      <Translate id="homePage.cross.title">Cross-App Observation</Translate>
+      <Translate id="homePage.cross.title">应用程序全局监听</Translate>
     ),
     imageUrl: 'img/icons/icon-observation.svg',
     imageUrlDark: 'img/icons/icon-observation--dark.svg',
@@ -82,11 +54,8 @@ const features = [
       'Connected dots, representing observation of values from various points in an application.',
     description: (
       <Translate id="homePage.cross.text">
-        Implement persistence, routing, time-travel debugging, or undo by
-        observing all state changes across your app, without impairing
-        code-splitting.
+        通过监听应用程序中所有状态的变化来实现持久化存储，路由，时间旅行调试或撤消，并且不会影响代码分割。
       </Translate>
->>>>>>> 5917124eb8fc6293bef96c153dc9eb10d3f2174d
     ),
   },
 ];
@@ -159,16 +128,6 @@ function Home() {
           <div className="container">
             <div className="row">
               <div className="container">
-<<<<<<< HEAD
-                <div className="row" style={{justifyContent: 'center'}}>
-                  <iframe 
-                    height="315"
-                    width="560"
-                    src="https://player.youku.com/embed/XNDY3NjE1OTE4NA=="
-                    frameborder="0"
-                    allowfullscreen="true">
-                  </iframe>{' '}
-=======
                 <div className="row" style={{ justifyContent: 'center' }}>
                   <iframe
                     width="560"
@@ -178,7 +137,6 @@ function Home() {
                     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                   />{' '}
->>>>>>> 5917124eb8fc6293bef96c153dc9eb10d3f2174d
                 </div>
               </div>
             </div>

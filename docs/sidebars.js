@@ -8,13 +8,8 @@
  */
 
 module.exports = {
-<<<<<<< HEAD
-  someSidebar: {
-    '简介': [
-=======
   docs: {
-    Introduction: [
->>>>>>> 5917124eb8fc6293bef96c153dc9eb10d3f2174d
+    '简介': [
       'introduction/motivation',
       'introduction/core-concepts',
       'introduction/installation',
