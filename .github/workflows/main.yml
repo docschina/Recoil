@@ -35,4 +35,5 @@ jobs:
         secretId: ${{ secrets.SECRET_ID }}
         secretKey: ${{ secrets.SECRET_KEY }}
         staticSrcPath: docs/build/
-        envId: ${{ secrets.BUCKET }}
+        bucket: ${{ secrets.BUCKET }}
+        region: ${{ secrets.REGION }}
