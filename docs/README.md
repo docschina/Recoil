@@ -1,41 +1,37 @@
-# Website
+# Recoil 中文文档
 
-This website is built using [Docusaurus 2](https://v2.docusaurus.io/), a modern static website generator.
+感谢关注 Recoil 中文文档，本文档由 [@docschina-bot](https://github.com/docschina-bot) 自动同步官方英文文档。
 
-### Installation
+## 参与翻译
 
-```
-$ yarn
-```
+具体请参见[翻译流程](https://github.com/docschina/Recoil/issues/62)和[任务认领](https://github.com/docschina/Recoil/issues/61)
 
-### Local Development
+## 本地预览
 
-```
-$ yarn start
-```
+本项目使用 [Docusaurus 2](https://v2.docusaurus.io/) 生成。
 
-This command starts a local development server and open up a browser window. Most changes are reflected live without having to restart the server.
-
-### Build
-
-```
-$ yarn build
+```bash
+cd docs/
+yarn
+yarn start
 ```
 
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
+或者
 
-### Deployment
-
+```bash
+cd docs/
+npm install
+npm start
 ```
-$ GIT_USER=<Your GitHub username> USE_SSH=true yarn deploy
-```
 
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
+## 贡献者
 
-### Continuous Integration
+感谢各位贡献者的付出（以下排名不分先后）：
 
-Some common defaults for linting/formatting have been set for you. If you integrate your project with an open source Continuous Integration system (e.g. Travis CI, CircleCI), you may check for issues using the following command.
+| Sunnysit | QC-L | yuqingc |
+| :-----: | :-------: | :-----: |
+| [![Sunnysit](https://avatars.githubusercontent.com/u/39445451?s=120&v=4)](https://github.com/Sunnysit) | [![QC-L](https://avatars.githubusercontent.com/u/13861040?s=120&v=4)](https://github.com/QC-L) | [![yuqingc](https://avatars.githubusercontent.com/u/29723652?s=120&v=4)](https://github.com/yuqingc) |
 
-```
-$ yarn ci
-```
+## 许可证
+
+["保留署名—非商用" 创意共享 4.0 许可证（CC BY-NC 4.0）](https://creativecommons.org/licenses/by-nc/4.0/deed.zh)
