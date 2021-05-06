@@ -19,7 +19,7 @@ function useRecoilValue<T>(state: RecoilValue<T>): T;
 
 当一个组件需要在不写入 state 的情况下读取 state 时，推荐使用该 hook，因为该 hook 可以同时在**只读 state** 和**可写 state** 中使用。Atom 是可写 state，而 selector 可以是只读，也可以是可写的。更多信息，参考 [`selector()`](/docs/api-reference/core/selector)。
 
-Using this hook in a React component will subscribe the component to re-render when the state is updated.  This hook may throw if the state has an error or is pending asynchronous resolution.  Please see [this guide](/docs/guides/asynchronous-data-queries).
+在 React 组件中，使用本 hook 将会订阅该组件，并且在 state 更新时重新渲染该组件。该 hook 在 state 异常或者在异步解析时抛出异常。详细可以参考[指南](/docs/guides/asynchronous-data-queries)。
 
 ### 示例
 

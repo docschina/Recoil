@@ -17,13 +17,13 @@ type SetterOrUpdater<T> = (T | (T => T)) => void;
 
 - `state`: 一个 [`atom`](/docs/api-reference/core/atom) 或一个 _可写_ 的 [`selector`](/docs/api-reference/core/selector)。可写的 selector 在其定义的同时具有 `get` 和 `set` 函数，而只读 selector 只有一个 `get`。
 
-This API is similar to the React [`useState()`](https://reactjs.org/docs/hooks-reference.html#usestate) hook except it takes a Recoil state instead of a default value as an argument.  It returns a tuple of the current value of the state and a setter function.  The setter function may either take a new value as an argument or an updater function which receives the previous value as a parameter.
+本 API 和 React 的 [`useState()`](https://reactjs.org/docs/hooks-reference.html#usestate) hook 类似，区别在于 `useRecoilState` 的参数使用 Recoil state 代替了 `useState()` 的默认值。它返回由 state 的当前值和 setter 函数组成的元组。Setter 函数的参数可以是新值，也可以是一个以之前的值为参数的更新器函数。
 
 ---
 
 当组件同时需要读写状态时，推荐使用该 hook。
 
-Using this hook in a React component will subscribe the component to re-render when the state is updated.  This hook may throw if the state has an error or is pending asynchronous resolution.  Please see [this guide](/docs/guides/asynchronous-data-queries).
+在 React 组件中，使用本 hook 将会订阅该组件，并且在 state 更新时重新渲染该组件。该 hook 在 state 异常或者在异步解析时抛出异常。详细可以参考[指南](/docs/guides/asynchronous-data-queries)。
 
 ### 示例
 
