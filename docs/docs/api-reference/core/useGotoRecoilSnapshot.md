@@ -11,7 +11,7 @@ function useGotoRecoilSnapshot(): Snapshot => void
 
 ### 交易示例
 
-**重要提示**: 此示例效率并不高，因为它将订阅该组件的 **所有**状态改变以便重新渲染。
+**重要提示**: 此示例效率并不高，因为它将订阅该组件的**所有**状态改变以便重新渲染。
 
 ```jsx
 function TransactionButton(): React.Node {
