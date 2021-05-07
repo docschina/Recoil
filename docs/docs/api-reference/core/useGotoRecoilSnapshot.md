@@ -3,28 +3,28 @@ title: useGotoRecoilSnapshot(snapshot)
 sidebar_label: useGotoRecoilSnapshot()
 ---
 
-This hook returns a callback which takes a [`Snapshot`](/docs/api-reference/core/Snapshot) as a parameter and will update the current [`<RecoilRoot>`](/docs/api-reference/core/RecoilRoot) state to match this atom state.
+此钩子函数返回一个以 [`Snapshot`](/docs/api-reference/core/Snapshot) 作为参数的回调函数，并且将更新当前的 [`<RecoilRoot>`](/docs/api-reference/core/RecoilRoot) 状态以匹配 atom 状态。
 
 ```jsx
 function useGotoRecoilSnapshot(): Snapshot => void
 ```
 
-### Transaction Example
+### 交易示例
 
-**Important Note**: This example is not efficient because it will subscribe the component to re-render for *all* state changes.
+**重要提示**: 此示例效率并不高，因为它将订阅该组件的 **所有**状态改变以便重新渲染。
 
 ```jsx
 function TransactionButton(): React.Node {
-  const snapshot = useRecoilSnapshot(); // Subscribe to all state changes
+  const snapshot = useRecoilSnapshot(); // 订阅所有状态改变
   const modifiedSnapshot = snapshot.map(({set}) => {
     set(atomA, x => x + 1);
     set(atomB, x => x * 2);
   });
   const gotoSnapshot = useGotoRecoilSnapshot();
-  return <button onClick={() => gotoSnapshot(modifiedSnapshot)}>Perform Transaction</button>;
+  return <button onClick={() => gotoSnapshot(modifiedSnapshot)}>执行交易</button>;
 }
 ```
 
-### Time Travel Example
+### 时间旅行示例
 
-See the [Time Travel Example](/docs/guides/dev-tools#time-travel)
+请查看 [时间旅行示例](/docs/guides/dev-tools#time-travel)
