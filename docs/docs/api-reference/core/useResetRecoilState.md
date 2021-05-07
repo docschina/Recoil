@@ -5,7 +5,7 @@ sidebar_label: useResetRecoilState()
 
 返回一个函数，用来把给定 state 重置为其初始值。
 
-Using `useResetRecoilState()` allows a component to reset the state to its default value without subscribing the component to re-render whenever the state changes.
+使用 `useResetRecoilState()` 可将组件的 state 重置为默认值，无需订阅组件，并且每当 state 改变时会重新渲染该组件。
 
 ---
 

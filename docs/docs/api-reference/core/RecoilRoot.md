@@ -13,7 +13,7 @@ sidebar_label: <RecoilRoot />
 
 ---
 
-`<RecoilRoot>`'s represent independent providers/stores of atom state.  Note that caches, such as selector caches, may be shared across roots.  Selector evaluations must be idempotent except for caching or logging, so this should not be a problem, but may be observable or may cause redundant queries to be cached across roots.
+`<RecoilRoot>` 表示 atom state 的独立的 providers/stores。注意，缓存可以跨根节点共享，如 selector 缓存。 Selector 的评估对于缓存或日志必须幂等，因此跨根结点缓存不应该是个问题，但是可能会被观测到或者引起重复查询。
 
 ### 示例
 
