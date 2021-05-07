@@ -13,7 +13,7 @@ sidebar_label: <RecoilRoot />
 
 ---
 
-`<RecoilRoot>` 表示 atom state 的独立的 providers/stores。注意，缓存，如 selector 缓存，可以跨根节点共享。 Selector 的评估对于缓存或日志必须幂等，因此跨根结点缓存不应该是个问题，但是可能会被观测到或者引起重复查询。
+`<RecoilRoot>` 表示 atom state 的独立的 providers/stores。注意，缓存可以跨根节点共享，如 selector 缓存。 Selector 的评估对于缓存或日志必须幂等，因此跨根结点缓存不应该是个问题，但是可能会被观测到或者引起重复查询。
 
 ### 示例
 

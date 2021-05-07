@@ -37,7 +37,7 @@ Recoil 管理 atom 的 state 变化，以便通知订阅该 atom 的组件何时
 
 可以使用 `Promise` 或者表示相同类型值的 `RecoilValue`。因为 `Promise` 会是 pending 状态，而默认的 selector 也可能是异步的，因此 atom 的值也可以是 pending 状态，或者在读取值的时候抛出异常。注意设置 atom 时，你不能对 `Promise` 实时赋值。对于异步函数，请使用 [selectors](/docs/api-reference/core/selector) 。
 
-Atom 不能用来直接存储 `Promise` 或 `RecoilValue`，但是可以用对象包装它们。注意 `Promise` 会是可变的。Atoms 可以设置为纯函数，如果你这么做，你需要使用更新器组成 setter。（例如： `set(myAtom, () => myFunc);`）。
+Atom 不能用来直接存储 `Promise` 或 `RecoilValue`，但是可以用对象包装它们。注意 `Promise` 是可变的。Atoms 可以设置为纯函数，如果你这么做，你需要使用更新器组成 setter。（例如： `set(myAtom, () => myFunc);`）。
 
 ### 示例
 
