@@ -12,8 +12,4 @@ title: 简介
 - 过滤 Todo Item
 - 显示有用的统计信息
 
-<<<<<<< HEAD
 在此过程中，我们将介绍 atom，selector，atom family 以及 Recoil API 的 Hook。 我们还将涵盖优化的内容。
-=======
-Along the way, we'll cover atoms, selectors, atom families, and the hooks exposed by the Recoil API. We'll also cover optimization.
->>>>>>> 6ea6d7ccdb02dfa72c0307bb1441428636f0ce3c
