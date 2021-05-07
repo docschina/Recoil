@@ -103,7 +103,7 @@ const transformSelector = selector({
 
 ### 异步 Selectors
 
-选择器还可以具有异步求值函数，并将 `Promise` 返回到输出里。更多信息，请参阅[本指南](/docs/guides/asynchronous-data-queries)
+选择器还可以具有异步求值函数，并将 `Promise` 返回到输出里。更多信息，请参阅 [本指南](/docs/guides/asynchronous-data-queries)
 
 ```jsx
 const myQuery = selector({
@@ -192,4 +192,3 @@ function ResultsSection() {
 ```
 
 更多复杂的示例，请参考 [这篇指南](/docs/guides/asynchronous-data-queries)。
-
