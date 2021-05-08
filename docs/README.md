@@ -30,7 +30,7 @@ npm start
 
 | Sunnysit | QC-L | yuqingc | Ivocin | KnowsCount | KimYang |
 | :-----: | :-------: | :-----: | :-----: | :-----: | :-----: |
-| [![Sunnysit](https://avatars.githubusercontent.com/u/39445451?s=120&v=4)](https://github.com/Sunnysit) | [![QC-L](https://avatars.githubusercontent.com/u/13861040?s=120&v=4)](https://github.com/QC-L) | [![yuqingc](https://avatars.githubusercontent.com/u/29723652?s=120&v=4)](https://github.com/yuqingc) | [![Ivocin](https://avatars.githubusercontent.com/u/16836801?s=120&v=4)](https://github.com/Ivocin) | [![KnowsCount](https://avatars.githubusercontent.com/u/56480008?s=120&v=4)](https://github.com/KnowsCount) | [![KimYang](https://avatars.githubusercontent.com/u/32960305?s=120&v=4)](https://github.com/KimYangOfCat) ｜
+| [![Sunnysit](https://avatars.githubusercontent.com/u/39445451?s=120&v=4)](https://github.com/Sunnysit) | [![QC-L](https://avatars.githubusercontent.com/u/13861040?s=120&v=4)](https://github.com/QC-L) | [![yuqingc](https://avatars.githubusercontent.com/u/29723652?s=120&v=4)](https://github.com/yuqingc) | [![Ivocin](https://avatars.githubusercontent.com/u/16836801?s=120&v=4)](https://github.com/Ivocin) | [![KnowsCount](https://avatars.githubusercontent.com/u/56480008?s=120&v=4)](https://github.com/KnowsCount) | [![KimYang](https://avatars.githubusercontent.com/u/32960305?s=120&v=4)](https://github.com/KimYangOfCat)|
 
 ## 许可证
 
