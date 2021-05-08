@@ -14,7 +14,7 @@ Loadable 还包含用于访问当前状态的 helper 方法。**注意这些 API
 - `toPromise()`：返回值为 selector 执行完毕后执行的 `Promise`。如果此 selector 是同步执行的或者已经执行完毕，它会返回一个立即执行的 `Promise`。
 - `valueMaybe()` - 如果有值则返回该值，否则返回 `undefined`。
 - `valueOrThrow()` - 如果有值则返回该值，否则抛出错误。
-- `map()` - 接受一个用来转换 Loadable 值的函数并返回一个带有已转换值的新 Loadable。转换函数取得该值的一个参数并返回新值，它也可以抛出错误或者挂起。
+- `map()` - 接受一个用以转换 Loadable 值的函数，并返回一个带有转换后值的新 Loadable。转换函数取得该值的参数并返回新值，它也可以抛出错误或者 suspense。
 
 ### 示例
 
