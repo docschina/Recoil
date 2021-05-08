@@ -1,12 +1,11 @@
 ---
-title: Testing
+title: 测试
 ---
 
-## Testing Recoil Selectors outside of React
+## 在 React 之外测试 Recoil Selectors
 
-It can be useful to manipulate and evaluate Recoil selectors outside of a React context for testing.  This can be done by working with a Recoil [`Snapshot`](/docs/api-reference/core/Snapshot).  You can build a fresh snapshot using `snapshot_UNSTABLE()` and then use that `Snapshot` to evaluate selectors for testing.
-
-### Example: Jest unit testing selectors
+在 React 上下文之外操作和评估 Recoil selectors 以进行测试是非常有用的。这可以通过使用 Recoil [`Snapshot`](/docs/api-reference/core/Snapshot) 来实现。您可以使用 `snapshot_UNSTABLE()` 生成一个新的快照，然后使用该 `Snapshot` 来评估用于测试的 selectors。
+### 示例: Jest 单元测试 selectors
 
 ```jsx
 const numberState = atom({key: 'Number', default: 0});
