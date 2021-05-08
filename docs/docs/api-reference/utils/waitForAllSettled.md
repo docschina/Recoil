@@ -3,9 +3,9 @@ title: waitForAllSettled(dependencies)
 sidebar_label: waitForAllSettled()
 ---
 
-A concurrency helper that returns a set of [`Loadable`s](/docs/api-reference/core/Loadable) for the current state of the requested dependencies.  It waits until at least all of the dependencies are either in a value state, or an error state.
+一个返回一组表示请求依赖项当前状态的 [`Loadables`](/docs/api-reference/core/Loadable) 的并发 helper 方法。它将一直等待，直到至少有一个依赖项可用。
 
-The dependencies may either be provided as a tuple array or as named dependencies in an object.
+依赖项可以作为元组数组提供，也可以作为对象中的命名依赖项提供。
 
 ---
 
@@ -20,4 +20,4 @@ function waitForAllSettled(dependencies: {[string]: RecoilValue<>}):
 ```
 ---
 
-`waitForAllSettled()` is similar to [`waitForNone()`](/docs/api-reference/utils/waitForNone), except that it waits while any of the dependencies are in a loading state.
+`waitForAllSettled()`类似于 [`waitForNone()`](/docs/api-reference/utils/waitForNone)，只是它等待任何依赖项处于加载状态。
