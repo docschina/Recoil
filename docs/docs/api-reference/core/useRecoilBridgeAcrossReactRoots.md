@@ -3,15 +3,15 @@ title: useRecoilBridgeAcrossReactRoots()
 sidebar_label: useRecoilBridgeAcrossReactRoots()
 ---
 
-A hook to help with bridging Recoil state with a nested React root and renderer.
+帮助桥接 Recoil 状态与嵌套的 React root 和渲染器的钩子函数。
 
 ```jsx
 function useRecoilBridgeAcrossReactRoots_UNSTABLE():
   React.AbstractComponent<{children: React.Node}>;
 ```
-If a nested React root is created with `ReactDOM.render()`, or a nested custom renderer is used, React will not propagate context state to the child root.  This hook is useful if you would like to "bridge" and share Recoil state with a nested React root.  The hook returns a React component which you can use instead of `<RecoilRoot>` in your nested React root to share the same consistent Recoil store state. As with any state sharing across React roots, changes may not be perfectly synchronized in all cases.
+如果使用 `ReactDOM.render()` 创建了一个嵌套的 React root，或者使用了嵌套的自定义渲染器，React 则不会将上下文状态传播到 child root。当你需要 "桥接" 并与嵌套的 React root 共享 Recoil 状态，这个钩子发挥作用了。此钩子函数的返回值类型为 React 组件，你可以用此返回值来代替嵌套的 React root 中的 `<RecoilRoot>` 以共享相同且一致的 Recoil 存储状态。与任何跨 React root 的状态共享一样，在所有情况下，变化都可能不会完美同步。
 
-### Example
+### 示例
 
 ```jsx
 function Bridge() {
