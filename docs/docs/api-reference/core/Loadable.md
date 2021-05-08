@@ -6,7 +6,7 @@ sidebar_label: Loadable
 `Loadable` 对象代表 Recoil [atom](/docs/api-reference/core/atom) 或 [selector](/docs/api-reference/core/selector) 的当前状态。此状态可能有一个可用值，也可能处于错误状态，或者是仍处于 pending 状态的异步解析。一个 `Loadable` 有如下接口：
 
 - `state`：atom 或 selector 的当前状态。可能的值有 `'hasValue'`、`'hasError'` 或者 `'loading'`。
-- `contents`：此 `Loadable`表示的值。如果 state 的值是 `hasValue`，它就是实际值；如果 state 的值是 `hasError`，它就是被抛出 `Error` 对象；如果 state 的值是 `loading`，那么你可以使用 `toPromise()` 得到一个 `Promise` 的值。
+- `contents`：此 `Loadable`表示的值。如果 state 的值是 `hasValue`，其值为实际值；如果 state 的值是 `hasError`，其值为被抛出 `Error` 对象；如果 state 的值是 `loading`，那么你可以使用 `toPromise()` 得到一个 `Promise`。
 
 Loadables 还包含用于访问当前状态的 helper 方法。**注意这些 API 并不稳定**：
 
