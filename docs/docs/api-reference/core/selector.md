@@ -3,9 +3,9 @@ title: selector(options)
 sidebar_label: selector()
 ---
 
-在 Recoil 里，_selector_ 代表一个函数，或 **派生状态**。你可以把它们看作是类似于一个没有副作用的 "幂等" 或 "纯函数"，对于一组给定的依赖值永远返回相同的值。如果只提供 `get` 方法，则 selector 是只读的，并返回 `RecoilValueReadOnly` 对象。 如果还提供了一个 `set`，它将返回一个可写的 `RecoilState` 对象。
+在 Recoil 里，_selector_ 代表一个函数，或 **派生状态**。你可以把它们看作是类似于一个没有副作用的 "幂等操作" 或 "纯函数"，对于一组给定的依赖值永远返回相同的值。如果只提供 `get` 方法，则 selector 便是只读的，并且会返回一个 `RecoilValueReadOnly` 对象。 如果还提供了一个 `set` 方法，它的返回值将变为一个可写的 `RecoilState` 对象。
 
-为了知道何时通知订阅该 selector 的组件重新渲染，Recoil 会管理 atom 以及 selector 的状态变化。如果一个 selector 的对象值直接被改变，它可能会绕过这个，以避免通知订阅它的组件。为了帮助检测 bug，Recoil 将在开发模式下冻结 selector 的值对象。
+为了知道何时通知订阅该 selector 的组件重新渲染，Recoil 会管理 atom 以及 selector 的状态变化。如果一个 selector 的对象值被直接改变，它可能会绕过管理，以避免通知订阅它的组件。为了帮助检测 bug，Recoil 将在开发模式下 freeze selector 的值对象。
 
 ---
 
@@ -58,9 +58,9 @@ const mySelector = selector({
 
 ### 动态依赖
 
-只读选择器有一个 `get` 方法，该方法根据依赖关系计算的值。如果这些依赖项中的任何一个被更新，那么选择器将重新计算。依赖关系是根据在评估 selector 时实际使用的 atom 或 selector 动态确定的。根据先前依赖项的值，你可以动态地使用不同的附加依赖项。Recoil 将自动更新当前的数据流图，以便选择器只订阅来自当前依赖关系集的更新。
+只读 selector 有一个 `get` 方法，该方法会根据依赖关系计算 selector 的值。如果这些依赖项中的任何一个更新了，那么 selector 的值也将重新计算。求该 selector 的值时，其依赖关系是基于实际使用的 atoms 或 selectors 动态确定的。根据先前依赖项的值，你可以动态地使用不同的附加依赖项。Recoil 将自动更新当前的数据流图，因此 selector 只需订阅来自当前依赖关系集的更新。
 
-在这个示例中，`mySelector` 将取决于 `toggleState` 的 atom 以及 `selector` 或 `selectorB`，具体取决于 `toggleState` 的状态。
+在这个示例中，`mySelector` 将取决于 `toggleState` 的 atom 以及依赖于 `toggleState` 状态的 `selector` 或 `selectorB`。
 
 ```jsx
 const toggleState = atom({key: 'Toggle', default: false});
@@ -80,9 +80,9 @@ const mySelector = selector({
 
 ### 可写的 Selectors
 
-一个双向选择器 (bi-directional selector) 接收传入值作为参数，并可以使用该参数沿数据流图向上游传递更改。因为用户可以使用新值设置选择器，同时也可以重置选择器，所以传入的值要么与选择器表示的类型相同，要么是表示重置操作的 `DefaultValue` 对象。
+一个双向 (bi-directional) selector 接收传入值作为参数，并可以使用该参数沿数据流图向上游传递更改。因为用户既可以选择使用新值设置 selector，也可以选择重置 selector，所以传入的值要么是与 selector 表示的同类值，要么是表示重置操作的 `DefaultValue` 对象。
 
-这个简单的 selector 将一个 atom 包装起来，以添加一个额外的字段。只是将 set 和 reset 操作传递给上游的 atom。
+这个简单的 selector 实质上包装了一个 atom 来添加一个额外的字段。它仅仅只是将 set 和 reset 操作传递给了上游的 atom。
 ```jsx
 const proxySelector = selector({
   key: 'ProxySelector',
@@ -91,7 +91,7 @@ const proxySelector = selector({
 });
 ```
 
-这个 selector 转换了数据，所以需要检查看看传入值是否是一个 `DefaultValue`。
+这个 selector 转换了数据，所以需要检查传入值是否是一个 `DefaultValue`。
 ```jsx
 const transformSelector = selector({
   key: 'TransformSelector',
@@ -103,7 +103,7 @@ const transformSelector = selector({
 
 ### 异步 Selectors
 
-选择器还可以具有异步求值函数，并将 `Promise` 返回到输出里。更多信息，请参阅 [本指南](/docs/guides/asynchronous-data-queries)
+Selectors 还可以具有异步求值函数，并将一个 `Promise` 作为返回值。更多信息，请参阅 [此指南](/docs/guides/asynchronous-data-queries)
 
 ```jsx
 const myQuery = selector({
