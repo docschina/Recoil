@@ -22,7 +22,7 @@ function waitForAll(dependencies: {[string]: RecoilValue<>}):
 
 因为此并发 helper 是作为一个 selector 提供的，所以它可以作为 React 组件中的 Recoil 钩子函数使用，也可以作为 Recoil selector 中的依赖项使用，或者任何使用 Recoil 状态的地方。
 
-### Examples
+### 示例
 
 ```jsx
 function FriendsInfo() {
