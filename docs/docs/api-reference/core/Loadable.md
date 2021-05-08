@@ -10,7 +10,7 @@ sidebar_label: Loadable
 
 Loadable 还包含用于访问当前状态的 helper 方法。**注意这些 API 并不稳定**：
 
-- `getValue()` - 访问与 React Suspense 和 Recoil selectors 语义匹配的值的方法。如果 state 有一个值，那么它回返回一个值；如果它有一个错误，那么它会抛出那个错误；如果它仍然挂起，那么它会暂停执行或者渲染以传播挂起状态。
+- `getValue()` - 访问与 React Suspense 和 Recoil selectors 语义匹配的值的方法。如果 state 有值，那么它会返回该值；如果它为错误信息，那么它会抛出该错误；如果它仍然处于 pending 状态，那么它会暂停执行或者渲染以传递 pending 状态。
 - `toPromise()`- 返回一个将在selector执行完毕后执行的 `Promise`。如果此 selector 是同步执行的或者已经执行完毕，它会返回一个能立即执行的 `Promise`。
 - `valueMaybe()` - 如果有值便返回值，否则返回 `undefined`。
 - `valueOrThrow()` - 如果有值便返回值，否则抛出错误。
