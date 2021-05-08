@@ -3,9 +3,9 @@ title: selector(options)
 sidebar_label: selector()
 ---
 
-在 Recoil 里，_selector_ 代表一个函数，或 **派生状态**。你可以把它们看作是类似于一个没有副作用的 "幂等操作" 或 "纯函数"，对于一组给定的依赖值永远返回相同的值。如果只提供 `get` 方法，则 selector 便是只读的，并且会返回一个 `RecoilValueReadOnly` 对象。 如果还提供了一个 `set` 方法，它的返回值将变为一个可写的 `RecoilState` 对象。
+在 Recoil 里，_selector_ 代表一个函数，或 **派生状态**。你可以把它们看作是类似于一个没有副作用的 "幂等操作" 或 "纯函数"，对于一组给定的依赖值永远返回相同的值。如果只提供 `get` 方法，则 selector 便是只读的，并且会返回一个 `RecoilValueReadOnly` 对象。如果还提供了一个 `set` 方法，它的返回值将变为一个可写的 `RecoilState` 对象。
 
-为了知道何时通知订阅该 selector 的组件重新渲染，Recoil 会管理 atom 以及 selector 的状态变化。如果一个 selector 的对象值被直接改变，它可能会绕过管理，以避免通知订阅它的组件。为了帮助检测 bug，Recoil 将在开发模式下 freeze selector 的值对象。
+为了知道何时通知订阅该 selector 的组件重新渲染，Recoil 会自动管理 atom 以及 selector 的状态变化。如果一个 selector 的对象值被直接改变，它可能会绕过管理，以避免通知订阅它的组件。为了帮助检测 bug，Recoil 将在开发模式下 freeze selector 的值对象。
 
 ---
 
@@ -59,7 +59,6 @@ const mySelector = selector({
 ### 动态依赖
 
 只读 selector 有一个 `get` 方法，该方法会根据依赖关系计算 selector 的值。如果这些依赖项中的任何一个更新了，那么 selector 的值也将重新计算。求该 selector 的值时，其依赖关系是基于实际使用的 atoms 或 selectors 动态确定的。根据先前依赖项的值，你可以动态地使用不同的附加依赖项。Recoil 将自动更新当前的数据流图，因此 selector 只需订阅来自当前依赖关系集的更新。
-
 在这个示例中，`mySelector` 将取决于 `toggleState` 的 atom 以及依赖于 `toggleState` 状态的 `selector` 或 `selectorB`。
 
 ```jsx
