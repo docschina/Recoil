@@ -8,7 +8,7 @@ sidebar_label: Loadable
 - `state`：atom 或 selector 的当前状态。可能的值有 `'hasValue'`、`'hasError'` 或者 `'loading'`。
 - `contents`：此 `Loadable`表示的值。如果 state 的值是 `hasValue`，其值为实际值；如果 state 的值是 `hasError`，其值为被抛出 `Error` 对象；如果 state 的值是 `loading`，那么你可以使用 `toPromise()` 得到一个 `Promise`。
 
-Loadables 还包含用于访问当前状态的 helper 方法。**注意这些 API 并不稳定**：
+Loadable 还包含用于访问当前状态的 helper 方法。**注意这些 API 并不稳定**：
 
 - `getValue()` - 访问与 React Suspense 和 Recoil selectors 语义匹配的值的方法。如果 state 有一个值，那么它回返回一个值；如果它有一个错误，那么它会抛出那个错误；如果它仍然挂起，那么它会暂停执行或者渲染以传播挂起状态。
 - `toPromise()`- 返回一个将在selector执行完毕后执行的 `Promise`。如果此 selector 是同步执行的或者已经执行完毕，它会返回一个能立即执行的 `Promise`。
