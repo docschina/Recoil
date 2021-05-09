@@ -30,7 +30,7 @@ interface ComponentInfo {
 它提供了一个可以通过 `RecoilValue<T>` 传递的函数并且将会返回一个包含 atom/selector 当前信息的对象。它并不会导致任何 state 改变或者创建任何订阅。它主要用于调试或开发工具中。
 
 调试信息正在改进中，但可能包括：
-* `loadable` - 一个带有当前状态的 Loadable。 不像 `getLoadable()`等方法，此方法根本不会改变快照 (snapshot)。它提供当前状态，并且将不会初始化新的 atoms/selectors，执行任何新的 selector 计算，或更新任何依赖项或订阅。
+* `loadable` - 一个带有当前状态的 Loadable。与 `getLoadable()` 等方法不同，此方法根本不会改变快照 (snapshot)。它提供当前状态，并且将不会初始化新的 atoms/selectors，执行任何新的 selector 计算，或更新任何依赖项或订阅。
 * `isSet` - 如果这是存储在快照状态中的带有显式值的 atom，则为 True。如果这是一个 selector 或使用默认的 atom 状态，则为 False。
 * `isModified` - 如果这是自上次处理后修改过的 atom，则为 True。
 * `type` - `atom` 或者 `selector`。
