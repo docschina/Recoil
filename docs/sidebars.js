@@ -40,38 +40,6 @@ module.exports = {
     'API Reference': [
       'api-reference/core/RecoilRoot',
       {
-<<<<<<< HEAD
-        '核心': [
-          'api-reference/core/RecoilRoot',
-          {
-            State: [
-              'api-reference/core/atom',
-              'api-reference/core/selector',
-              'api-reference/core/Loadable',
-              'api-reference/core/useRecoilState',
-              'api-reference/core/useRecoilValue',
-              'api-reference/core/useSetRecoilState',
-              'api-reference/core/useResetRecoilState',
-              'api-reference/core/useRecoilStateLoadable',
-              'api-reference/core/useRecoilValueLoadable',
-              'api-reference/core/useGetRecoilValueInfo',
-              'api-reference/core/isRecoilValue',
-              // 'api-reference/core/DefaultValue',
-            ],
-            Snapshots: [
-              'api-reference/core/Snapshot',
-              'api-reference/core/useRecoilTransactionObserver',
-              'api-reference/core/useRecoilSnapshot',
-              'api-reference/core/useGotoRecoilSnapshot',
-            ],
-          },
-          'api-reference/core/useRecoilCallback',
-          {
-            Misc: [
-              'api-reference/core/useRecoilBridgeAcrossReactRoots',
-            ],
-          },
-=======
         State: [
           'api-reference/core/atom',
           'api-reference/core/selector',
@@ -91,7 +59,6 @@ module.exports = {
           'api-reference/core/useRecoilTransactionObserver',
           'api-reference/core/useRecoilSnapshot',
           'api-reference/core/useGotoRecoilSnapshot',
->>>>>>> 7b861bf336e36777470036c79c979f26e9fec941
         ],
       },
       'api-reference/core/useRecoilCallback',
