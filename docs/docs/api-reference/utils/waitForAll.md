@@ -3,9 +3,9 @@ title: waitForAll(dependencies)
 sidebar_label: waitForAll()
 ---
 
-A concurrency helper which allows us to concurrently evaluate multiple asynchronous dependencies.
+一个允许我们并发计算多个异步依赖项的并发 helper 方法。
 
-The dependencies may either be provided as a tuple array or as named dependencies in an object.
+依赖项可以作为元组数组提供，也可以作为对象中的命名依赖项提供。
 
 ---
 
@@ -20,9 +20,9 @@ function waitForAll(dependencies: {[string]: RecoilValue<>}):
 ```
 ---
 
-Because the concurrency helper is provided as a selector, it may be used by Recoil hooks in a React component, as a dependency in a Recoil selector, or anywhere a Recoil state is used.
+因为此并发 helper 是作为一个 selector 提供的，所以它可以作为 React 组件中的 Recoil 钩子函数使用，也可以作为 Recoil selector 中的依赖项使用，或者任何使用 Recoil 状态的地方。
 
-### Examples
+### 示例
 
 ```jsx
 function FriendsInfo() {
