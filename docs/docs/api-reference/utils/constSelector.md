@@ -3,17 +3,17 @@ title: constSelector(constant)
 sidebar_label: constSelector()
 ---
 
-A [selector](/docs/api-reference/core/selector) which always provides a constant value.
+一个永远提供常数的 [selector](/docs/api-reference/core/selector)。
 
 ```jsx
 function constSelector<T: Parameter>(constant: T): RecoilValueReadOnly<T>
 ```
 
-A `constSelector` may be useful if you have an interface that uses a type such as `RecoilValue<T>` or `RecoilValueReadOnly<T>` that may be provided by different selector implementations.
+如果你有一个使用有诸如 `RecoilValue<T>` 或 `RecoilValueReadOnly<T>` 类型的接口，可能会被不同的选择器实现所提供，那么 `constSelector` 可能很有用。
 
-These selectors will memoize based on reference value equality.  So, `constSelector()` can be called multiple times with the same value and the same selector will be provided.  Because of this, the value used as a constant is restricted to types that may be serialized using the Recoil serialization.  Please see documentation in [`selectorFamily`](/docs/api-reference/utils/selectorFamily) describing the limitations.
+这些选择器将基于引用值的平等进行记忆。所以`constSelector()` 可以用相同的值多次调用，并且会提供相同的选择器。正因为如此，作为常量使用的值被限制在可以使用 Recoil 序列化的类型上。对于这些限制的更多描述，请参阅 [`selectorFamily`](/docs/api-reference/utils/selectorFamily)。
 
-### Example
+### 示例
 
 ```jsx
 type MyInterface = {
