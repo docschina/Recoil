@@ -14,7 +14,7 @@ function useRecoilTransactionObserver_UNSTABLE(({
 }) => void)
 ```
 
-此回调函数为 React 批处理事务提供当前和先前状态的 [`Snapshot`](/docs/api-reference/core/Snapshot)。如果您只想订阅单个 atom 的更改，请考虑使用 effects 代替。将来，我们可能会允许在特定条件下订阅，或者为了提升性能提供防抖功能。
+此回调函数为 React 批处理事务提供当前和先前状态的 [`Snapshot`](/docs/api-reference/core/Snapshot)。如果你只想订阅单个 atom 的更改，请考虑使用 effects 代替。将来，我们可能会允许在特定条件下订阅，或者为了提升性能提供防抖功能。
 
 ### 调试示例
 
