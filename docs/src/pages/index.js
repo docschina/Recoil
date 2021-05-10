@@ -107,7 +107,7 @@ function Home() {
                 styles.getStarted,
               )}
               to={useBaseUrl('docs/introduction/getting-started')}>
-              <Translate id="homePage.head.start">Get Started</Translate>
+              <Translate id="homePage.head.start">快速上手</Translate>
             </Link>
           </div>
         </div>
