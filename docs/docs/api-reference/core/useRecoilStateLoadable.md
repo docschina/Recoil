@@ -12,7 +12,7 @@ sidebar_label: useRecoilStateLoadable()
 ```jsx
 function useRecoilStateLoadable<T>(state: RecoilState<T>): [Loadable<T>, (T | (T => T)) => void]
 ```
-- `state`: 一个可写的 [`atom`](/docs/api-reference/core/atom) 或_可能_ 有一些异步操作的 [`selector`](/docs/api-reference/core/selector)。返回的 loadable 的状态将取决于所提供的状态 selector 的状态。
+- `state`: 一个可写的 [`atom`](/docs/api-reference/core/atom) 或 _可能_ 有一些异步操作的 [`selector`](/docs/api-reference/core/selector)。返回的 loadable 的状态将取决于所提供的状态 selector 的状态。
 
 返回一个 [`Loadable`](/docs/api-reference/core/Loadable) 的当前状态与接口：
 
