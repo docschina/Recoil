@@ -3,7 +3,7 @@ title: useGetRecoilValueInfo_UNSTABLE()
 sidebar_label: useGetRecoilValueInfo()
 ---
 
-此钩子函数允许组件 ”窥视“ atom 或者 selector 的当前状态、值和其他信息。这类似于 [`Snapshot`](docs/api-reference/core/Snapshot) 中的 [`getInfo_UNSTABLE()`](/docs/api-reference/core/Snapshot#debug-information) 方法。
+此钩子函数允许组件 “窥视” atom 或者 selector 的当前状态、值和其他信息。这类似于 [`Snapshot`](docs/api-reference/core/Snapshot) 中的 [`getInfo_UNSTABLE()`](/docs/api-reference/core/Snapshot#debug-information) 方法。
 
 
 ```jsx
