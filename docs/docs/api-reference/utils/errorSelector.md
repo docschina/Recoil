@@ -3,13 +3,13 @@ title: errorSelector(message)
 sidebar_label: errorSelector()
 ---
 
-A [selector](/docs/api-reference/core/selector) which always throws the provided error
+一个总是抛出已有错误的 [selector](/docs/api-reference/core/selector)。
 
 ```jsx
 function errorSelector(message: string): RecoilValueReadOnly
 ```
 
-### Example
+### 示例
 
 ```jsx
 const myAtom = atom({
