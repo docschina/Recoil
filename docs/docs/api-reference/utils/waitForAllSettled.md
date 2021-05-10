@@ -20,4 +20,4 @@ function waitForAllSettled(dependencies: {[string]: RecoilValue<>}):
 ```
 ---
 
-`waitForAllSettled()`类似于 [`waitForNone()`](/docs/api-reference/utils/waitForNone)，只是它等待任何依赖项处于加载状态。
+`waitForAllSettled()` 类似于 [`waitForNone()`](/docs/api-reference/utils/waitForNone)，只是它等待任何依赖项处于加载状态。
