@@ -3,7 +3,7 @@ title: errorSelector(message)
 sidebar_label: errorSelector()
 ---
 
-一个总是抛出已有错误的 [selector](/docs/api-reference/core/selector)
+一个总是抛出已有错误的 [selector](/docs/api-reference/core/selector)。
 
 ```jsx
 function errorSelector(message: string): RecoilValueReadOnly
