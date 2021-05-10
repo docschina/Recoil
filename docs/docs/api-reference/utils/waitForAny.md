@@ -20,4 +20,4 @@ function waitForAny(dependencies: {[string]: RecoilValue<>}):
 ```
 ---
 
-`waitForAny()` 类似于 [`waitForNone()`](/docs/api-reference/utils/waitForNone) ，只是它要等到至少有一个依赖项具有可用的值(或错误) ，而不是立即返回。
+`waitForAny()` 类似于 [`waitForNone()`](/docs/api-reference/utils/waitForNone)，只是它要等到至少有一个依赖项具有可用的值 (或错误) ，而不是立即返回。
