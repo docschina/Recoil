@@ -3,19 +3,19 @@ title: 开发工具
 sidebar_label: 开发工具
 ---
 
-Recoil 具有允许您观察和更新 state 变化的能力。
+Recoil 能够允许你观察和更新 state 的变化。
 
 ----
 ## *重要提示*
-***此 API 目前正在开发中，且将会被更改。敬请期待……***
+***此 API 目前仍在开发中，且将会有所变化。敬请期待……***
 
 ----
 
 ## 观察所有 state 变化
 
-您可以使用一个例如 [**`useRecoilSnapshot()`**](/docs/api-reference/core/useRecoilSnapshot) 和 [**`useRecoilTransactionObserver_UNSTABLE()`**](/docs/api-reference/core/useRecoilTransactionObserver) 的钩子函数来订阅 state 的变化，同时也能得到新的 state 的 [**`Snapshot`**](/docs/api-reference/core/Snapshot)。
+你可以使用一个钩子函数来订阅 state 的变化，例如 [**`useRecoilSnapshot()`**](/docs/api-reference/core/useRecoilSnapshot) 和 [**`useRecoilTransactionObserver_UNSTABLE()`**](/docs/api-reference/core/useRecoilTransactionObserver) ，同时也能得到新的 state 的 [**`Snapshot`**](/docs/api-reference/core/Snapshot)。
 
-拥有 `Snapshot` 后，您可以使用一些例如 **`getLoadable()`**，**`getPromise()`** 和 **`getInfo_UNSTABLE()`** 的方法来查阅 state，同时也能使用 **`getNodes_UNSTABLE()`** 来遍历一组已知的 atom。
+拥有 `Snapshot` 后，你可以使用一些方法来查阅 state，例如 **`getLoadable()`**，**`getPromise()`** 和 **`getInfo_UNSTABLE()`** ，同时也能使用 **`getNodes_UNSTABLE()`** 来遍历一组已知的 atom。
 
 ```jsx
 function DebugObserver(): React.Node {
@@ -44,7 +44,7 @@ function MyApp() {
 
 ## 按需观察 state 变化
 
-或者，您可以使用 [**`useRecoilCallback()`**](/docs/api-reference/core/useRecoilCallback) 钩子函数按需获取 [**`Snapshot`**](/docs/api-reference/core/Snapshot)。
+或者，你可以使用 [**`useRecoilCallback()`**](/docs/api-reference/core/useRecoilCallback) 钩子函数按需获取 [**`Snapshot`**](/docs/api-reference/core/Snapshot)。
 
 ```jsx
 function DebugButton(): React.Node {
@@ -62,9 +62,9 @@ function DebugButton(): React.Node {
 
 ## 时间旅行
 
-[**`useGotoRecoilSnapshot()`**](/docs/api-reference/core/useGotoRecoilSnapshot) 钩子函数可以用于更新整个 Recoil state，使其符合匹配的 `Snapshot`。此示例展示的是维护 state 更改的历史记录，返回和恢复先前的全局 state 的能力。
+[**`useGotoRecoilSnapshot()`**](/docs/api-reference/core/useGotoRecoilSnapshot) 钩子函数可以用于更新整个 Recoil state，以匹配提供的 `Snapshot`。此示例展示的是维护 state 更改的历史记录以便回溯，并恢复先前的全局 state 的能力。
 
-`Snapshot` 还提供了 **`getID()`** 方法。例如，您可以使用它来帮助您确定是否正在还原到先前已知的 state，以避免更新您的快照历史记录。
+`Snapshot` 还提供了 **`getID()`** 方法。例如，可以使用它来帮助你确定是否正在还原到先前已知的 state，以避免更新你的快照历史记录。
 
 ```jsx
 function TimeTravelObserver() {
@@ -96,4 +96,4 @@ function TimeTravelObserver() {
 
 ## 查阅当前状态
 
-[`useGetRecoilValueInfo_UNSTABLE()`](/docs/api-reference/core/useGetRecoilValueInfo) 提供了一个回调用于查看当前 state，并获取 atoms 和 selectors 的信息。大多数情况下这等效于在当前 [`Snapshot`](/docs/api-reference/core/Snapshot) 上调用 [`getInfo_UNSTABLE()`](/docs/api-reference/core/Snapshot#debug-information)，不同之处在于它可以提供一些可以更改且与 Recoil state 快照无关的其他信息，例如订阅了 atom 的 React 组件集合。
+[`useGetRecoilValueInfo_UNSTABLE()`](/docs/api-reference/core/useGetRecoilValueInfo) 提供了一个回调函数，它可用于查看当前 state 以及获取 atom 和 selector 的信息。在大多数情况下，这等效于在当前 [`Snapshot`](/docs/api-reference/core/Snapshot) 上调用 [`getInfo_UNSTABLE()`](/docs/api-reference/core/Snapshot#debug-information)，不同之处在于它能够提供一些可更改且与 Recoil state 快照无关的其他信息，例如订阅了 atom 的 React 组件集合。
