@@ -9,7 +9,7 @@ sidebar_label: useRecoilSnapshot()
 function useRecoilSnapshot(): Snapshot
 ```
 
-请慎重使用此钩子，因为它会导致组件重新渲染 *所有* 的 Recoil 状态变化。今后，我们希望能够为业绩提供拆分能力。未来，我们希望能为提升性能提供防抖能力。
+请慎重使用此钩子，因为它会导致组件重新渲染 *所有* 的 Recoil 状态变化。未来，我们希望能为提升性能提供防抖能力。
 
 ### Link 示例
 定义一个 `<LinkToNewView>` 组件，该组件根据当前已改变的状态渲染一个带有 `href` 的 `<a>` 。在这个示例中 `uriFromSnapshot()` 是一个用户定义的函数，它会对 URI 中的当前状态进行编码，当再次加载页面时可以还原这个状态。
