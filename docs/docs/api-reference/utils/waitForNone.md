@@ -3,7 +3,7 @@ title: waitForNone(dependencies)
 sidebar_label: waitForNone()
 ---
 
-一个返回一组 [`Loadables`](/docs/api-reference/core/Loadable) 表示请求的依赖项的当前状态的并发 helper 方法。
+一个并发 helper 方法，返回一组表示请求的依赖项当前状态的 [`Loadables`](/docs/api-reference/core/Loadable)。
 
 依赖项可以作为元组数组提供，也可以作为对象中的命名依赖项提供。
 
