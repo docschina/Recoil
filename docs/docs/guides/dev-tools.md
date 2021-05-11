@@ -1,6 +1,6 @@
 ---
-title: Development Tools
-sidebar_label: Dev Tools
+title: 开发工具
+sidebar_label: 开发工具
 ---
 
 Recoil 具有允许您观察和更新 state 变化的能力。
