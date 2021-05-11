@@ -25,7 +25,7 @@ function waitForNone(dependencies: {[string]: RecoilValue<>}):
 此 helper 方法对于处理部分数据或在不同数据可用时增量更新 UI 非常有用。
 
 ### 增量加载示例
-这个例子渲染了一个多层图表。每一层都有一个潜在的耗时巨大的数据查询。它将立即使用 spinners 为每个处于 pending 的图层渲染图表，并在该图层的数据输入时更新图表以添加每个新图层。如果任一图层的查询出现错误，那么只有该图层会显示错误消息，其余图层将继续渲染。
+此示例渲染了一个多层图表。每一层都存在耗时的数据查询操作。它将立即使用 spinners 为每个处于 pending 的图层渲染图表，并在该图层的数据返回时，更新图表以添加该层数据。如果任一图层的查询出现错误，那么只有该图层会显示错误消息，其余图层将继续渲染。
 
 ```jsx
 function MyChart({layerQueries}: {layerQueries: Array<RecoilValue<Layer>>}) {
