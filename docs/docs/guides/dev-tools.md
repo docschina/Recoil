@@ -3,7 +3,7 @@ title: 开发工具
 sidebar_label: 开发工具
 ---
 
-Recoil 能够允许你观察和更新 state 的变化。
+Recoil 允许你观察和更新 state 的变化。
 
 ----
 ## *重要提示*
@@ -15,7 +15,7 @@ Recoil 能够允许你观察和更新 state 的变化。
 
 你可以使用一个钩子函数来订阅 state 的变化，例如 [**`useRecoilSnapshot()`**](/docs/api-reference/core/useRecoilSnapshot) 和 [**`useRecoilTransactionObserver_UNSTABLE()`**](/docs/api-reference/core/useRecoilTransactionObserver) ，同时也能得到新的 state 的 [**`Snapshot`**](/docs/api-reference/core/Snapshot)。
 
-拥有 `Snapshot` 后，你可以使用一些方法来查阅 state，例如 **`getLoadable()`**，**`getPromise()`** 和 **`getInfo_UNSTABLE()`** ，同时也能使用 **`getNodes_UNSTABLE()`** 来遍历一组已知的 atom。
+有 `Snapshot` 后，你即可使用一些方法来查阅 state，例如 **`getLoadable()`**，**`getPromise()`** 和 **`getInfo_UNSTABLE()`** ，同时也能使用 **`getNodes_UNSTABLE()`** 来遍历一组已知的 atom。
 
 ```jsx
 function DebugObserver(): React.Node {
