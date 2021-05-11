@@ -1,21 +1,21 @@
 ---
-title: Development Tools
-sidebar_label: Dev Tools
+title: 开发工具
+sidebar_label: 开发工具
 ---
 
-Recoil has functionality to allow you to observe and update state changes.
+Recoil 允许你观察和更新 state 的变化。
 
 ----
-## *IMPORTANT NOTE*
-***This API is currently under development and will change.  Please stay tuned...***
+## *重要提示*
+***此 API 目前仍在开发中，且将会有所变化。敬请期待……***
 
 ----
 
-## Observing All State Changes
+## 观察所有 state 变化
 
-You can use a hook such as [**`useRecoilSnapshot()`**](/docs/api-reference/core/useRecoilSnapshot) or [**`useRecoilTransactionObserver_UNSTABLE()`**](/docs/api-reference/core/useRecoilTransactionObserver) to subscribe to state changes and obtain a [**`Snapshot`**](/docs/api-reference/core/Snapshot) of the new state.
+你可以使用一个钩子函数来订阅 state 的变化，例如 [**`useRecoilSnapshot()`**](/docs/api-reference/core/useRecoilSnapshot) 和 [**`useRecoilTransactionObserver_UNSTABLE()`**](/docs/api-reference/core/useRecoilTransactionObserver) ，同时也能得到新的 state 的 [**`Snapshot`**](/docs/api-reference/core/Snapshot)。
 
-Once you have a `Snapshot`, you can use methods such as **`getLoadable()`**, **`getPromise()`**, and **`getInfo_UNSTABLE()`** to inspect the state and use **`getNodes_UNSTABLE()`** to iterate over the set of known atoms.
+有 `Snapshot` 后，你即可使用一些方法来查阅 state，例如 **`getLoadable()`**，**`getPromise()`** 和 **`getInfo_UNSTABLE()`** ，同时也能使用 **`getNodes_UNSTABLE()`** 来遍历一组已知的 atom。
 
 ```jsx
 function DebugObserver(): React.Node {
@@ -42,9 +42,9 @@ function MyApp() {
 }
 ```
 
-## Observing State Changes On-Demand
+## 按需观察 state 变化
 
-Or, you can use the [**`useRecoilCallback()`**](/docs/api-reference/core/useRecoilCallback) hook to obtain a [**`Snapshot`**](/docs/api-reference/core/Snapshot) on-demand.
+或者，你可以使用 [**`useRecoilCallback()`**](/docs/api-reference/core/useRecoilCallback) 钩子函数按需获取 [**`Snapshot`**](/docs/api-reference/core/Snapshot)。
 
 ```jsx
 function DebugButton(): React.Node {
@@ -60,11 +60,11 @@ function DebugButton(): React.Node {
 }
 ```
 
-## Time Travel
+## 时间旅行
 
-The [**`useGotoRecoilSnapshot()`**](/docs/api-reference/core/useGotoRecoilSnapshot) hook can be used to update the entire Recoil state to match the provided `Snapshot`.  This example maintains a history of state changes with the ability to go back and restore previous global state.
+[**`useGotoRecoilSnapshot()`**](/docs/api-reference/core/useGotoRecoilSnapshot) 钩子函数可以用于更新整个 Recoil state，以匹配提供的 `Snapshot`。此示例展示的是维护 state 更改的历史记录以便回溯，并恢复先前的全局 state 的能力。
 
-`Snapshot`'s also provide a **`getID()`** method.  That can be used, for example, to help determine if you are reverting to a previous known state to avoid updating your snapshot history.
+`Snapshot` 还提供了 **`getID()`** 方法。例如，可以使用它来帮助你确定是否正在还原到先前已知的 state，以避免更新你的快照历史记录。
 
 ```jsx
 function TimeTravelObserver() {
@@ -94,6 +94,6 @@ function TimeTravelObserver() {
 }
 ```
 
-## Inspecting current state
+## 查阅当前状态
 
-The [`useGetRecoilValueInfo_UNSTABLE()`](/docs/api-reference/core/useGetRecoilValueInfo) provides a callback which can be used to peek at the current state and get information about atoms and selectors.  For the most part this is equivalent to calling [`getInfo_UNSTABLE()`](/docs/api-reference/core/Snapshot#debug-information) on a current [`Snapshot`](/docs/api-reference/core/Snapshot), except that it can provide additional information such as the set of React components subscribing to an atom, which can change and isn't associated with a snapshot of Recoil state.
+[`useGetRecoilValueInfo_UNSTABLE()`](/docs/api-reference/core/useGetRecoilValueInfo) 提供了一个回调函数，它可用于查看当前 state 以及获取 atom 和 selector 的信息。在大多数情况下，这等效于在当前 [`Snapshot`](/docs/api-reference/core/Snapshot) 上调用 [`getInfo_UNSTABLE()`](/docs/api-reference/core/Snapshot#debug-information)，不同之处在于它能够提供一些可更改且与 Recoil state 快照无关的其他信息，例如订阅了 atom 的 React 组件集合。
