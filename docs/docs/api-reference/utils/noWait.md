@@ -3,7 +3,7 @@ title: noWait(state)
 sidebar_label: noWait()
 ---
 
-一个返回代表所提供的 [`atom`](/docs/api-reference/core/atom) 或 [`selector`](/docs/api-reference/core/selector) 当前状态的 [`Loadable`](/docs/api-reference/core/Loadable)。
+一个 selector helper 方法，返回值为代表所提供的 [`atom`](/docs/api-reference/core/atom) 或 [`selector`](/docs/api-reference/core/selector) 当前状态的 [`Loadable`](/docs/api-reference/core/Loadable)。
 
 ```jsx
 function noWait<T>(state: RecoilValue<T>): RecoilValueReadOnly<Loadable<T>>
