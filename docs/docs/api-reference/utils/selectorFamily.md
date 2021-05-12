@@ -3,9 +3,9 @@ title: selectorFamily(options)
 sidebar_label: selectorFamily()
 ---
 
-Returns a function that returns a read-only `RecoilValueReadOnly` or writeable `RecoilState` selector.
+返回一个函数，该函数返回以一个只读的 `RecoilValueReadOnly` 或者可写的 `RecoilState` selector.
 
-A `selectorFamily` is a powerful pattern that is similar to a [`selector`](/docs/api-reference/core/selector), but allows you to pass parameters to the `get` and `set` callbacks of a `selector`.  The `selectorFamily()` utility returns a function which can be called with user-defined parameters and returns a selector. Each unique parameter value will return the same memoized selector instance.
+`selectorFamily` 是一个功能强大的模式，类似于 [`selector`](/docs/api-reference/core/selector)，但允许你将参数传递给 `selector` 的 `get` 和 `set` 回调。`selectorFamily()` 实例返回一个函数，该函数可以使用自定义的参数进行调用并会翻译一个 selector。对每个唯一参数值，该函数都将返回相同的 selector 实例。
 
 ---
 
@@ -47,15 +47,15 @@ type SetRecoilValue = <T>(RecoilState<T>, ValueOrUpdater<T>) => void;
 type ResetRecoilValue = <T>(RecoilState<T>) => void;
 ```
 
-- `key` - A unique string used to identify the atom internally. This string should be unique with respect to other atoms and selectors in the entire application.
-- `get` - A function that is passed an object of named callbacks that returns the value of the selector, the same as the `selector()` interface. This is wrapped by a function which is passed the parameter from calling the selector family function.
-- `set?` - An optional function that will produce writeable selectors when provided. It should be a function that takes an object of named callbacks, same as the `selector()` interface. This is again wrapped by another function with gets the parameters from calling the selector family function.
+- `key` - 用于内部识别 atom 的唯一字符串。相对于整个应用程序中的其他 atom 和 selector，该字符串应该是唯一的。
+- `get` - 传递给命名回调对象的函数，该回调将返回 selector 的值，与 `selector()` 接口相同。这是一个包装函数，该函数通过调用 selector 族函数获取参数。
+- `set?` - 它应该是一个带有命名回调对象的函数，与 `selector()` 接口相同。这也是一个包装函数，该函数通过调用 selector 族函数获取参数。
 
 ---
 
-The `selectorFamily` essentially provides a map from the parameter to a selector.  Because the parameters are often generated at the callsites using the family, and we want equivalent parameters to re-use the same underlying selector, it uses value-equality by default instead of reference-equality.  (There is an unstable API to adjust this behavior).  This imposes restrictions on the types which can be used for the parameter.  Please use a primitive type or an object that can be serialized.  Recoil uses a custom serializer that can support objects and arrays, some containers (such as ES6 Sets and Maps), is invariant of object key ordering, supports Symbols, Iterables, and uses `toJSON` properties for custom serialization (such as provided with libraries like Immutable containers).  Using functions or mutable objects, such as Promises, in parameters is problematic.
+`selectorFamily` 本质上提供了从参数到选择器的映射。因为参数通常是使用族在调用站点上生成的，并且我们希望等效的参数重新使用相同的基础选择器，所以默认情况下它使用值相等而不是引用相等。（有一个不稳定的 API 可以调整此行为）。这对可用于参数的类型施加了限制。请使用原始类型或可以序列化的对象。Recoil 使用可以支持对象和数组的自定义序列化程序，某些容器（例如ES6 Sets和Maps）不改变对象键顺序，支持Symbols、Iterables，并可用 `toJSON` 属性来进行自定义序列化（例如类似不可变容器之类的库）。在参数中使用函数或可变对象（如 Promises）都有可能造成问题。
 
-## Example
+## 示例
 
 ```jsx
 const myNumberState = atom({
@@ -86,9 +86,9 @@ function MyComponent() {
 }
 ```
 
-## Async Query Example
+## 异步查询示例
 
-Selector Families are also useful to use for passing parameters to queries.  Note that using a selector to abstract queries like this should still be "pure" functions which always return the same result for a given set of inputs and dependency values.  See [this guide](/docs/guides/asynchronous-data-queries) for more examples.
+Selector 族对于将参数传递给查询也很有用。注意，使用 selector 来抽象这样的查询仍然应该是 “纯” 函数，对于给定的一组输入和相关性值，它们总是返回相同的结果。 更多相关示例，请参见[指南](/docs/guides/asynchronous-data-queries)。
 
 ```jsx
 const myDataQuery = selectorFamily({
@@ -108,7 +108,7 @@ function MyComponent() {
 }
 ```
 
-## Destructuring Example
+## 销毁示例
 
 ```jsx
 const formState = atom({
