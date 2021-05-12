@@ -3,7 +3,7 @@ title: selectorFamily(options)
 sidebar_label: selectorFamily()
 ---
 
-返回一个函数，该函数返回以一个只读的 `RecoilValueReadOnly` 或者可写的 `RecoilState` selector.
+返回一个函数，该函数返回一个只读的 `RecoilValueReadOnly` 或者可写的 `RecoilState` selector。
 
 `selectorFamily` 是一个功能强大的模式，类似于 [`selector`](/docs/api-reference/core/selector)，但允许你将参数传递给 `selector` 的 `get` 和 `set` 回调。`selectorFamily()` 实例返回一个函数，该函数可以使用自定义的参数进行调用并会翻译一个 selector。对每个唯一参数值，该函数都将返回相同的 selector 实例。
 
@@ -69,17 +69,17 @@ const myMultipliedState = selectorFamily({
     return get(myNumberState) * multiplier;
   },
 
-  // optional set
+  // 可选 set
   set: (multiplier) => ({set}, newValue) => {
     set(myNumberState, newValue / multiplier);
   },
 });
 
 function MyComponent() {
-  // defaults to 2
+  // 默认为 2
   const number = useRecoilValue(myNumberState);
 
-  // defaults to 200
+  // 默认为 200
   const multipliedNumber = useRecoilValue(myMultipliedState(100));
 
   return <div>...</div>;
