@@ -3,9 +3,9 @@ title: waitForNone(dependencies)
 sidebar_label: waitForNone()
 ---
 
-A concurrency helper that returns a set of [`Loadable`s](/docs/api-reference/core/Loadable) for the current state of the requested dependencies.
+一个并发 helper 方法，返回一组表示请求的依赖项当前状态的 [`Loadables`](/docs/api-reference/core/Loadable)。
 
-The dependencies may either be provided as a tuple array or as named dependencies in an object.
+依赖项可以作为元组数组提供，也可以作为对象中的命名依赖项提供。
 
 ---
 
@@ -20,12 +20,12 @@ function waitForNone(dependencies: {[string]: RecoilValue<>}):
 ```
 ---
 
-`waitForNone()` is similar to [`waitForAll()`](/docs/api-reference/utils/waitForAll), except that it returns immediately and returns a [`Loadable`](/docs/api-reference/core/Loadable) for each dependency instead of the values directly.  It is similar to [`noWait()`](/docs/api-reference/utils/noWait), except that it allows requesting multiple dependencies at once.
+`waitForNone()` 类似于 [`waitForAll()`](/docs/api-reference/utils/waitForAll)，只是它会立即为每个依赖项返回一个 [`Loadable`](/docs/api-reference/core/Loadable)，而不是直接返回值。它类似于 [`noWait()`](/docs/api-reference/utils/noWait)，只是它允许同时请求多个依赖项。
 
-This helper is useful for working with partial data or incrementally updating the UI as different data becomes available.
+此 helper 方法对于处理部分数据或在不同数据可用时增量更新 UI 非常有用。
 
-### Incremental Loading Example
-This example renders a chart with multiple layers.  Each layer has a potentially expensive data query.  It will render the chart immediately using spinners for each layer that is still pending and will update the chart to add each new layer as the data for that layer comes in.  If any of the layers has an error with the query then only that layer will show an error message and the rest will continue to render.
+### 增量加载示例
+此示例渲染了一个多层图表。每一层都存在耗时的数据查询操作。它将立即使用 spinners 为每个处于 pending 的图层渲染图表，并在该图层的数据返回时，更新图表以添加该层数据。如果任一图层的查询出现错误，那么只有该图层会显示错误消息，其余图层将继续渲染。
 
 ```jsx
 function MyChart({layerQueries}: {layerQueries: Array<RecoilValue<Layer>>}) {
