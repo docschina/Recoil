@@ -88,7 +88,7 @@ function MyComponent() {
 
 ## 异步查询示例
 
-Selector 族对于将参数传递给查询也很有用。注意，使用 selector 来抽象这样的查询仍然应该是 “纯” 函数，对于给定的一组输入和相关性值，它们总是返回相同的结果。更多相关示例，请参见 [指南](/docs/guides/asynchronous-data-queries)。
+Selector 族对于将参数传递给查询也很有用。注意，使用 selector 来抽象这样的查询仍然应该是 “纯” 函数，对于给定的一组输入值和依赖值，它们总是返回相同的结果。更多相关示例，请参见 [指南](/docs/guides/asynchronous-data-queries)。
 
 ```jsx
 const myDataQuery = selectorFamily({
