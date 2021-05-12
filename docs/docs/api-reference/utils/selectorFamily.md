@@ -48,7 +48,7 @@ type ResetRecoilValue = <T>(RecoilState<T>) => void;
 ```
 
 - `key` - 用于内部识别 atom 的唯一字符串。相对于整个应用程序中的其他 atom 和 selector，该字符串应该是唯一的。
-- `get` - 传递给命名回调对象的函数，该回调将返回 selector 的值，与 `selector()` 接口相同。这是一个包装函数，该函数通过调用 selector 族函数获取参数。
+- `get` - 传递给命名回调对象的函数，与 `selector()` 接口相同，该回调将返回 selector 的值。这是一个包装函数，该函数通过调用 selector 族函数获取参数。
 - `set?` - 它应该是一个带有命名回调对象的函数，与 `selector()` 接口相同。这也是一个包装函数，该函数通过调用 selector 族函数获取参数。
 
 ---
