@@ -3,7 +3,7 @@ title: class Snapshot
 sidebar_label: Snapshot
 ---
 
-A `Snapshot` object represents an immutable snapshot of the state of Recoil [atoms](/docs/api-reference/core/atom).  It is intended to standardize the API for observing, inspecting, and managing global Recoil state.  It is mostly useful for dev tools, global state synchronization, history navigation, etc.
+`快照` 对象是 Recoil [atoms](/docs/api-reference/core/atom) 状态的一个不可改变的快照。它的目的是规范观察、检查和管理全局 Recoil 状态的 API。它主要对开发工具、全局状态同步、历史导航等有用。
 
 ```jsx
 class Snapshot {
@@ -26,25 +26,28 @@ class Snapshot {
 function snapshot_UNSTABLE(initializeState?: (MutableSnapshot => void)): Snapshot
 ```
 
-## Obtaining Snapshots
+## 获得快照
 
-### Hooks
+### 钩子
 
-Recoil provides the following hooks for obtaining snapshots based on the current state:
+Recoil 提供了以下钩子，用以根据当前状态获取快照。
 
-- [`useRecoilCallback()`](/docs/api-reference/core/useRecoilCallback) - Asynchronous access to a Snapshot
-- [`useRecoilSnapshot()`](/docs/api-reference/core/useRecoilSnapshot) - Synchronous access to a Snapshot
-- [`useRecoilTransactionObserver_UNSTABLE()`](/docs/api-reference/core/useRecoilTransactionObserver) - Subscribe to Snapshots for all state changes
+- [`useRecoilCallback()`](/docs/api-reference/core/useRecoilCallback) - 对快照的异步访问
+- [`useRecoilSnapshot()`](/docs/api-reference/core/useRecoilSnapshot) - 对快照的同步访问
+- [`useRecoilTransactionObserver_UNSTABLE()`](/docs/api-reference/core/useRecoilTransactionObserver) - 订阅所有状态变化的快照
 
-### Building a Snapshot
+### 构建快照
 
 You can also build a fresh snapshot using the `snapshot_UNSTABLE()` factory, which accepts an optional initializer function.  This can be used for [testing](/docs/guides/testing) or evaluating selectors outside of a React context.
 
-## Reading Snapshots
+你也可以使用 `snapshot_UNSTABLE()` 工厂，建立一个接受一个可选的初始化函数的新快照。这可以用于 [测试](/docs/guides/testing) 中，或在 React 上下文之外评估 selectors。
 
-Snapshots are read-only with respect to atom state.  They can be used to read atom state and evaluate selectors' derived state.  `getLoadable()` provides a [`Loadable`](/docs/api-reference/core/Loadable) with the state of the atom or selector in this Snapshot.  The `getPromise()` method can be used to wait for the evaluated value of asynchronous selectors, so you can see what the value would be based on the static atom state.
+## 读取快照
 
-### Example
+对于 atom 的状态来说，快照是只读的。它们可以用来读取原子状态和评估 selectors 的衍生状态。 `getLoadable()` 提供了一个 [`Loadable`](/docs/api-reference/core/Loadable) 方法，其中包含该快照中 atom 或 selectors 的状态。`getPromise()` 方法可以用来等待异步 selectors 的评估值，所以你可以看到基于静态原子状态的值会是什么。
+
+
+### 示例
 
 ```jsx
 function MyComponent() {
@@ -56,9 +59,9 @@ function MyComponent() {
 }
 ```
 
-## Transforming Snapshots
+## 转换快照
 
-There are cases where you may wish to mutate a snapshot.  While snapshots are immutable, they have methods to map themselves with a set of transformations to a new immutable snapshot.  The map methods take a callback that is passed a MutableSnapshot, which is mutated throughout the callback and will ultimately become the new snapshot returned by the mapping operation.
+在有些情况下，你可能希望转换一个快照。 虽然快照是不可变的，但它们有方法将自己与一组转换映射到一个新的不可变的快照。此种映射方法接受一个回调，该回调将传递一个 MutableSnapshot，并在整个回调过程中被转换，并最终成为由映射操作返回的新快照。
 
 ```jsx
 class MutableSnapshot {
@@ -67,44 +70,44 @@ class MutableSnapshot {
 }
 ```
 
-Notice that `set()` and `reset()` have the same signature as callbacks provided to a writeable selector's `set` property, but they only effect the new snapshot, not the current state.
+注意，`set()` 和 `reset()` 的签名与提供给可写 selector 的 `set` 属性的回调相同，但它们只影响新的快照，不影响当前状态。
 
-## Going to a Snapshot
+## 去向快照
 
-The following hook can be used for navigating the current Recoil state to the provided `Snapshot`:
-- [`useGotoRecoilSnapshot()`](/docs/api-reference/core/useGotoRecoilSnapshot) - Update current state to match a Snapshot
+下面这个钩子可用于将当前的 Recoil 状态导航到提供的 `Snapshot`。
+- [`useGotoRecoilSnapshot()`](/docs/api-reference/core/useGotoRecoilSnapshot) —— 更新当前状态以匹配一个快照
 
 
-## Developer Tools
+## 开发者工具
 
-Snapshots provide some methods useful for [building developer tools](/docs/guides/dev-tools) or debugging capabilities with Recoil.  This API is still evolving, and thus marked as `_UNSTABLE`, as we work on the initial dev tools.
+快照提供了一些对 [构建开发者工具](/docs/guides/dev-tools)或用 Recoil 调试能力有用的方法。这个 API 仍在发展中，因此先被标记为 `_UNSTABLE`；我们仍在开发最初的开发工具。
 
-### Snapshot IDs
+### 快照 ID
 
-Each committed state or mutated Snapshot has a unique opaque version ID that can be obtained via `getID()`. This can be used to detect when we have gone back to a previous snapshot via `useGotoRecoilSnapshot()`.
+每个提交的状态或变异的快照都有一个唯一的不透明的版本 ID，可它们以通过 `getID()` 获得。这可以用来检测我们何时通过 `useGotoRecoilSnapshot()` 回到了之前的快照。
 
-### Enumerate Atoms and Selectors
+### 枚举 atom 和 selector
 
-The `getNodes_UNSTABLE()` method can be used to iterate all atoms and selectors that were in use for this snapshot.  Atoms, selectors, and families may be created at any time.  However, they will only show up in the snapshot if they are actually used.  Atoms and selectors may be removed from subsequent state snapshots if they are no longer being used.
+`getNodes_UNSTABLE()` 方法可以被用来遍历这个快照中使用的所有 atom 和 selector。atom、selector 和族可以在任何时候被创建。不过，它们只有在被实际使用时才会出现在快照中。如果 atom 和 selector 不再被使用，它们可以被从后续的状态快照中移除。
 
-An optional `isModified` flag may be specified to only return atoms which have been modified since the last transaction.
+可以指定一个的 `isModified` 标志（可选），只返回自上一次处理以来被修改的原子。
 
-### Debug information
+### 调试信息
 
-The `getInfo_UNSTABLE()` method provides additional debug information for atoms and selectors.  The debug information provided is evolving, but may include:
+`getInfo_UNSTABLE()` 方法为 atom 和 selector 提供额外的调试信息。提供的调试信息是不断变化的，但可能包括：
 
-* `loadable` - A Loadable with the current state.  Unlike methods like `getLoadable()`, this method will not mutate the snapshot at all.  It provides the current state and will not initialize new atoms/selectors, perform any new selector evaluations, or update any dependencies or subscriptions.
-* `isSet` - True if this is an atom with an explicit value stored in the snapshot state.  False if this is a selector or using the default atom state.
-* `isModified` - True if this is an atom which was modified since the last transaction.
-* `type` - Either an `atom` or `selector`
-* `deps` - An iterator over the atoms or selectors this node depends on.
-* `subscribers` - Information about what is subscribing to this node for this snapshot.  Details under development.
+* `loadable` - 一个具有当前状态的 Loadable。 与 `getLoadable()` 等方法不同，这个方法根本不会改变快照。它提供了当前的状态，但不会初始化新的 atom/selector，执行任何新的 selector 评估，或更新任何依赖关系或订阅。
+* `isSet` - 如果这是一个在快照状态中存储有明确值的 atom，则为 True。 如果这是一个 selector 或使用默认的 atom 状态，则为 False。
+* `isModified` - 如果这是一个自上次处理后被修改的 atom，则为 True。
+* `type` - 要么是 `atom`，要么是 `selector`。
+* `deps` - 这个节点所依赖的 atom 或 selector 的迭代器。
+* `subscribers` - 关于这个快照的节点的订阅信息；细节正在开发中。
 
-This is similar to the [`useGetRecoilValueInfo_UNSTABLE()`](/docs/api-reference/core/useGetRecoilValueInfo) hook, but provides information based on the state in the `Snapshot` instead of the current state.  It cannot provide information not associated with a snapshot of Recoil state, such as subscribing React components.
+这类似于 [`useGetRecoilValueInfo_UNSTABLE()`](/docs/api-reference/core/useGetRecoilValueInfo) 钩子，但它提供的信息是基于 `Snapshot` 中的状态，而非当前状态。它不提供与 Recoil 状态的快照无关的信息，例如订阅 React 组件。
 
-## State Initialization
+## 状态初始化
 
-The [`<RecoilRoot>`](/docs/api-reference/core/RecoilRoot) component and `snapshot_UNSTABLE()` factory take an optional `initializeState` prop for initializing the state via a `MutableSnapshot`.  This can be helpful for loading persisted state when you know all atoms in advance and is compatible with server-side rendering where the state should be setup synchronously with the initial render.  For per-atom initialization/persistence and ease of working with dynamic atoms, consider [atom effects](/docs/guides/atom-effects)
+[`<RecoilRoot>`](/docs/api-reference/core/RecoilRoot) 组件和 `snapshot_UNSTABLE()` 工厂接受一个可选的 `initializeState` 道具，通过 `MutableSnapshot` 初始化状态。当你事先知道所有的 atom 时，这对加载持久化状态很有帮助，并且与服务器端渲染兼容，在这种情况下，状态应该与初始渲染同步设置。对于每个 atom 的初始化/持久化以及对动态 atom 的简单处理，可以参考 [atom 效果](/docs/guides/atom-effects)
 
 ```jsx
 function MyApp() {
