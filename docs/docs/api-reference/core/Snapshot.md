@@ -38,8 +38,6 @@ Recoil 提供了以下钩子，用以根据当前状态获取快照。
 
 ### 构建快照
 
-You can also build a fresh snapshot using the `snapshot_UNSTABLE()` factory, which accepts an optional initializer function.  This can be used for [testing](/docs/guides/testing) or evaluating selectors outside of a React context.
-
 你也可以使用 `snapshot_UNSTABLE()` 工厂函数来构建一个新快照，该工厂函数可接受一个可选的初始化函数。该快照可用于 [测试](/docs/guides/testing) 或在 React 上下文之外评估 selectors。
 
 ## 读取快照
@@ -76,7 +74,6 @@ class MutableSnapshot {
 
 下面这个钩子可用于将当前的 Recoil 状态导航到提供的 `Snapshot`：
 - [`useGotoRecoilSnapshot()`](/docs/api-reference/core/useGotoRecoilSnapshot) —— 更新当前状态以匹配一个快照
-
 
 ## 开发者工具
 
