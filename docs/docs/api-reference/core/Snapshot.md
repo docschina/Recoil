@@ -7,15 +7,15 @@ sidebar_label: Snapshot
 
 ```jsx
 class Snapshot {
-  // Accessors to inspect snapshot state
+  // 检查快照状态的访问器
   getLoadable: <T>(RecoilValue<T>) => Loadable<T>;
   getPromise: <T>(RecoilValue<T>) => Promise<T>;
 
-  // API to transform snapshots for transactions
+  // 用于为了 transaction 转换快照的 API
   map: (MutableSnapshot => void) => Snapshot;
   asyncMap: (MutableSnapshot => Promise<void>) => Promise<Snapshot>;
 
-  // Developer Tools API
+  // 开发者工具 API
   getID: () => SnapshotID;
   getNodes_UNSTABLE: ({
     isModified?: boolean,
