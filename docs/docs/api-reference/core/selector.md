@@ -43,24 +43,14 @@ type SetRecoilState = <T>(RecoilState<T>, ValueOrUpdater<T>) => void;
 type ResetRecoilState = <T>(RecoilState<T>) => void;
 ```
 
-<<<<<<< HEAD
 - `key` - 一个在内部用来标识 atom 的唯一字符串。在整个应用中，该字符串必须相对于其他 atom 和 selector 保持唯一。如果用于持久化，则他需要在整个执行过程中保持稳定性。
 - `get` - 一个评估派生 state 值的函数。它可以直接返回一个值，也可以返回一个异步的 `Promise` 或另一个代表相同类型的 atom 或 selector。它被传递给一个对象作为第一个参数，并包含如下属性：
   - `get` - 一个用来从其他 atom 或 selector 获取值的函数。所有传入该函数的 atom 或 selector 将会隐式地被添加到此 selector 的一个 **依赖** 列表中。如果这个 selector 的任何一个依赖发生改变，这个 selector 就会重新计算值。
+  - `getCallback()` - 用于创建 Recoil-aware 回调的函数。参见后续 [示例](/docs/api-reference/core/selector#returning-objects-with-callbacks)。
 - `set?` - 如果设置了该属性，selector 就会返回一个 **可写** 的 state。这个函数需要传入一个回调函数的对象作为其第一个参数以及一个新值。新值可以是一个 `T` 类型的值，如果用户重置了 selector，也可以是一个 `DefaultValue` 类型的对象。该回调函数包含了：
-  - `get` - 一个用来从其他 atom 或 selector 获取值的函数。该函数不会为 selector 订阅给定的 atom 或 selector。
-  - `set` - 一个用来设置 Recoil 状态的函数。第一个参数是 Recoil 的 state，第二个参数是新的值。新值可以是一个更新函数，或一个 `DefaultValue` 类型的对象，用以传递更新操作。
+  - `get()` - 一个用来从其他 atom 或 selector 获取值的函数。该函数不会为 selector 订阅给定的 atom 或 selector。
+  - `set()` - 一个用来设置 Recoil 状态的函数。第一个参数是 Recoil 的 state，第二个参数是新的值。新值可以是一个更新函数，或一个 `DefaultValue` 类型的对象，用以传递更新操作。
 - `dangerouslyAllowMutability` - 在某些情况下，我们可能希望允许存储在 atom 中的对象发生改变，而这些变化并不代表 status 的变更。使用这个选项可以覆盖开发模式下的 freezing 对象。
-=======
-- `key` - A unique string used to identify the atom internally. This string should be unique with respect to other atoms and selectors in the entire application.  It needs to be stable across executions if used for persistence.
-- `get` - A function that evaluates the value for the derived state.  It may return either a value directly or an asynchronous `Promise` or another atom or selector representing the same type.  It is passed an object as the first parameter containing the following properties:
-  - `get()` - a function used to retrieve values from other atoms/selectors. All atoms/selectors passed to this function will be implicitly added to a list of **dependencies** for the selector. If any of the selector's dependencies change, the selector will re-evaluate.
-  - `getCallback()` - a function for creating Recoil-aware callbacks.  See [example](/docs/api-reference/core/selector#returning-objects-with-callbacks) below.
-- `set?` - If this property is set, the selector will return **writeable** state. A function that is passed an object of callbacks as the first parameter and the new incoming value.  The incoming value may be a value of type `T` or maybe an object of type `DefaultValue` if the user reset the selector.  The callbacks include:
-  - `get()` - a function used to retrieve values from other atoms/selectors. This function will not subscribe the selector to the given atoms/selectors.
-  - `set()` - a function used to set the values of upstream Recoil state. The first parameter is the Recoil state and the second parameter is the new value.  The new value may be an updater function or a `DefaultValue` object to propagate reset actions.
-- `dangerouslyAllowMutability` - In some cases it may be desireable allow mutating of objects stored in selectors that don't represent state changes.  Use this option to override freezing objects in development mode.
->>>>>>> 1297d74927632a18b7b42a388bfe7326b85d9aea
 
 ---
 
@@ -205,17 +195,14 @@ function ResultsSection() {
   );
 }
 ```
-<<<<<<< HEAD
 
 更多复杂的示例，请参考 [这篇指南](/docs/guides/asynchronous-data-queries)。
-=======
-Please see [this guide](/docs/guides/asynchronous-data-queries) for more complex examples.
 
-### Returning objects with callbacks
+### 使用回调来返回对象
 
-Sometimes selectors can be used to return objects that contain callbacks.  It may be helpful for these callbacks to access Recoil state, such as for querying typeahead values or click handlers.  The following example uses a selector to generate menu items with a click handler that accesses Recoil state.  This can be useful when passing these objects to frameworks or logic outside the context of a React component.
+有时 selector 可以用来返回包含回调的对象。这些回调有助于访问 Recoil 的状态。例如查询 typeahead 或点击处理程序。下面示例中使用一个 selector 来生成菜单项，点击事件可以访问 Recoil 状态。当把这些对象传递给 React 组件上下文之外的框架或逻辑时，会很有益处。
 
-There is symmetry between this callback and using [`useRecoilCallback()`](/docs/api-reference/core/useRecoilCallback).  Note that the callback returned by `getCallback()` can be used as an async callback to access Recoil state later, it should not be called during the evaluation of the selector value itself.
+此回调与使用 [`useRecoilCallback()`](/docs/api-reference/core/useRecoilCallback) 之间是一致的。请注意，由 `getCallback()` 返回的回调可以作为一个同步回调使用，用以访问 Recoil 状态，它不应该在评估 selector 本身时被调用。
 
 ```jsx
 const menuItemState = selectorFamily({
@@ -233,4 +220,3 @@ const menuItemState = selectorFamily({
   },
 });
 ```
->>>>>>> 1297d74927632a18b7b42a388bfe7326b85d9aea
