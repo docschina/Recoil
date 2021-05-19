@@ -29,6 +29,7 @@ function atomFamily<T, Parameter>({
 - `default` —— atom 的初始值。它可以是一个直接的值，一个代表默认值的`RecoilValue` 或 `Promise`，或者一个获得默认值的函数。回调函数被传递给 `atomFamily` 函数被调用时使用的参数的副本。
 - `effects_UNSTABLE` —— 一个可选的数组，或回调函数，用于根据 [Atom Effects](/docs/guides/atom-effects) 的族参数获取数组。
 - `dangerouslyAllowMutability` —— Recoil 依赖 atom 状态的变化来知道何时通知使用原 atom 组件重新渲染。如果一个 atom 的值发生了变异，它可能会绕过这个，并导致状态发生变化，而不正确地通知订阅组件。为了防止这种情况，所有存储的值都被冻结。在某些情况下，我们可能希望使用这个选项来覆盖这一点。
+
 ---
 
 一个 `atom` 是一个有 _Recoil_ 的状态。一个 atom 是由你的应用程序在每个 `<RecoilRoot>` 创建和注册。但是，如果你的状态不是全局的呢？如果你的状态是与一个控件的特定实例，或与一个特定的元素相关联呢？例如，也许你的应用程序是一个 UI 原型设计工具，用户可以动态地添加元素，每个元素都有状态，比如说它的位置。理想情况下，每个元素都会有自己的状态 atom。你可以通过备忘录模式自己实现这一点。但是， _Recoil_ 通过 `atomFamily` 为你提供了这种模式。一个 atom 家族代表一个 atom 的集合。当你调用 `atomFamily` 时，它将返回一个函数，根据你传入的参数提供 `RecoilState` atom。
