@@ -42,8 +42,7 @@ Recoil 提供了以下钩子，用以根据当前状态获取快照。
 
 ## 读取快照
 
-对于 atom 的状态来说，快照是只读的。它们可以用来读取 atom 状态和评估 selector 的衍生状态。 `getLoadable()` 方法提供了一个 [`Loadable`](/docs/api-reference/core/Loadable) 对象，其中包含该快照中 atom 或 selectors 的状态。`getPromise()` 方法可以用来等待异步 selectors 的评估值，所以你可以看到基于静态 atom 状态的值会是什么。
-
+对于 atom 的状态来说，快照是只读的。它们可以用来读取 atom 状态和评估 selector 的衍生状态。`getLoadable()` 方法提供了一个 [`Loadable`](/docs/api-reference/core/Loadable) 对象，其中包含该快照中 atom 或 selectors 的状态。`getPromise()` 方法可以用来等待异步 selectors 的评估值，所以你可以看到基于静态 atom 状态的值会是什么。
 
 ### 示例
 
@@ -74,6 +73,7 @@ class MutableSnapshot {
 
 下面这个钩子可用于将当前的 Recoil 状态导航到提供的 `Snapshot`：
 - [`useGotoRecoilSnapshot()`](/docs/api-reference/core/useGotoRecoilSnapshot) —— 更新当前状态以匹配一个快照
+
 
 ## 开发者工具
 
