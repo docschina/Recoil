@@ -36,7 +36,6 @@ function atomFamily<T, Parameter>({
 
 `atomFamily` 本质上提供了一个从参数到 atom 的映射。你只需要为 `atomFamily` 提供一个 key，它将为每个底层 atom 生成一个唯一的 key。这些 atom 的 key 可用于持久化，因此必须在不同的应用执行中保持稳定。参数也可能在不同的调用站生成，我们希望同等的参数使用相同的底层 atom。因此，对于 `atomFamily` 参数，我们使用值等价法而不是引用等价法。这对可用于参数的类型进行了限制。`atomFamily` 接受原始类型，或数组或对象，它们可以包含数组、对象或原始类型。
 
-
 ## 示例
 
 ```jsx
