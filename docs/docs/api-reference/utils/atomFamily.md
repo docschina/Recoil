@@ -3,7 +3,7 @@ title: atomFamily(options)
 sidebar_label: atomFamily()
 ---
 
-返回一个返回可写的 `RecoilState` [atom](/docs/api-reference/core/atom) 的函数。
+返回一个返回可写的 `RecoilState` [atom](/docs/api-reference/core/atom) 函数。
 
 ---
 
