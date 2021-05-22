@@ -6,7 +6,7 @@ sidebar_label: Atom Effects
 Atom Effects 是一个新的实验性 API，用于管理副作用和初始化 Recoil atom。它们有很多有用的应用，比如状态持久化、状态同步、管理历史、日志等。它们被定义为 atom 定义的一部分，所以每个 atom 都可以指定和组成它们自己的策略。这个 API 仍在发展中，因此被标记为 "_UNSTABLE"。
 
 ----
-## *注意*
+## *重要提示*
 ***这个 API 目前正在开发中，会有变化。请继续关注...***
 
 ----
@@ -19,7 +19,7 @@ type AtomEffect<T> = ({
   trigger: 'get' | 'set', // 触发 atom 初始化的行动
 
   // 用于设置或重置 atom 值的回调。
-  // 可以从 atom  effect函数中直接调用，以初始化
+  // 可以从 atom  effect 函数中直接调用，以初始化
   // atom 的初始值，或者在以后异步调用以改变它。
   setSelf: (
     | T
@@ -83,7 +83,7 @@ function MyStateEffect(): React.Node {
     // 当 atom 值改变时被调用
     store.set(value);
     store.onChange(setValue);
-    return () => { store.onChange(null); }; // 清理效应
+    return () => { store.onChange(null); }; // 清理 effect
   }, [value]);
   return null;
 }
@@ -104,7 +104,7 @@ function MyApp(): React.Node {
 
 ## 日志示例
 
-一个简单的使用 atom effects 记录 atom 的状态变化的例子：
+一个使用 atom effects 记录 atom 状态变化的简单例子：
 
 ```jsx
 const currentUserIDState = atom({
@@ -157,7 +157,7 @@ const userInfoState = atomFamily({
 ```jsx
 const syncStorageEffect = userID => ({setSelf, trigger}) => {
   // 将 atom 值初始化为远程存储状态
-  if (trigger === 'get') { // 避免昂贵的初始化
+  if (trigger === 'get') { // 避免耗时的初始化
     setSelf(myRemoteStorage.get(userID)); // 同步调用以初始化
   }
 
@@ -189,7 +189,7 @@ const userInfoState = atomFamily({
 ```jsx
 const syncStorageEffect = userID => ({setSelf, onSet, trigger}) => {
   // 将 atom 值初始化为远程存储状态
-  if (trigger === 'get') { // 避免昂贵的初始化
+  if (trigger === 'get') { // 避免耗时的初始化
     setSelf(myRemoteStorage.get(userID)); // 同步调用以初始化
   }
 
@@ -249,7 +249,7 @@ const currentUserIDState = atom({
 
 ### 使用 `Promise` 进行初始化
 
-通过同步调用 `setSelf()` 和 `Promise`，你将能够用 `Suspense/>` 组件包裹 `<RecoilRoot/>` 内的组件，在等待 `Recoil` 加载持久值时显示一个回退。`<Suspense>` 将显示一个回退，直到提供给 `setSelf()` 的 `Promise` 被解决。如果 atom 在 `Promise` 解析之前被设置为一个值，那么初始化的值将被忽略。
+通过同步调用 `setSelf()` 和 `Promise`，你将能够用 `<Suspense/>` 组件包裹 `<RecoilRoot/>` 内的组件，在等待 `Recoil` 加载持久值时显示一个回退。`<Suspense>` 将显示一个回退，直到提供给 `setSelf()` 的 `Promise` 被解决。如果 atom 在 `Promise` 解析之前被设置为一个值，那么初始化的值将被忽略。
 
 请注意，如果 `atom` 后来被 “重置”，它们将恢复到其默认值，而不是初始化值。
 
@@ -318,7 +318,7 @@ const currentUserIDState = atom({
 
 ## 向后兼容
 
-如果你改变了 atom 的格式怎么办？用新的格式但是有基于旧格式的 `localStorage` 加载一个页面可能会导致问题。但是，你可以建立效果来处理恢复和验证值的类型安全方式：
+如果你改变了 atom 的格式怎么办？用新的格式但是有基于旧格式的 `localStorage` 加载一个页面可能会导致问题。但是，你可以建立 effect 来处理恢复和验证值的类型安全方式：
 
 ```jsx
 type PersistenceOptions<T>: {
@@ -408,6 +408,6 @@ const currentUserIDState = atom<number>({
 });
 ```
 
-## 浏览器 URL 历史的持久性
+## 浏览器 URL 历史的持久化
 
 Atom effects 也可以持久化并与浏览器的 URL 历史同步。这对于让状态变化更新当前的 URL 是很有用的，因为这样就可以保存或与他人分享以恢复该状态。它还可以与浏览器历史记录整合，以利用浏览器的前进/后退按钮。*提供这种类型的持久性的例子或库即将推出……*。
