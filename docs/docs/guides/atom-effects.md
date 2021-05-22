@@ -54,7 +54,7 @@ const myState = atom({
 });
 ```
 
-[Atom 族](/docs/api-reference/utils/atomFamily) 也支持参数化以及非参数化的效果：
+[Atom 族](/docs/api-reference/utils/atomFamily) 也支持参数化以及非参数化的 effect ：
 
 ```jsx
 const myStateFamily = atomFamily({
@@ -72,7 +72,7 @@ const myStateFamily = atomFamily({
 
 ### 与 React Effects 相比
 
-Atom effect 大多可以通过 React `useEffect()` 来实现。然而，这组 atom 是在 React 上下文之外创建的，从 React 组件中管理效果会很困难，特别是对于动态创建的 atom。它们也不能用于初始化初始 atom 值或用于服务器端的渲染。使用 atom effect 还可以将效果与 atom 定义一起定位。
+Atom effect 大多可以通过 React `useEffect()` 来实现。然而，这组 atom 是在 React 上下文之外创建的，从 React 组件中管理 effect 会很困难，特别是对于动态创建的 atom。它们也不能用于初始化初始 atom 值或用于服务器端的渲染。使用 atom effect 还可以将 effect 与 atom 定义一起定位。
 
 ```jsx
 const myState = atom({key: 'Key', default: null});
@@ -152,7 +152,7 @@ const userInfoState = atomFamily({
 
 ## 状态同步示例
 
-使用 atom 作为其他一些状态的本地缓存值可能很有用，比如远程数据库、本地存储等。你可以使用 `default` 属性设置 atom 的默认值，并使用选择器来获取储存的值。然而，这只是一次性的查找；如果储存的值改变了，atom 的值也不会改变。通过效果，我们可以订阅储存，并在储存改变时更新 atom 的值。从效果中调用 `setSelf()` 会将 atom 初始化为该值，并将用于初始渲染。如果 atom 被重置，它将恢复到 `default` 值，而不是初始化值。
+使用 atom 作为其他一些状态的本地缓存值可能很有用，比如远程数据库、本地存储等。你可以使用 `default` 属性设置 atom 的默认值，并使用选择器来获取储存的值。然而，这只是一次性的查找；如果储存的值改变了，atom 的值也不会改变。通过 effect ，我们可以订阅储存，并在储存改变时更新 atom 的值。从 effect 中调用 `setSelf()` 会将 atom 初始化为该值，并将用于初始渲染。如果 atom 被重置，它将恢复到 `default` 值，而不是初始化值。
 
 ```jsx
 const syncStorageEffect = userID => ({setSelf, trigger}) => {
@@ -184,7 +184,7 @@ const userInfoState = atomFamily({
 
 ## 直写式缓存实例
 
-我们还可以将 atom 值与远程存储进行双向同步，因此服务器上的变化会更新 atom 值，而本地 atom 的变化会写回到服务器上。当通过该效果的 `setSelf()` 改变时，该效果将不调用 `onSet()` 处理程序，以帮助避免反馈循环。
+我们还可以将 atom 值与远程存储进行双向同步，因此服务器上的变化会更新 atom 值，而本地 atom 的变化会写回到服务器上。当通过该 effect 的 `setSelf()` 改变时，该 effect 将不调用 `onSet()` 处理程序，以帮助避免反馈循环。
 
 ```jsx
 const syncStorageEffect = userID => ({setSelf, onSet, trigger}) => {
