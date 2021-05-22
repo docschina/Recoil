@@ -3,15 +3,15 @@ title: Atom Effects
 sidebar_label: Atom Effects
 ---
 
-Atom Effects are a new experimental API for managing side-effects and initializing Recoil atoms.  They have a variety of useful applications such as state persistence, state synchronization, managing history, logging, &c.  They are defined as part of the atom definition, so each atom can specify and compose their own policies.  This API is still evolving, and thus marked as `_UNSTABLE`.
+Atom Effects 是一个新的实验性 API，用于管理副作用和初始化 Recoil atom。它们有很多有用的应用，比如状态持久化、状态同步、管理历史、日志等。它们被定义为 atom 定义的一部分，所以每个 atom 都可以指定和组成它们自己的策略。 这个 API 仍在发展中，因此被标记为 "_UNSTABLE"。
 
 ----
-## *IMPORTANT NOTE*
-***This API is currently under development and will change.  Please stay tuned...***
+## *注意*
+***这个 API 目前正在开发中，会有变化。请继续关注...***
 
 ----
 
-An *atom effect* is a *function* with the following definition.
+*Atom effect* 是一个 *函数*，其定义如下：
 
 ```jsx
 type AtomEffect<T> = ({
@@ -38,7 +38,7 @@ type AtomEffect<T> = ({
 }) => void | () => void; // Optionally return a cleanup handler
 ```
 
-Atom effects are attached to [atoms](/docs/api-reference/core/atom) via the `effects_UNSTABLE` option.  Each atom can reference an array of these atom effect functions which are called in priority order when the atom is initialized.  Atoms are initialized when they are used for the first time within a `<RecoilRoot>`, but may be re-initialized again if they were unused and cleaned up.  The atom effect function may return an optional cleanup handler to manage cleanup side-effects.
+Atom effects 通过 `effects_UNSTABLE` 选项附加到 [atoms](/docs/api-reference/core/atom)。每个 atom 都可以引用这些 atom effect 函数的一个数组，当 atom 被初始化时，这些函数会按优先级顺序被调用。atom 在 `<RecoilRoot>` 内首次使用时被初始化，但如果它们未被使用并被清理，则可再次被重新初始化。Atom effect函数可以返回一个可选的清理处理程序来管理清理的副作用。
 
 ```jsx
 const myState = atom({
