@@ -3,11 +3,11 @@ title: Atom Effects
 sidebar_label: Atom Effects
 ---
 
-Atom Effects 是一个新的实验性 API，用于管理副作用和初始化 Recoil atom。它们有很多有用的应用，比如状态持久化、状态同步、管理历史、日志等。它们被定义为 atom 定义的一部分，所以每个 atom 都可以指定和组成它们自己的策略。这个 API 仍在发展中，因此被标记为 "_UNSTABLE"。
+Atom Effects 是一个新的实验性 API，用于管理副作用和初始化 Recoil atom。它们有很多有用的应用，比如状态持久化、状态同步、管理历史、日志等。它们被定义为 atom 定义的一部分，所以每个 atom 都可以指定和组成它们自己的策略。这个 API 目前仍在发展中，因此被标记为 `_UNSTABLE`。
 
 ----
 ## *重要提示*
-***这个 API 目前正在开发中，会有变化。请继续关注...***
+***这个 API 目前正在开发中，未来会有变化。请继续关注……***
 
 ----
 
@@ -19,7 +19,7 @@ type AtomEffect<T> = ({
   trigger: 'get' | 'set', // 触发 atom 初始化的行动
 
   // 用于设置或重置 atom 值的回调。
-  // 可以从 atom  effect 函数中直接调用，以初始化
+  // 可以从 atom effect 函数中直接调用，以初始化
   // atom 的初始值，或者在以后异步调用以改变它。
   setSelf: (
     | T
@@ -152,7 +152,7 @@ const userInfoState = atomFamily({
 
 ## 状态同步示例
 
-使用 atom 作为其他一些状态的本地缓存值可能很有用，比如远程数据库、本地存储等。你可以使用 `default` 属性设置 atom 的默认值，并使用选择器来获取商店的值。然而，这只是一次性的查找；如果储存的值改变了，atom 的值也不会改变。通过效果，我们可以订阅储存，并在商店改变时更新 atom 的值。从效果中调用 `setSelf()` 会将 atom 初始化为该值，并将用于初始渲染。如果 atom 被重置，它将恢复到 `default` 值，而不是初始化值。
+使用 atom 作为其他一些状态的本地缓存值可能很有用，比如远程数据库、本地存储等。你可以使用 `default` 属性设置 atom 的默认值，并使用选择器来获取储存的值。然而，这只是一次性的查找；如果储存的值改变了，atom 的值也不会改变。通过效果，我们可以订阅储存，并在储存改变时更新 atom 的值。从效果中调用 `setSelf()` 会将 atom 初始化为该值，并将用于初始渲染。如果 atom 被重置，它将恢复到 `default` 值，而不是初始化值。
 
 ```jsx
 const syncStorageEffect = userID => ({setSelf, trigger}) => {
@@ -286,7 +286,7 @@ const currentUserIDState = atom({
 
 ```jsx
 const localForageEffect = key => ({setSelf, onSet}) => {
-  /** 如果有一个持久化的值，在加载时设置它 **/
+  /** 如果有一个持久化的值，在加载时设置它 */
   const loadPersisted = async () => {
     const savedValue = await localForage.getItem(key);
 
