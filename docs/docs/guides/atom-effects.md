@@ -15,30 +15,30 @@ Atom Effects 是一个新的实验性 API，用于管理副作用和初始化 Re
 
 ```jsx
 type AtomEffect<T> = ({
-  node: RecoilState<T>, // A reference to the atom itself
-  trigger: 'get' | 'set', // The action which triggered initialization of the atom
+  node: RecoilState<T>, // 对 atom 本身的引用
+  trigger: 'get' | 'set', // 触发 atom 初始化的行动
 
-  // Callbacks to set or reset the value of the atom.
-  // This can be called from the atom effect function directly to initialize the
-  // initial value of the atom, or asynchronously called later to change it.
+  // 用于设置或重置 atom 值的回调。
+  // 可以从 atom  effect函数中直接调用，以初始化
+  // atom 的初始值，或者在以后异步调用以改变它。
   setSelf: (
     | T
     | DefaultValue
-    | Promise<T | DefaultValue> // Only allowed for initialization at this time
+    | Promise<T | DefaultValue> // 目前只能用于初始化
     | ((T | DefaultValue) => T | DefaultValue),
   ) => void,
   resetSelf: () => void,
 
-  // Subscribe to changes in the atom value.
-  // The callback is not called due to changes from this effect's own setSelf().
+  // 订阅 atom 值的变化。
+  // 由于这个 effect 自己的 setSelf() 的变化，该回调没有被调用。
   onSet: (
     (newValue: T | DefaultValue, oldValue: T | DefaultValue) => void,
   ) => void,
 
-}) => void | () => void; // Optionally return a cleanup handler
+}) => void | () => void; // 可以返回一个清理程序
 ```
 
-Atom effects 通过 `effects_UNSTABLE` 选项附加到 [atoms](/docs/api-reference/core/atom)。每个 atom 都可以引用这些 atom effect 函数的一个数组，当 atom 被初始化时，这些函数会按优先级顺序被调用。atom 在 `<RecoilRoot>` 内首次使用时被初始化，但如果它们未被使用并被清理，则可再次被重新初始化。Atom effect函数可以返回一个可选的清理处理程序来管理清理的副作用。
+Atom effects 通过 `effects_UNSTABLE` 选项附加到 [atoms](/docs/api-reference/core/atom)。每个 atom 都可以引用这些 atom effect 函数的一个数组，当 atom 被初始化时，这些函数会按优先级顺序被调用。atom 在 `<RecoilRoot>` 内首次使用时被初始化，但如果它们未被使用并被清理，则可再次被重新初始化。Atom effect 函数可以返回一个可选的清理处理程序来管理清理的副作用。
 
 ```jsx
 const myState = atom({
@@ -80,10 +80,10 @@ const myState = atom({key: 'Key', default: null});
 function MyStateEffect(): React.Node {
   const [value, setValue] = useRecoilState(myState);
   useEffect(() => {
-    // Called when the atom value changes
+    // 当 atom 值改变时被调用
     store.set(value);
     store.onChange(setValue);
-    return () => { store.onChange(null); }; // Cleanup effect
+    return () => { store.onChange(null); }; // 清理效应
   }, [value]);
   return null;
 }
@@ -156,17 +156,17 @@ It can be useful to use atoms as a local cached value of some other state such a
 
 ```jsx
 const syncStorageEffect = userID => ({setSelf, trigger}) => {
-  // Initialize atom value to the remote storage state
-  if (trigger === 'get') { // Avoid expensive initialization
-    setSelf(myRemoteStorage.get(userID)); // Call synchronously to initialize
+  // 将 atom 值初始化为远程存储状态
+  if (trigger === 'get') { // 避免昂贵的初始化
+    setSelf(myRemoteStorage.get(userID)); // 同步调用以初始化
   }
 
-  // Subscribe to remote storage changes and update the atom value
+  // 订阅远程存储变化并更新 atom 值
   myRemoteStorage.onChange(userID, userInfo => {
-    setSelf(userInfo); // Call asynchronously to change value
+    setSelf(userInfo); // 异步调用以改变值
   });
 
-  // Cleanup remote storage subscription
+  // 清理远程存储订阅
   return () => {
     myRemoteStorage.onChange(userID, null);
   };
@@ -188,22 +188,22 @@ We can also bi-directionally sync atom values with remote storage so changes on 
 
 ```jsx
 const syncStorageEffect = userID => ({setSelf, onSet, trigger}) => {
-  // Initialize atom value to the remote storage state
-  if (trigger === 'get') { // Avoid expensive initialization
-    setSelf(myRemoteStorage.get(userID)); // Call synchronously to initialize
+  // 将 atom 值初始化为远程存储状态
+  if (trigger === 'get') { // 避免昂贵的初始化
+    setSelf(myRemoteStorage.get(userID)); // 同步调用以初始化
   }
 
-  // Subscribe to remote storage changes and update the atom value
+  // 订阅远程存储变化并更新 atom 值
   myRemoteStorage.onChange(userID, userInfo => {
-    setSelf(userInfo); // Call asynchronously to change value
+    setSelf(userInfo); // 异步调用以改变值
   });
 
-  // Subscribe to local changes and update the server value
+  // 订阅本地变化并更新服务器值
   onSet(userInfo => {
     myRemoteStorage.set(userID, userInfo);
   });
 
-  // Cleanup remote storage subscription
+  // 清理远程存储订阅
   return () => {
     myRemoteStorage.onChange(userID, null);
   };
@@ -258,7 +258,7 @@ const localForageEffect = key => ({setSelf, onSet}) => {
   setSelf(localForage.getItem(key).then(savedValue =>
     savedValue != null
       ? JSON.parse(savedValue)
-      : new DefaultValue() // Abort initialization if no value was stored
+      : new DefaultValue() // 如果没有存储值，则终止初始化
   ));
 
   onSet(newValue => {
@@ -286,7 +286,7 @@ With this approach, you can asynchronously call `setSelf()` when the value is av
 
 ```jsx
 const localForageEffect = key => ({setSelf, onSet}) => {
-  /** If there's a persisted value - set it on load  */
+  /** 如果有一个持久化的值，在加载时设置它 **/
   const loadPersisted = async () => {
     const savedValue = await localForage.getItem(key);
 
@@ -295,7 +295,7 @@ const localForageEffect = key => ({setSelf, onSet}) => {
     }
   };
 
-  // Load the persisted data
+  // 加载持久化的数据
   loadPersisted();
 
   onSet(newValue => {
@@ -348,13 +348,13 @@ const currentUserIDState = atom<number>({
     localStorageEffect({
       key: 'current_user',
       restorer: (value, defaultValue) =>
-        // values are currently persisted as numbers
+        // 值目前是以数字形式持续存在的
         typeof value === 'number'
           ? value
-          // if value was previously persisted as a string, parse it to a number
+          // 如果数值以前是作为字符串保存的，则将其解析为一个数字
           : typeof value === 'string'
           ? parseInt(value, 10)
-          // if type of value is not recognized, then use the atom's default value.
+          // 如果值的类型不被识别，则使用 atom 的默认值。
           : defaultValue
     }),
   ],
