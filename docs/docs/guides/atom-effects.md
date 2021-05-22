@@ -3,7 +3,7 @@ title: Atom Effects
 sidebar_label: Atom Effects
 ---
 
-Atom Effects 是一个新的实验性 API，用于管理副作用和初始化 Recoil atom。它们有很多有用的应用，比如状态持久化、状态同步、管理历史、日志等。它们被定义为 atom 定义的一部分，所以每个 atom 都可以指定和组成它们自己的策略。 这个 API 仍在发展中，因此被标记为 "_UNSTABLE"。
+Atom Effects 是一个新的实验性 API，用于管理副作用和初始化 Recoil atom。它们有很多有用的应用，比如状态持久化、状态同步、管理历史、日志等。它们被定义为 atom 定义的一部分，所以每个 atom 都可以指定和组成它们自己的策略。这个 API 仍在发展中，因此被标记为 "_UNSTABLE"。
 
 ----
 ## *注意*
@@ -54,7 +54,7 @@ const myState = atom({
 });
 ```
 
-[Atom families](/docs/api-reference/utils/atomFamily) also support parameterized or non-parameterized effects:
+[Atom 族](/docs/api-reference/utils/atomFamily) 也支持参数化以及非参数化的效果：
 
 ```jsx
 const myStateFamily = atomFamily({
@@ -70,9 +70,9 @@ const myStateFamily = atomFamily({
 });
 ```
 
-### Compared to React Effects
+### 与 React Effects 相比
 
-Atom effects could mostly be implemented via React `useEffect()`.  However, the set of atoms are created outside of a React context, and it can be difficult to manage effects from within React components, particularly for dynamically created atoms.  They also cannot be used to initialize the initial atom value or be used with server-side rendering.  Using atom effects also co-locates the effects with the atom definitions.
+Atom effect 大多可以通过 React `useEffect()` 来实现。然而，这组 atom 是在 React 上下文之外创建的，从 React 组件中管理效果会很困难，特别是对于动态创建的 atom。它们也不能用于初始化初始 atom 值或用于服务器端的渲染。使用 atom effect 还可以将效果与 atom 定义一起定位。
 
 ```jsx
 const myState = atom({key: 'Key', default: null});
@@ -98,13 +98,13 @@ function MyApp(): React.Node {
 }
 ```
 
-### Compared to Snapshots
+### 与 Snapshots 相比
 
-The [`Snapshot hooks`](/docs/api-reference/core/Snapshot#hooks) API can also monitor atom state changes and the `initializeState` prop in [`<RecoilRoot>`](/docs/api-reference/core/RecoilRoot) can initialize values for initial render. However, these APIs monitor all state changes and can be awkward to manage dynamic atoms, particularly atom families.  With atom effects, the side-effect can be defined per-atom alongside the atom definition and multiple policies can be easily composed.
+[`Snapshot hooks`](/docs/api-reference/core/Snapshot#hooks) API 也可以监视原子的状态变化，并且 [`<RecoilRoot>`](/docs/api-reference/core/RecoilRoot) 中的 `initializeState` 道具可以初始化初始渲染值。不过，这些 API 监控所有的状态变化，在管理动态 atom —— 特别是 atom 族时 —— 可能会很尴尬。有了 atom effect，副作用可以与 atom 定义一起按 atom 定义，多个规则的组成会变得很容易。
 
-## Logging Example
+## 日志示例
 
-A simple example of using atom effects are for logging a specific atom's state changes.
+一个简单的使用 atom effects 记录 atom 的状态变化的例子：
 
 ```jsx
 const currentUserIDState = atom({
@@ -120,9 +120,9 @@ const currentUserIDState = atom({
 });
 ```
 
-## History Example
+## 历史示例
 
-A more complex example of logging might maintain a history of changes.  This example provides an effect which maintains a history queue of state changes with callback handlers that undo that particular change:
+一个更复杂的日志例子可能会维护一个不断变化的历史。这个例子提供了一个维护状态变化的历史队列的 effect，并有回调处理程序来撤销该特定变化。
 
 ```jsx
 const history: Array<{
@@ -150,9 +150,9 @@ const userInfoState = atomFamily({
 });
 ```
 
-## State Synchronization Example
+## 状态同步示例
 
-It can be useful to use atoms as a local cached value of some other state such as a remote database, local storage, &c.  You could set the default value of an atom using the `default` property with a selector to get the store's value.  However, that is only a one-time lookup; if the store's value changes the atom value will not change.  With effects, we can subscribe to the store and update the atom's value whenever the store changes.  Calling `setSelf()` from the effect will initialize the atom to that value and will be used for the initial render.  If the atom is reset, it will revert to the `default` value, not the initialized value.
+使用 atom 作为其他一些状态的本地缓存值可能很有用，比如远程数据库、本地存储等。你可以使用 `default` 属性设置 atom 的默认值，并使用选择器来获取商店的值。然而，这只是一次性的查找；如果储存的值改变了，atom 的值也不会改变。通过效果，我们可以订阅储存，并在商店改变时更新 atom 的值。从效果中调用 `setSelf()` 会将 atom 初始化为该值，并将用于初始渲染。如果 atom 被重置，它将恢复到 `default` 值，而不是初始化值。
 
 ```jsx
 const syncStorageEffect = userID => ({setSelf, trigger}) => {
@@ -182,9 +182,9 @@ const userInfoState = atomFamily({
 });
 ```
 
-## Write-Through Cache Example
+## 直写式缓存实例
 
-We can also bi-directionally sync atom values with remote storage so changes on the server update the atom value and changes in the local atom are written back to the server.  The effect will not call the `onSet()` handler when changed via that effect's `setSelf()` to help avoid feedback loops.
+我们还可以将 atom 值与远程存储进行双向同步，因此服务器上的变化会更新 atom 值，而本地 atom 的变化会写回到服务器上。当通过该效果的 `setSelf()` 改变时，该效果将不调用 `onSet()` 处理程序，以帮助避免反馈循环。
 
 ```jsx
 const syncStorageEffect = userID => ({setSelf, onSet, trigger}) => {
@@ -210,11 +210,11 @@ const syncStorageEffect = userID => ({setSelf, onSet, trigger}) => {
 };
 ```
 
-## Local Storage Persistence
+## 本地存储的持久性
 
-Atom effects can be used to persist atom state with [browser local storage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage). `localStorage` is synchronous, so we can retrieve the data directly without `async` `await` or a `Promise`.
+Atom Effect 可以用 [浏览器本地存储](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) 来持久化 atom 状态。`localStorage` 是同步的，所以我们可以直接检索数据而不需要 `async`、`await` 或 `Promise`。
 
-Note that the following examples are simplified for illustrative purposes and do not cover all cases.
+请注意，以下例子是为说明问题而简化的，并不包括所有情况：
 
 ```jsx
 const localStorageEffect = key => ({setSelf, onSet}) => {
@@ -243,15 +243,15 @@ const currentUserIDState = atom({
 
 ## Asynchronous Storage Persistence
 
-If your persisted data needs to be retrieved asynchronously, you can either [use a `Promise`](#initialize-with-promise) in the `setSelf()` function or call it [asynchronously](#asynchronous-setself).
+如果你的持久化数据需要异步检索，你可以在 `setSelf()` 函数中 [使用 `Promise`](#initialize-with-promise) 或者 [异步](#asynchronous-setelf) 调用它。
 
-Below we will use `AsyncLocalStorage` or `localForage` as an example of an asynchronous store.
+下面我们将使用 `AsyncLocalStorage` 或 `localForage` 作为一个异步存储的例子。
 
-### Initialize with `Promise`
+### 使用 `Promise` 进行初始化
 
-By synchronously calling `setSelf()` with a `Promise`, you'll be able to wrap the components inside of the `<RecoilRoot/>` with a `<Suspense/>` component to show a fallback while waiting for `Recoil` to load the persisted values.  `<Suspense>` will show a fallback until the `Promise` provided to `setSelf()` resolves.  If the atom is set to a value before the `Promise` resolves then the initialized value will be ignored.
+通过同步调用 `setSelf()` 和 `Promise`，你将能够用 `Suspense/>` 组件包裹 `<RecoilRoot/>` 内的组件，在等待 `Recoil` 加载持久值时显示一个回退。`<Suspense>` 将显示一个回退，直到提供给 `setSelf()` 的 `Promise` 被解决。如果 atom 在 `Promise` 解析之前被设置为一个值，那么初始化的值将被忽略。
 
-Note that if the `atoms` later are "reset", they will revert to their default value, and not the initialized value.
+请注意，如果 `atom` 后来被 “重置”，它们将恢复到其默认值，而不是初始化值。
 
 ```jsx
 const localForageEffect = key => ({setSelf, onSet}) => {
@@ -280,9 +280,9 @@ const currentUserIDState = atom({
 ```
 
 
-### Asynchronous setSelf()
+### 异步 setSelf()
 
-With this approach, you can asynchronously call `setSelf()` when the value is available.  Unlike initializing to a `Promise`, the atom's default value will be used initially, so `<Suspense>` will not show a fallback unless the atom's default is a `Promise` or async selector.  If the atom is set to a value before the `setSelf()` is called, then it will be overwritten by the `setSelf()`.  This approach isn't just limited to `await`, but for any asynchronous usage of `setSelf()`, such as `setTimeout()`.
+通过这种方法，你可以在值可用时异步调用 `setSelf()`。与初始化为 `Promise` 不同，最初将使用 atom 的默认值，所以 `<Suspense>` 不会显示回退，除非 atom 的默认值是 `Promise` 或异步 selector。如果 atom 在调用 `setSelf()` 之前被设置为一个值，那么它将被 `setSelf()` 覆盖。这种方法不仅限于 `await`，也适用于任何 `setSelf()` 的异步使用，例如 `setTimeout()`。
 
 ```jsx
 const localForageEffect = key => ({setSelf, onSet}) => {
@@ -316,9 +316,9 @@ const currentUserIDState = atom({
 });
 ```
 
-## Backward Compatibility
+## 向后兼容
 
-What if you change the format for an atom?  Loading a page with the new format with a `localStorage` based on the old format could cause a problem.  You could build effects to handle restoring and validating the value in a type safe way:
+如果你改变了 atom 的格式怎么办？用新的格式但是有基于旧格式的 `localStorage` 加载一个页面可能会导致问题。但是，你可以建立效果来处理恢复和验证值的类型安全方式：
 
 ```jsx
 type PersistenceOptions<T>: {
@@ -361,7 +361,7 @@ const currentUserIDState = atom<number>({
 });
 ```
 
-What if the key used to persist the value changes?  Or what used to be persisted using one key now uses several?  Or vice versa?  That can also be handled in a type-safe way:
+如果用来保存数值的 key 发生变化怎么办？过去用一个 key 来持久化的东西现在用了几个 key；反之亦然？这也可以用一种类型安全的方式来处理：
 
 ```jsx
 type PersistenceOptions<T>: {
@@ -408,6 +408,6 @@ const currentUserIDState = atom<number>({
 });
 ```
 
-## Browser URL History Persistence
+## 浏览器 URL 历史的持久性
 
-Atom state can also be persisted and synced with the browser URL history.  This can be useful to have state changes update the current URL so it can be saved or shared with others to restore that state.  It can also be integrated with the browser history to leverage the browser forward/back buttons.  *Examples or a library to provide this type of persistence are coming soon...*
+Atom effects 也可以持久化并与浏览器的 URL 历史同步。这对于让状态变化更新当前的 URL 是很有用的，因为这样就可以保存或与他人分享以恢复该状态。它还可以与浏览器历史记录整合，以利用浏览器的前进/后退按钮。*提供这种类型的持久性的例子或库即将推出……*。
