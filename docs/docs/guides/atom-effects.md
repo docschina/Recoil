@@ -100,7 +100,7 @@ function MyApp(): React.Node {
 
 ### 与 Snapshots 相比
 
-[`Snapshot hooks`](/docs/api-reference/core/Snapshot#hooks) API 也可以监视 atom 的状态变化，并且 [`<RecoilRoot>`](/docs/api-reference/core/RecoilRoot) 中的 `initializeState` 道具可以初始化初始渲染值。不过，这些 API 监控所有的状态变化，在管理动态 atom —— 特别是 atom 族时 —— 可能会很尴尬。有了 atom effect，副作用可以与 atom 定义一起按 atom 定义，多个规则的组成会变得很容易。
+[`Snapshot hooks`](/docs/api-reference/core/Snapshot#hooks) API 也可以监视 atom 的状态变化，并且 [`<RecoilRoot>`](/docs/api-reference/core/RecoilRoot) 中的 `initializeState` prop 可以初始化初始渲染值。不过，这些 API 监控所有的状态变化，在管理动态 atom —— 特别是 atom 族时 —— 可能会很尴尬。有了 atom effect，副作用可以与 atom 定义一起按 atom 定义，多个规则的组成会变得很容易。
 
 ## 日志示例
 
