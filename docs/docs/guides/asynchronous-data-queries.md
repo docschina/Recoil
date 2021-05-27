@@ -1,15 +1,15 @@
 ---
-title: Asynchronous Data Queries
+title: 异步数据查询
 sidebar_label: Asynchronous Data Queries
 ---
 
-Recoil provides a way to map state and derived state to React components via a data-flow graph. What's really powerful is that the functions in the graph can also be asynchronous. This makes it easy to use asynchronous functions in synchronous React component render functions. Recoil allows you to seamlessly mix synchronous and asynchronous functions in your data-flow graph of selectors. Simply return a Promise to a value instead of the value itself from a selector `get` callback, the interface remains exactly the same. Because these are just selectors, other selectors can also depend on them to further transform the data.
+Recoil提供了一种通过数据流图将状态和派生状态映射到 React 组件方法。其真正强大的是，图中的函数也可以是异步的。这使得在同步 React 组件渲染器中使用异步函数变得更容易。Recoil 允许你在 selector 的数据流图中无缝混合同步和异步函数。只需从 selector `get` 回调中返回一个 Promise 的值而不是值本身，接口仍然完全相同。因为这些只是 selector，其他 selector 也可以依据它们来进一步转换数据。
 
-Selectors can be used as one way to incorporate asynchronous data into the Recoil data-flow graph.  Please keep in mind that selectors represent "idempotent" functions: For a given set of inputs they should always produce the same results (at least for the lifetime of the application).  This is important as selector evaluations may be cached, restarted, or executed multiple times.  Because of this, selectors are generally a good way to model read-only DB queries.  For mutable data you can use a [Query Refresh](#query-refresh) or to synchronize mutable state, persist state, or for other side-effects consider the experimental [Atom Effects](/docs/guides/atom-effects) API.
+selector 可以被用作将异步数据纳入 Recoil 数据流图的一种方式。 请记住，selector 是“幂等”函数：对于一组给定的输入，它们应该总是产生相同的结果（至少在应用程序的生命周期内）。 这一点很重要，因为 selector 的计算可能被缓存、重启或多次执行。 正因为如此，selector 通常是模拟只读数据库查询的好方法。 对于易变的数据，你可以使用 [查询刷新](#query-refresh)，或者同步易变状态、持久化状态，或者对于其他的副作用，考虑实验性的 [Atom Effects](/docs/guides/atom-effects) API。
 
-## Synchronous Example
+## 同步示例
 
-For example, here is a simple synchronous [atom](/docs/api-reference/core/atom) and [selector](/docs/api-reference/core/selector) to get a user name:
+例如，这里有一个简单的用于获取一个用户名的同步 [atom](/docs/api-reference/core/atom) 和 [selector](/docs/api-reference/core/selector)。
 
 ```jsx
 const currentUserIDState = atom({
@@ -38,9 +38,9 @@ function MyApp() {
 }
 ```
 
-## Asynchronous Example
+## 异步示例
 
-If the user names were stored in some database we need to query, all we need to do is return a `Promise` or use an `async` function. If any dependencies change, the selector will be re-evaluated and execute a new query. The results are cached, so the query will only execute once per unique input.
+如果用户名被存储在某个我们需要查询的数据库中，我们需要做的就是返回一个 `Promise` 或者使用一个 `async` 函数。如果任何依赖关系发生变化，selector 都将重新计算并执行新的查询。结果会被缓存起来，所以查询将只对每个独特的输入执行一次。
 
 ```jsx
 const currentUserNameQuery = selector({
@@ -59,15 +59,15 @@ function CurrentUserInfo() {
 }
 ```
 
-The interface of the selector is the same, so the component using this selector doesn't need to care if it was backed with synchronous atom state, derived selector state, or asynchronous queries!
+selector 的接口是相同的，所以使用这个选择器的组件不需要关心它是用同步 atom 状态、派生 selector 状态或者异步查询来实现的!
 
-But, since React render functions are synchronous, what will it render before the promise resolves? Recoil is designed to work with [React Suspense](https://reactjs.org/docs/concurrent-mode-suspense.html) to handle pending data. Wrapping your component with a Suspense boundary will catch any descendants that are still pending and render a fallback UI:
+但是，由于 React 的渲染函数是同步的，在期约(promise)解决之前，它将渲染什么？Recoil 被设计为配合 [React Suspense](https://reactjs.org/docs/concurrent-mode-suspense.html)，以处理待定(pending)数据。用 Suspense 作为边界包裹你的组件，其会捕捉到任何仍在 pending 中的后代，并渲染一个回调 UI。
 
 ```jsx
 function MyApp() {
   return (
     <RecoilRoot>
-      <React.Suspense fallback={<div>Loading...</div>}>
+      <React.Suspense fallback={<div>加载中。。。</div>}>
         <CurrentUserInfo />
       </React.Suspense>
     </RecoilRoot>
@@ -75,9 +75,9 @@ function MyApp() {
 }
 ```
 
-## Error Handling
+## 报错处理
 
-But what if the request has an error? Recoil selectors can also throw errors which will then be thrown if a component tries to use that value. This can be caught with a React [`<ErrorBoundary>`](https://reactjs.org/docs/error-boundaries.html). For example:
+但如果请求有错误怎么办？Recoil selector 也可以抛出错误，其错误来自一个组件试图使用该值时就会抛出的错误。这可以用 React [`<ErrorBoundary>`](https://reactjs.org/docs/error-boundaries.html) 来捕捉。例如：
 
 ```jsx
 const currentUserNameQuery = selector({
@@ -102,7 +102,7 @@ function MyApp() {
   return (
     <RecoilRoot>
       <ErrorBoundary>
-        <React.Suspense fallback={<div>Loading...</div>}>
+        <React.Suspense fallback={<div>加载中。。。</div>}>
           <CurrentUserInfo />
         </React.Suspense>
       </ErrorBoundary>
@@ -111,9 +111,9 @@ function MyApp() {
 }
 ```
 
-## Queries with Parameters
+## 带参查询
 
-Sometimes you want to be able to query based on parameters that aren't just based on derived state. For example, you may want to query based on the component props. You can do that using the [**`selectorFamily`**](/docs/api-reference/utils/selectorFamily) helper:
+有时你希望能够基于参数进行查询，而不仅仅是基于派生状态。例如，你可能想根据组件的 props 来查询。你可以使用 [**`selectorFamily`**](/docs/api-reference/utils/selectorFamily) helper 来实现：
 
 ```jsx
 const userNameQuery = selectorFamily({
@@ -136,7 +136,7 @@ function MyApp() {
   return (
     <RecoilRoot>
       <ErrorBoundary>
-        <React.Suspense fallback={<div>Loading...</div>}>
+        <React.Suspense fallback={<div>加载中。。。</div>}>
           <UserInfo userID={1}/>
           <UserInfo userID={2}/>
           <UserInfo userID={3}/>
@@ -147,11 +147,11 @@ function MyApp() {
 }
 ```
 
-## Data-Flow Graph
+## 数据流图
 
-Remember, by modeling queries as selectors, we can build a data-flow graph mixing state, derived state, and queries!  This graph will automatically update and re-render React components as state is updated.
+记住，通过为可做 selector 的查询建模，我们可以建立一个混合状态、派生状态和查询的数据流图！当状态被更新时，该图会自动更新并重新渲染 React 组件。
 
-The following example will render the current user's name and a list of their friends.  If a friend's name is clicked on, they will become the current user and the name and list will be automatically updated.
+下面的例子将渲染当前用户的名字和他们的朋友列表。如果一个朋友的名字被点击，他们将成为当前用户，名字和列表将自动更新。
 
 ```jsx
 const currentUserIDState = atom({
@@ -205,7 +205,7 @@ function MyApp() {
   return (
     <RecoilRoot>
       <ErrorBoundary>
-        <React.Suspense fallback={<div>Loading...</div>}>
+        <React.Suspense fallback={<div>加载中。。。</div>}>
           <CurrentUserInfo />
         </React.Suspense>
       </ErrorBoundary>
@@ -214,9 +214,9 @@ function MyApp() {
 }
 ```
 
-## Concurrent Requests
+## 并行请求
 
-If you notice in the above example, the `friendsInfoQuery` uses a query to get the info for each friend.  But, by doing this in a loop they are essentially serialized.  If the lookup is fast, maybe that's ok.  If it's expensive, you can use a concurrency helper such as [`waitForAll`](/docs/api-reference/utils/waitForAll) to run them in parallel.  This helper accepts both arrays and named objects of dependencies.
+如果你注意到了上面的例子，`friendsInfoQuery` 使用一个查询来获得每个朋友的信息。但是，在一个循环中这样做的结果是它们基本上被序列化了。 如果查询的速度很快，这也许是可行的。 但如果它耗时巨大，你可以使用一个并发 helper，如 [`waitForAll`](/docs/api-reference/utils/waitForAll) 来并行执行它们。这个 helper 接受数组和指定的依赖对象。
 
 ```jsx
 const friendsInfoQuery = selector({
@@ -231,7 +231,7 @@ const friendsInfoQuery = selector({
 });
 ```
 
-You can use [`waitForNone`](/docs/api-reference/utils/waitForNone) to handle incremental updates to the UI with partial data
+你可以使用带有部分数据的 [`waitForNone`](/docs/api-reference/utils/waitForNone) 来对用户界面进行增量更新。
 
 ```jsx
 const friendsInfoQuery = selector({
@@ -248,11 +248,11 @@ const friendsInfoQuery = selector({
 });
 ```
 
-## Pre-Fetching
+## 预取
 
-For performance reasons you may wish to kick off fetching *before* rendering.  That way the query can be going while we start rendering.  The [React docs](https://reactjs.org/docs/concurrent-mode-suspense.html#start-fetching-early) give some examples.  This pattern works with Recoil as well.
+出于性能方面的考虑，你可能希望在渲染**之前**就开始获取数据。这样，在我们开始渲染的时候，查询就可以开始了。[React docs](https://reactjs.org/docs/concurrent-mode-suspense.html#start-fetching-early) 中给出了一些示例。 这种模式也适用于 Recoil。
 
-Let's change the above example to initiate a fetch for the next user info as soon as the user clicks the button to change users:
+让我们改变一下上面的例子，一旦用户点击改变用户的按钮，就启动对下一个用户信息的获取。
 
 ```jsx
 function CurrentUserInfo() {
@@ -260,8 +260,8 @@ function CurrentUserInfo() {
   const friends = useRecoilValue(friendsInfoQuery);
 
   const changeUser = useRecoilCallback(({snapshot, set}) => userID => {
-    snapshot.getLoadable(userInfoQuery(userID)); // pre-fetch user info
-    set(currentUserIDState, userID); // change current user to start new render
+    snapshot.getLoadable(userInfoQuery(userID)); // 预取用户信息
+    set(currentUserIDState, userID); //  改变当前用户以开始新的渲染
   });
 
   return (
@@ -279,9 +279,9 @@ function CurrentUserInfo() {
 }
 ```
 
-## Query Default Atom Values
+## 查询默认 Atom 值
 
-A common pattern is to use an atom to represent local editable state, but use a selector to query default values:
+常见的模式是使用一个 atom 来代表本地可编辑的状态，但使用一个 selector 来查询默认值。
 
 ```jsx
 const currentUserIDState = atom({
@@ -293,11 +293,11 @@ const currentUserIDState = atom({
 });
 ```
 
-If you would like bi-directional syncing of data, then consider [atom effects](/docs/guides/atom-effects)
+如果你想要双向同步数据，那么可以考虑实用 [atom effects](/docs/guides/atom-effects)。
 
-## Async Queries Without React Suspense
+## 不带 React Suspense 的异步查询
 
-It is not necessary to use React Suspense for handling pending asynchronous selectors. You can also use the [`useRecoilValueLoadable()`](/docs/api-reference/core/useRecoilValueLoadable) hook to determine the status during rendering:
+没有必要使用 React Suspense 来处理未决的异步 selector。你也可以使用[`useRecoilValueLoadable()`](/docs/api-reference/core/useRecoilValueLoadable) 钩子来确定渲染期间的状态：
 
 ```jsx
 function UserInfo({userID}) {
@@ -306,21 +306,21 @@ function UserInfo({userID}) {
     case 'hasValue':
       return <div>{userNameLoadable.contents}</div>;
     case 'loading':
-      return <div>Loading...</div>;
+      return <div>加载中。。。</div>;
     case 'hasError':
       throw userNameLoadable.contents;
   }
 }
 ```
 
-## Query Refresh
+## 查询刷新
 
-When using selectors to model data queries, it's important to remember that selector evaluation should always provide a consistent value for a given state.  Selectors represent state derived from other atom and selector states.  Thus, selector evaluation functions should be idempotent for a given input, as it may be cached or executed multiple times.  Practically, that means a single selector should not be used for a query where you expect the results to vary during the application's lifetime.
+当使用 selector 为数据查询建模时，重要的是要记住，selector 的计算总能为给定的状态提供一个一致的值。 selector 代表从其他 atom 和 selector 状态派生出来的状态。 因此，对于一个给定的输入，selector 的计算函数应该是幂等的，因为它可能被缓存或执行多次。 实际上，这意味着单一的选择器不应该被用于查询在应用程序的生命周期内会有变化的结果。
 
-There are a few patterns you can use for working with mutable data:
+你可以使用一些模式来处理易变的数据：
 
-### Use a Request ID
-Selector evaluation should provide a consistent value for a given state based on input (dependent state or family parameters).  So, you could add a request ID as either a family parameter or a dependency to your query.  For example:
+### 使用请求ID
+selector 的计算应该根据输入（依赖状态或族参数）为一个给定的状态提供一个一致的值。因此，你可以将请求 ID 作为族参数或依赖关系添加到你的查询中。 例如：
 
 ```jsx
 const userInfoQueryRequestIDState = atomFamily({
@@ -331,7 +331,7 @@ const userInfoQueryRequestIDState = atomFamily({
 const userInfoQuery = selectorFamily({
   key: 'UserInfoQuery',
   get: userID => async ({get}) => {
-    get(userInfoQueryRequestIDState(userID)); // Add request ID as a dependency
+    get(userInfoQueryRequestIDState(userID)); // 添加请求ID作为依赖关系
     const response = await myDBQuery({userID});
     if (response.error) {
       throw response.error;
@@ -355,14 +355,14 @@ function CurrentUserInfo() {
   return (
     <div>
       <h1>{currentUser.name}</h1>
-      <button onClick={refreshUserInfo}>Refresh</button>
+      <button onClick={refreshUserInfo}>刷新</button>
     </div>
   );
 }
 ```
 
-### Use an Atom
-Another option is to use an atom, instead of a selector, to model the query results.  You can imperatively update the atom state with the new query results based on your refresh policy.
+### 使用 Atom
+另一个选择是使用 Atom，而不是 Selector，来为查询结果建模。 你可以根据你的刷新策略，用新的查询结果强制性地更新 atom 状态。
 
 ```jsx
 const userInfoState = atomFamily({
@@ -370,14 +370,14 @@ const userInfoState = atomFamily({
   default: userID => fetch(userInfoURL(userID)),
 });
 
-// React component to refresh query
+// 刷新查询的 React 组件
 function RefreshUserInfo({userID}) {
   const refreshUserInfo = useRecoilCallback(({set}) => async id => {
     const userInfo = await myDBQuery({userID});
     set(userInfoState(userID), userInfo);
   }, [userID]);
 
-  // Refresh user info every second
+  // 每秒钟刷新一次用户信息
   useEffect(() => {
     const intervalID = setInterval(refreshUserInfo, 1000);
     return () => clearInterval(intervalID);
@@ -387,6 +387,6 @@ function RefreshUserInfo({userID}) {
 }
 ```
 
-One downside to this approach is that atoms do not *currently* support accepting a `Promise` as the new value in order to automatically take advantage of React Suspense while the query refresh is pending, if that is your desired behavior.  However, you could store an object which manually encodes the loading status as well as the results if desired.
+如果这是你想要的效果，但这种方法的一个缺点是，atom **目前**不支持接受 `Promise` 作为新值，以便在查询刷新时自动利用 React Suspense。 然而，如果需要的话，你可以存储一个对象，对加载状态和结果进行手动编码。
 
-Also consider [atom effects](/docs/guides/atom-effects) for query synchronization of atoms.
+还可以考虑 [atom effects](/docs/guides/atom-effects) 来查询原子的同步状态。
