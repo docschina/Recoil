@@ -33,7 +33,11 @@ Recoil 管理 atom 的 state 变化，以便通知订阅该 atom 的组件何时
 - [`useSetRecoilState()`](/docs/api-reference/core/useSetRecoilState)：当你仅需要写入 atom 时，使用此 hook。
 - [`useResetRecoilState()`](/docs/api-reference/core/useResetRecoilState)：需将 atom 重置为默认值时，使用此 hook。
 
+<<<<<<< HEAD
 在一些罕见的场景下，你需要在不订阅组件的情况下读取 atom 的值，请参考 [`useRecoilCallback()`](/docs/api-reference/core/useRecoilCallback)。
+=======
+For rare cases where you need to read an atom's value without subscribing the component, see [`useRecoilCallback()`](/docs/api-reference/core/useRecoilCallback).
+>>>>>>> 3846a67682ba73916cf51b35439ffdbf6ee329b9
 
 可以使用 `Promise` 或者表示相同类型值的 `RecoilValue`。因为 `Promise` 会是 pending 状态，而默认的 selector 也可能是异步的，因此 atom 的值也可以是 pending 状态，或者在读取值的时候抛出异常。注意设置 atom 时，你不能对 `Promise` 实时赋值。对于异步函数，请使用 [selectors](/docs/api-reference/core/selector) 。
 
