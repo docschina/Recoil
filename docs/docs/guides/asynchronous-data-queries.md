@@ -3,9 +3,9 @@ title: 异步数据查询
 sidebar_label: Asynchronous Data Queries
 ---
 
-Recoil提供了一种通过数据流图将状态和派生状态映射到 React 组件方法。其真正强大的是，图中的函数也可以是异步的。这使得在同步 React 组件渲染器中使用异步函数变得更容易。Recoil 允许你在 selector 的数据流图中无缝混合同步和异步函数。只需从 selector `get` 回调中返回一个 Promise 的值而不是值本身，接口仍然完全相同。因为这些只是 selector，其他 selector 也可以依据它们来进一步转换数据。
+Recoil 提供了一种通过数据流图将状态和派生状态映射到 React 组件方法。其真正强大的是，图中的函数也可以是异步的。这使得在同步 React 组件渲染器中使用异步函数变得更容易。Recoil 允许你在 selector 的数据流图中无缝混合同步和异步函数。不用返回值本身，只需从 selector `get` 回调中返回一个值的 Promise，接口仍然完全相同。因为这些只是 selector，其他 selector 也可以依据它们来进一步转换数据。
 
-selector 可以被用作将异步数据纳入 Recoil 数据流图的一种方式。 请记住，selector 是“幂等”函数：对于一组给定的输入，它们应该总是产生相同的结果（至少在应用程序的生命周期内）。 这一点很重要，因为 selector 的计算可能被缓存、重启或多次执行。 正因为如此，selector 通常是模拟只读数据库查询的好方法。 对于易变的数据，你可以使用 [查询刷新](#query-refresh)，或者同步易变状态、持久化状态，或者对于其他的副作用，考虑实验性的 [Atom Effects](/docs/guides/atom-effects) API。
+selector 可以被用作将异步数据纳入 Recoil 数据流图的一种方式。请记住，selector 是 “幂等” 函数：对于一组给定的输入，它们应该总是产生相同的结果 (至少在应用程序的生命周期内)。这一点很重要，因为 selector 的计算可能被缓存、重启或多次执行。正因为如此，selector 通常是模拟只读数据库查询的好方法。对于易变的数据，你可以使用 [查询刷新](#query-refresh)，或者同步易变状态、持久化状态，或者对于其他的副作用，考虑实验性的 [Atom Effects](/docs/guides/atom-effects) API。
 
 ## 同步示例
 
@@ -59,9 +59,9 @@ function CurrentUserInfo() {
 }
 ```
 
-selector 的接口是相同的，所以使用这个选择器的组件不需要关心它是用同步 atom 状态、派生 selector 状态或者异步查询来实现的!
+selector 的接口总是相同的，所以使用这个 selector 的组件不需要关心它是用同步 atom 状态、派生 selector 状态或者异步查询来实现的！
 
-但是，由于 React 的渲染函数是同步的，在期约(promise)解决之前，它将渲染什么？Recoil 被设计为配合 [React Suspense](https://reactjs.org/docs/concurrent-mode-suspense.html)，以处理待定(pending)数据。用 Suspense 作为边界包裹你的组件，其会捕捉到任何仍在 pending 中的后代，并渲染一个回调 UI。
+但是，由于 React 的渲染函数是同步的，在 Promise 解决之前，它将渲染什么？Recoil 的设计配合 [React Suspense](https://reactjs.org/docs/concurrent-mode-suspense.html) 处理待定 (pending) 数据。如果用 Suspense 边界包裹你的组件，会捕捉到任何仍在 pending 中的后代，并渲染一个回调 UI。
 
 ```jsx
 function MyApp() {
@@ -102,7 +102,7 @@ function MyApp() {
   return (
     <RecoilRoot>
       <ErrorBoundary>
-        <React.Suspense fallback={<div>加载中。。。</div>}>
+        <React.Suspense fallback={<div>加载中……</div>}>
           <CurrentUserInfo />
         </React.Suspense>
       </ErrorBoundary>
@@ -136,7 +136,7 @@ function MyApp() {
   return (
     <RecoilRoot>
       <ErrorBoundary>
-        <React.Suspense fallback={<div>加载中。。。</div>}>
+        <React.Suspense fallback={<div>加载中……</div>}>
           <UserInfo userID={1}/>
           <UserInfo userID={2}/>
           <UserInfo userID={3}/>
@@ -205,7 +205,7 @@ function MyApp() {
   return (
     <RecoilRoot>
       <ErrorBoundary>
-        <React.Suspense fallback={<div>加载中。。。</div>}>
+        <React.Suspense fallback={<div>加载中……</div>}>
           <CurrentUserInfo />
         </React.Suspense>
       </ErrorBoundary>
@@ -297,7 +297,7 @@ const currentUserIDState = atom({
 
 ## 不带 React Suspense 的异步查询
 
-没有必要使用 React Suspense 来处理未决的异步 selector。你也可以使用[`useRecoilValueLoadable()`](/docs/api-reference/core/useRecoilValueLoadable) 钩子来确定渲染期间的状态：
+没有必要使用 React Suspense 来处理未决的异步 selector。你也可以使用 [`useRecoilValueLoadable()`](/docs/api-reference/core/useRecoilValueLoadable) 钩子来确定渲染期间的状态：
 
 ```jsx
 function UserInfo({userID}) {
@@ -306,7 +306,7 @@ function UserInfo({userID}) {
     case 'hasValue':
       return <div>{userNameLoadable.contents}</div>;
     case 'loading':
-      return <div>加载中。。。</div>;
+      return <div>加载中……</div>;
     case 'hasError':
       throw userNameLoadable.contents;
   }
