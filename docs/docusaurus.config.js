@@ -30,6 +30,35 @@ module.exports = {
   favicon: 'img/favicon.png',
   organizationName: 'facebookexperimental', // Usually your GitHub org/user name.
   projectName: 'Recoil', // Usually your repo name.
+<<<<<<< HEAD
+=======
+  i18n: {
+    defaultLocale: 'en',
+    // locales: ['en', 'fr', 'ko'],
+    locales: isDeployPreview
+      ? // Deploy preview: keep it fast!
+        ['en']
+      : isI18nStaging
+      ? // Staging locales: https://docusaurus-i18n-staging.netlify.app/
+        ['en', 'fr']
+      : // Production locales
+        ['en', 'fr', 'ko', 'zh-hans'],
+    localeConfigs: {
+      en: {
+        label: 'English',
+      },
+      ko: {
+        label: '한국어',
+      },
+      fr: {
+        label: 'Français',
+      },
+      "zh-hans": {
+        label: '简体中文',
+      },
+    },
+  },
+>>>>>>> 1bf036bb91afe8f994bf89f45d7a1164401323f4
   themeConfig: {
     algolia: {
       apiKey: '9c5a009951e793525603922b8ca66628',
