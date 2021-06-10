@@ -22,14 +22,14 @@ import WordMarkImaage from '../../static/img/wordmark.svg';
 const features = [
   {
     title: (
-      <Translate id="homePage.minimal.title">最小且具有响应式</Translate>
+      <Translate id="homePage.minimal.title">极简的 React 风格设计</Translate>
     ),
     imageUrl: 'img/icons/icon-reactish.svg',
     imageUrlDark: 'img/icons/icon-reactish--dark.svg',
     imageAlt: 'React logo.',
     description: (
       <Translate id="homePage.minimal.text">
-        Recoil 拥有与 React 一样的工作方式与原理。将其添加到您的应用中可快速获得灵活的状态共享。
+        Recoil 拥有与 React 一样的工作方式与原理。将其添加到您的应用中可获得快速、灵活的状态共享。
       </Translate>
     ),
   },
