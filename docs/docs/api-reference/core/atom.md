@@ -65,4 +65,4 @@ function Counter() {
 
 ## Atom Families
 
-[`atomFamily()`](/docs/api-reference/utils/atomFamily) can be useful for storing a collection of related states or [scoping your atom state](/docs/api-reference/utils/atomFamily#scoped-atoms).
+[`atomFamily()`](/docs/api-reference/utils/atomFamily) 对于存储一系列的相关状态以及 [划分你 atom 状态的作用域](/docs/api-reference/utils/atomFamily#scoped-atoms) 来说，非常有用。
