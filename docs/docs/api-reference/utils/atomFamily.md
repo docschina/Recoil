@@ -55,13 +55,9 @@ function ElementListItem({elementID}) {
 }
 ```
 
-<<<<<<< HEAD
-`atomFamily()` 与简单的 [`atom()`]（/docs/api-reference/core/atom）的选项几乎相同。然而，默认值也可以被参数化。这意味着你可以提供一个函数，它接收参数值并返回实际的默认值。比如说
-=======
 ## Family Defaults
 
-An `atomFamily()` takes almost the same options as a simple [`atom()`](/docs/api-reference/core/atom).  However, the default value can also be parameterized. That means you could provide a function which takes the parameter value and returns the actual default value.  For example:
->>>>>>> 9680b9967850be3f4b443d99d666bc05b282d5a0
+`atomFamily()` 与简单的 [`atom()`](/docs/api-reference/core/atom) 的选项几乎相同。然而，默认值也可以被参数化。这意味着你可以提供一个函数，它接收参数值并返回实际的默认值。比如说
 
 ```jsx
 const myAtomFamily = atomFamily({
@@ -70,11 +66,7 @@ const myAtomFamily = atomFamily({
 });
 ```
 
-<<<<<<< HEAD
-或使用 [`selectorFamily`](/docs/api-reference/utils/selectorFamily) 代替 `selector`，你也可以在 `default` selector 中访问参数值。
-=======
-For dynamic defaults based on other state use a [`selectorFamily()`](/docs/api-reference/utils/selectorFamily), which also has access to the parameter value.  Don't just use `selector()` for `atomFamily()` defaults, as it would produce duplicate keys.
->>>>>>> 9680b9967850be3f4b443d99d666bc05b282d5a0
+对于基于其他状态的动态默认值，可以使用 [`selectorFamily()`](/docs/api-reference/utils/selectorFamily)，它可以访问参数的值。不要只用 `selector()` 来做 `atomFamily()`  的默认值，因为会产生重复的键。
 
 ```jsx
 const myAtomFamily = atomFamily({
@@ -93,12 +85,9 @@ const myAtomFamily = atomFamily({
 
 与试图用所有元素的状态图来存储一个单独的 atom 相比，为每个元素使用这种模式的一个好处是，它们都保持着各自的订阅。因此，更新一个元素的值将只导致订阅了该 atom 的 React 组件更新。
 
-<<<<<<< HEAD
-## 持久性
-=======
-## Scoped Atoms
+## 作用域 atoms
 
-Sometimes you may want to "scope" atom state by some other prop, React Context, or piece of state.  For example:
+有时，你可能想通过其他的 prop、Context 或者部分状态来 “划分” 原子状态。比如：
 
 ```jsx
 const viewWidthForPaneState = atomFamily<number, PaneID>({
@@ -113,7 +102,7 @@ function PaneView() {
 }
 ```
 
-If you want to scope by some other Recoil state and wish to avoid looking up the scope parameter at every call site, it can be a useful pattern to use a wrapper [`selector()`](/docs/api-reference/core/selector):
+如果你想通过其他的 Recoil 状态来划分范围，并希望避免在每次调用时查找范围参数，你可以使用 [`selector()`](/docs/api-reference/core/selector) 进行包装，这对你来说可能非常有用：
 
 ```jsx
 const viewWidthState = selector({
@@ -128,8 +117,7 @@ function PaneView() {
 }
 ```
 
-## Persistence
->>>>>>> 9680b9967850be3f4b443d99d666bc05b282d5a0
+## 持久性
 
 持久 observer 将把每个参数值的状态持久化为一个独特的 atom，并根据所使用的参数值的序列化而有一个独特的 key。因此，只使用基元或包含基元的简单复合对象的参数是很重要的；自定义类或函数是不允许的。
 
