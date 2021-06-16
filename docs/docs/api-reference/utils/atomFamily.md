@@ -119,6 +119,10 @@ function PaneView() {
 
 ## 持久性
 
+<<<<<<< HEAD
 持久 observer 将把每个参数值的状态持久化为一个独特的 atom，并根据所使用的参数值的序列化而有一个独特的 key。因此，只使用基元或包含基元的简单复合对象的参数是很重要的；自定义类或函数是不允许的。
 
 允许把一个简单的 `atom` "升级" 到 `atomFamily`，并在你的应用程序的较新版本中基于相同的 key。如果你这样做，那么任何带有旧的简单 key 的持久值仍然可以被读取，新的 `atomFamily` 的所有参数值将默认为简单 atom 的持久状态。然而，如果你改变了一个 `atomFamily` 中的参数格式，它将不会自动读取改变前持久化的先前的值。然而，你可以在默认的 selector 或验证器中添加逻辑，根据以前的参数格式查询数值。我们希望在未来能帮助实现这种模式的自动化。
+=======
+Persistence observers will persist the state for each parameter value as a distinct atom with a unique key based on serialization of the parameter value used. Therefore, it is important to only use parameters which are primitives or simple compound objects containing primitives. Custom classes or functions are not allowed.
+>>>>>>> 34bf203381bd8f7f6a11fbbf1762af674c610a87
