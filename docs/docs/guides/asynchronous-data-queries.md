@@ -279,7 +279,13 @@ function CurrentUserInfo() {
 }
 ```
 
+<<<<<<< HEAD
 ## 查询默认 Atom 值
+=======
+Note that this pre-fetching works by triggering the `selectorFamily()` to initiate an async query and populate the selector's cache.  If the `selectorFamily()` has caching disabled, pre-fetching like this will not do anything.  Also, if you are using an `atomFamily()` instead of a `selectorFamily()`, by either setting the atoms or relying on atom effects to initialize, then it will also not work with `useRecoilCallback()` as trying to set the state of the provided `Snapshot` will have no effect on the live state in the host `<RecoilRoot>`.
+
+## Query Default Atom Values
+>>>>>>> 8216a10989f86f4866172ba3727312bedbdb015d
 
 常见的模式是使用一个 atom 来代表本地可编辑的状态，但使用一个 selector 来查询默认值。
 
