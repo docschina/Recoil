@@ -3,7 +3,11 @@ title: waitForAny(dependencies)
 sidebar_label: waitForAny()
 ---
 
+<<<<<<< HEAD
 一个返回一组表示请求依赖项当前状态的 [`Loadables`](/docs/api-reference/core/Loadable) 的并发 helper 方法。它将一直等待，直到至少有一个依赖项可用。
+=======
+A concurrency helper that returns a set of [`Loadable`s](/docs/api-reference/core/Loadable) for the current state of the requested dependencies.  It waits until at least one of the dependencies is available.
+>>>>>>> 2a2e78bad159360dc260b65c4ce34d751d9d4eb8
 
 依赖项可以作为元组数组提供，也可以作为对象中的命名依赖项提供。
 

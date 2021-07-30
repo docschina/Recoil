@@ -54,10 +54,14 @@ module.exports = {
           'api-reference/core/isRecoilValue',
           // 'api-reference/core/DefaultValue',
         ],
+<<<<<<< HEAD
       },
       'api-reference/core/useRecoilCallback',
       {
         '工具': [
+=======
+        Utils: [
+>>>>>>> 2a2e78bad159360dc260b65c4ce34d751d9d4eb8
           'api-reference/utils/atomFamily',
           'api-reference/utils/selectorFamily',
           'api-reference/utils/constSelector',
@@ -68,6 +72,10 @@ module.exports = {
           'api-reference/utils/waitForNone',
           'api-reference/utils/waitForAny',
         ],
+      },
+      'api-reference/core/useRecoilTransaction',
+      'api-reference/core/useRecoilCallback',
+      {
         Snapshots: [
           'api-reference/core/Snapshot',
           'api-reference/core/useRecoilTransactionObserver',

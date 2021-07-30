@@ -32,7 +32,7 @@ type AtomEffect<T> = ({
   // 订阅 atom 值的变化。
   // 由于这个 effect 自己的 setSelf() 的变化，该回调没有被调用。
   onSet: (
-    (newValue: T | DefaultValue, oldValue: T | DefaultValue) => void,
+    (newValue: T, oldValue: T | DefaultValue) => void,
   ) => void,
 
 }) => void | () => void; // 可以返回一个清理程序
@@ -262,11 +262,7 @@ const localForageEffect = key => ({setSelf, onSet}) => {
   ));
 
   onSet(newValue => {
-    if (newValue instanceof DefaultValue) {
-      localStorage.removeItem(key);
-    } else {
-      localStorage.setItem(key, JSON.stringify(newValue));
-    }
+    localStorage.setItem(key, JSON.stringify(newValue));
   });
 };
 
@@ -286,7 +282,11 @@ const currentUserIDState = atom({
 
 ```jsx
 const localForageEffect = key => ({setSelf, onSet}) => {
+<<<<<<< HEAD
   /** 如果有一个持久化的值，在加载时设置它 */
+=======
+  // If there's a persisted value - set it on load
+>>>>>>> 2a2e78bad159360dc260b65c4ce34d751d9d4eb8
   const loadPersisted = async () => {
     const savedValue = await localForage.getItem(key);
 
@@ -298,12 +298,9 @@ const localForageEffect = key => ({setSelf, onSet}) => {
   // 加载持久化的数据
   loadPersisted();
 
+  // Subscribe to state changes and persist them to localForage
   onSet(newValue => {
-    if (newValue instanceof DefaultValue) {
-      localForage.removeItem(key);
-    } else {
-      localForage.setItem(key, JSON.stringify(newValue));
-    }
+    localForage.setItem(key, JSON.stringify(newValue));
   });
 };
 
@@ -333,11 +330,7 @@ const localStorageEffect = <T>(options: PersistenceOptions<T>) => ({setSelf, onS
   }
 
   onSet(newValue => {
-    if (newValue instanceof DefaultValue) {
-      localStorage.removeItem(options.key);
-    } else {
-      localStorage.setItem(options.key, JSON.stringify(newValue));
-    }
+    localStorage.setItem(options.key, JSON.stringify(newValue));
   });
 };
 
@@ -377,11 +370,7 @@ const localStorageEffect = <T>(options: PersistenceOptions<T>) => ({setSelf, onS
   );
 
   onSet(newValue => {
-    if (newValue instanceof DefaultValue) {
-      localStorage.removeItem(options.key);
-    } else {
-      localStorage.setItem(options.key, JSON.stringify(newValue));
-    }
+    localStorage.setItem(options.key, JSON.stringify(newValue));
   });
 };
 
