@@ -3,7 +3,11 @@ title: waitForAllSettled(dependencies)
 sidebar_label: waitForAllSettled()
 ---
 
+<<<<<<< HEAD
 一个返回一组表示请求依赖项当前状态的 [`Loadables`](/docs/api-reference/core/Loadable) 的并发 helper 方法。它将一直等待，直到至少有一个依赖项可用。
+=======
+A concurrency helper that returns a set of [`Loadable`s](/docs/api-reference/core/Loadable) for the current state of the requested dependencies.  It waits until all of the dependencies are either in a value state, or an error state.
+>>>>>>> cbffa60d2cb316a562e449cf4f26610bed133536
 
 依赖项可以作为元组数组提供，也可以作为对象中的命名依赖项提供。
 

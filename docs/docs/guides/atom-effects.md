@@ -32,7 +32,7 @@ type AtomEffect<T> = ({
   // 订阅 atom 值的变化。
   // 由于这个 effect 自己的 setSelf() 的变化，该回调没有被调用。
   onSet: (
-    (newValue: T | DefaultValue, oldValue: T | DefaultValue) => void,
+    (newValue: T, oldValue: T | DefaultValue) => void,
   ) => void,
 
 }) => void | () => void; // 可以返回一个清理程序
@@ -262,11 +262,7 @@ const localForageEffect = key => ({setSelf, onSet}) => {
   ));
 
   onSet(newValue => {
-    if (newValue instanceof DefaultValue) {
-      localStorage.removeItem(key);
-    } else {
-      localStorage.setItem(key, JSON.stringify(newValue));
-    }
+    localStorage.setItem(key, JSON.stringify(newValue));
   });
 };
 
@@ -286,7 +282,11 @@ const currentUserIDState = atom({
 
 ```jsx
 const localForageEffect = key => ({setSelf, onSet}) => {
+<<<<<<< HEAD
   /** 如果有一个持久化的值，在加载时设置它 */
+=======
+  // If there's a persisted value - set it on load
+>>>>>>> cbffa60d2cb316a562e449cf4f26610bed133536
   const loadPersisted = async () => {
     const savedValue = await localForage.getItem(key);
 
@@ -298,12 +298,9 @@ const localForageEffect = key => ({setSelf, onSet}) => {
   // 加载持久化的数据
   loadPersisted();
 
+  // Subscribe to state changes and persist them to localForage
   onSet(newValue => {
-    if (newValue instanceof DefaultValue) {
-      localForage.removeItem(key);
-    } else {
-      localForage.setItem(key, JSON.stringify(newValue));
-    }
+    localForage.setItem(key, JSON.stringify(newValue));
   });
 };
 
@@ -333,11 +330,7 @@ const localStorageEffect = <T>(options: PersistenceOptions<T>) => ({setSelf, onS
   }
 
   onSet(newValue => {
-    if (newValue instanceof DefaultValue) {
-      localStorage.removeItem(options.key);
-    } else {
-      localStorage.setItem(options.key, JSON.stringify(newValue));
-    }
+    localStorage.setItem(options.key, JSON.stringify(newValue));
   });
 };
 
@@ -377,11 +370,7 @@ const localStorageEffect = <T>(options: PersistenceOptions<T>) => ({setSelf, onS
   );
 
   onSet(newValue => {
-    if (newValue instanceof DefaultValue) {
-      localStorage.removeItem(options.key);
-    } else {
-      localStorage.setItem(options.key, JSON.stringify(newValue));
-    }
+    localStorage.setItem(options.key, JSON.stringify(newValue));
   });
 };
 
@@ -410,4 +399,12 @@ const currentUserIDState = atom<number>({
 
 ## 浏览器 URL 历史的持久化
 
+<<<<<<< HEAD
 Atom effects 也可以持久化并与浏览器的 URL 历史同步。这对于让状态变化更新当前的 URL 是很有用的，因为这样就可以保存或与他人分享以恢复该状态。它还可以与浏览器历史记录整合，以利用浏览器的前进/后退按钮。*提供这种类型的持久性的例子或库即将推出……*。
+=======
+Atom state can also be persisted and synced with the browser URL history.  This can be useful to have state changes update the current URL so it can be saved or shared with others to restore that state.  It can also be integrated with the browser history to leverage the browser forward/back buttons.  *Examples or a library to provide this type of persistence are coming soon...*
+
+## Error Handling
+
+If there is an error thrown during the execution of an atom effect then the atom will be initialized in an error state with that error.  This can then be handled with the React `<ErrorBoundary>` mechanism at render time.
+>>>>>>> cbffa60d2cb316a562e449cf4f26610bed133536

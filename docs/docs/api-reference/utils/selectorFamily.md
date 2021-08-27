@@ -35,6 +35,8 @@ function selectorFamily<T, Parameter>({
   ) => void,
 
   dangerouslyAllowMutability?: boolean,
+
+  cachePolicy_UNSTABLE?: CachePolicy,
 }): Parameter => RecoilState<T>
 ```
 
@@ -45,11 +47,27 @@ type ValueOrUpdater<T> =  T | DefaultValue | ((prevValue: T) => T | DefaultValue
 type GetRecoilValue = <T>(RecoilValue<T>) => T;
 type SetRecoilValue = <T>(RecoilState<T>, ValueOrUpdater<T>) => void;
 type ResetRecoilValue = <T>(RecoilState<T>) => void;
+
+type CachePolicy =
+  | {eviction: 'lru', maxSize: number}
+  | {eviction: 'keep-all'}
+  | {eviction: 'most-recent'};
 ```
 
+<<<<<<< HEAD
 - `key` - 用于内部识别 atom 的唯一字符串。相对于整个应用程序中的其他 atom 和 selector，该字符串应该是唯一的。
 - `get` - 传递给命名回调对象的函数，与 `selector()` 接口相同，该回调将返回 selector 的值。这是一个包装函数，该函数通过调用 selector 族函数获取参数。
 - `set?` - 它应该是一个带有命名回调对象的函数，与 `selector()` 接口相同。这也是一个包装函数，该函数通过调用 selector 族函数获取参数。
+=======
+- `key` - A unique string used to identify the atom internally. This string should be unique with respect to other atoms and selectors in the entire application.
+- `get` - A function that is passed an object of named callbacks that returns the value of the selector, the same as the `selector()` interface. This is wrapped by a function which is passed the parameter from calling the selector family function.
+- `set?` - An optional function that will produce writeable selectors when provided. It should be a function that takes an object of named callbacks, same as the `selector()` interface. This is again wrapped by another function with gets the parameters from calling the selector family function.
+- `cachePolicy_UNSTABLE` - Defines the behavior of the internal selector cache for **the invidual selectors** that make up the family (it does not control the number of selectors that are stored in the family). Can be useful to control the memory footprint in apps that have selectors with many changing dependencies.
+  - `eviction` - can be set to `lru` (which requires that a `maxSize` is set), `keep-all` (default), or `most-recent`. An `lru` cache will evict the least-recently-used value from the selector cache when the size of the cache exceeds `maxSize`. A `keep-all` policy will mean all selector dependencies and their values will be indefinitely stored in the selector cache. A `most-recent` policy will use a cache of size 1 and will retain only the most recently saved set of dependencies and their values.
+  - Note the `maxSize` property used alongside `lru` does not control the max size of the family itself, it only controls the eviction policy used in the invidiual selectors that make up the family.
+  - Note the cache stores the values of the selector based on a key containing all dependencies and their values. This means the size of the internal selector cache depends on both the size of the selector values as well as the number of unique values of all dependencies.
+  - Note the default eviction policy (currently `keep-all`) may change in the future.
+>>>>>>> cbffa60d2cb316a562e449cf4f26610bed133536
 
 ---
 
@@ -144,3 +162,7 @@ const Component2 = () => {
   );
 }
 ```
+
+## Cache policy configuration
+
+The `cachePolicy_UNSTABLE` property allows you to configure the caching behavior of **individual selectors** that make up the family. This property can be useful for reducing memory in applications that have a large number of selectors that have a large number of changing dependencies.  Please see the [selector cache policy configuration documentation](/docs/api-reference/core/selector#cache-policy-configuration).

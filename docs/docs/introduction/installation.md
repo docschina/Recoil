@@ -65,7 +65,7 @@ Recoil 的构建没有转译成 ES5，我们也不支持在 ES5 下使用 Recoil
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": [
       "warn", {
-        "additionalHooks": "useRecoilCallback"
+        "additionalHooks": "(useRecoilCallback|useRecoilTransaction_UNSTABLE)"
       }
     ]
   }
