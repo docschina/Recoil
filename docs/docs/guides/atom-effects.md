@@ -282,11 +282,7 @@ const currentUserIDState = atom({
 
 ```jsx
 const localForageEffect = key => ({setSelf, onSet}) => {
-<<<<<<< HEAD
-  /** 如果有一个持久化的值，在加载时设置它 */
-=======
-  // If there's a persisted value - set it on load
->>>>>>> cbffa60d2cb316a562e449cf4f26610bed133536
+  // 如果有一个持久化的值，在加载时设置它
   const loadPersisted = async () => {
     const savedValue = await localForage.getItem(key);
 
@@ -399,12 +395,8 @@ const currentUserIDState = atom<number>({
 
 ## 浏览器 URL 历史的持久化
 
-<<<<<<< HEAD
 Atom effects 也可以持久化并与浏览器的 URL 历史同步。这对于让状态变化更新当前的 URL 是很有用的，因为这样就可以保存或与他人分享以恢复该状态。它还可以与浏览器历史记录整合，以利用浏览器的前进/后退按钮。*提供这种类型的持久性的例子或库即将推出……*。
-=======
-Atom state can also be persisted and synced with the browser URL history.  This can be useful to have state changes update the current URL so it can be saved or shared with others to restore that state.  It can also be integrated with the browser history to leverage the browser forward/back buttons.  *Examples or a library to provide this type of persistence are coming soon...*
 
-## Error Handling
+## 错误处理
 
-If there is an error thrown during the execution of an atom effect then the atom will be initialized in an error state with that error.  This can then be handled with the React `<ErrorBoundary>` mechanism at render time.
->>>>>>> cbffa60d2cb316a562e449cf4f26610bed133536
+如果在执行 atom effect 过程中出现了错误，那么 atom 将在错误状态下被初始化，并带有该错误。这可以在渲染时用 React 的 `<ErrorBoundary>` 机制来处理。

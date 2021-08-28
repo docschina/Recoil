@@ -54,20 +54,14 @@ type CachePolicy =
   | {eviction: 'most-recent'};
 ```
 
-<<<<<<< HEAD
 - `key` - 用于内部识别 atom 的唯一字符串。相对于整个应用程序中的其他 atom 和 selector，该字符串应该是唯一的。
 - `get` - 传递给命名回调对象的函数，与 `selector()` 接口相同，该回调将返回 selector 的值。这是一个包装函数，该函数通过调用 selector 族函数获取参数。
 - `set?` - 它应该是一个带有命名回调对象的函数，与 `selector()` 接口相同。这也是一个包装函数，该函数通过调用 selector 族函数获取参数。
-=======
-- `key` - A unique string used to identify the atom internally. This string should be unique with respect to other atoms and selectors in the entire application.
-- `get` - A function that is passed an object of named callbacks that returns the value of the selector, the same as the `selector()` interface. This is wrapped by a function which is passed the parameter from calling the selector family function.
-- `set?` - An optional function that will produce writeable selectors when provided. It should be a function that takes an object of named callbacks, same as the `selector()` interface. This is again wrapped by another function with gets the parameters from calling the selector family function.
-- `cachePolicy_UNSTABLE` - Defines the behavior of the internal selector cache for **the invidual selectors** that make up the family (it does not control the number of selectors that are stored in the family). Can be useful to control the memory footprint in apps that have selectors with many changing dependencies.
-  - `eviction` - can be set to `lru` (which requires that a `maxSize` is set), `keep-all` (default), or `most-recent`. An `lru` cache will evict the least-recently-used value from the selector cache when the size of the cache exceeds `maxSize`. A `keep-all` policy will mean all selector dependencies and their values will be indefinitely stored in the selector cache. A `most-recent` policy will use a cache of size 1 and will retain only the most recently saved set of dependencies and their values.
-  - Note the `maxSize` property used alongside `lru` does not control the max size of the family itself, it only controls the eviction policy used in the invidiual selectors that make up the family.
-  - Note the cache stores the values of the selector based on a key containing all dependencies and their values. This means the size of the internal selector cache depends on both the size of the selector values as well as the number of unique values of all dependencies.
-  - Note the default eviction policy (currently `keep-all`) may change in the future.
->>>>>>> cbffa60d2cb316a562e449cf4f26610bed133536
+- `cachePolicy_UNSTABLE` - 定义内部选择器缓存的行为，用于**构成 family 的各个选择器**（它不控制存储在 family 中选择器的数量）。在有许多依赖关系变化的选择器应用程序中，控制内存占用非常有用。
+  - `eviction` - 可以设置为 `lru`（需要设置 `maxSize`），`keep-all`（默认值），或者设置为 `most-recent`。当缓存大小超过 `maxSize` 时，`lru` 缓存策略将从选择器缓存中移除最近较少使用的值。`keep-all` 策略将意味着所有选择器的依赖关系以及它们的值将无限期地存储在选择器缓存中。而 `most-recent` 策略将使用一个大小为 1 的缓存，并将只保留最近保存的依赖关系和它们的值。
+  - 注意与 `lru` 一起使用的 `maxSize` 属性并不控制其本身的最大 Size，它仅控制组成 family 的单个选择器中使用的驱逐策略。
+  - 注意，缓存会根据一个包含所有依赖关系及其值的 key 来存储选择器的值。这意味着内部选择器缓存的大小既取决于选择器值的大小，也取决于所有依赖关系的唯一值数量。
+  - 注意，默认的驱逐策略（目前是 "保持所有"）在未来可能会改变。
 
 ---
 
@@ -163,6 +157,6 @@ const Component2 = () => {
 }
 ```
 
-## Cache policy configuration
+## Cache 策略配置
 
-The `cachePolicy_UNSTABLE` property allows you to configure the caching behavior of **individual selectors** that make up the family. This property can be useful for reducing memory in applications that have a large number of selectors that have a large number of changing dependencies.  Please see the [selector cache policy configuration documentation](/docs/api-reference/core/selector#cache-policy-configuration).
+`cachePolicy_UNSTABLE` 属性允许你配置 family 中的 **单个选择器** 的缓存行为。此属性可用于减少具有大量更改依赖项大量选择器的应用程序内存。请参阅 [选择器缓存策略配置文档](/docs/api-reference/core/selector#cache-policy-configuration)。
