@@ -35,6 +35,8 @@ function selectorFamily<T, Parameter>({
   ) => void,
 
   dangerouslyAllowMutability?: boolean,
+
+  cachePolicy_UNSTABLE?: CachePolicy,
 }): Parameter => RecoilState<T>
 ```
 
@@ -45,11 +47,21 @@ type ValueOrUpdater<T> =  T | DefaultValue | ((prevValue: T) => T | DefaultValue
 type GetRecoilValue = <T>(RecoilValue<T>) => T;
 type SetRecoilValue = <T>(RecoilState<T>, ValueOrUpdater<T>) => void;
 type ResetRecoilValue = <T>(RecoilState<T>) => void;
+
+type CachePolicy =
+  | {eviction: 'lru', maxSize: number}
+  | {eviction: 'keep-all'}
+  | {eviction: 'most-recent'};
 ```
 
 - `key` - 用于内部识别 atom 的唯一字符串。相对于整个应用程序中的其他 atom 和 selector，该字符串应该是唯一的。
 - `get` - 传递给命名回调对象的函数，与 `selector()` 接口相同，该回调将返回 selector 的值。这是一个包装函数，该函数通过调用 selector 族函数获取参数。
 - `set?` - 它应该是一个带有命名回调对象的函数，与 `selector()` 接口相同。这也是一个包装函数，该函数通过调用 selector 族函数获取参数。
+- `cachePolicy_UNSTABLE` - 定义内部选择器缓存的行为，用于**构成 family 的各个选择器**（它不控制存储在 family 中选择器的数量）。在有许多依赖关系变化的选择器应用程序中，控制内存占用非常有用。
+  - `eviction` - 可以设置为 `lru`（需要设置 `maxSize`），`keep-all`（默认值），或者设置为 `most-recent`。当缓存大小超过 `maxSize` 时，`lru` 缓存策略将从选择器缓存中移除最近较少使用的值。`keep-all` 策略将意味着所有选择器的依赖关系以及它们的值将无限期地存储在选择器缓存中。而 `most-recent` 策略将使用一个大小为 1 的缓存，并将只保留最近保存的依赖关系和它们的值。
+  - 注意与 `lru` 一起使用的 `maxSize` 属性并不控制其本身的最大 Size，它仅控制组成 family 的单个选择器中使用的驱逐策略。
+  - 注意，缓存会根据一个包含所有依赖关系及其值的 key 来存储选择器的值。这意味着内部选择器缓存的大小既取决于选择器值的大小，也取决于所有依赖关系的唯一值数量。
+  - 注意，默认的驱逐策略（目前是 "保持所有"）在未来可能会改变。
 
 ---
 
@@ -144,3 +156,7 @@ const Component2 = () => {
   );
 }
 ```
+
+## Cache 策略配置
+
+`cachePolicy_UNSTABLE` 属性允许你配置 family 中的 **单个选择器** 的缓存行为。此属性可用于减少具有大量更改依赖项大量选择器的应用程序内存。请参阅 [选择器缓存策略配置文档](/docs/api-reference/core/selector#cache-policy-configuration)。

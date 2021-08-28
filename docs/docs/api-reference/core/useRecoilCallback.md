@@ -20,6 +20,7 @@ type CallbackInterface = {
   gotoSnapshot: Snapshot => void,
   set: <T>(RecoilState<T>, (T => T) | T) => void,
   reset: <T>(RecoilState<T>) => void,
+  transact_UNSTABLE: ((TransactionInterface) => void) => void,
 };
 
 function useRecoilCallback<Args, ReturnValue>(
@@ -36,6 +37,7 @@ function useRecoilCallback<Args, ReturnValue>(
 * **`gotoSnapshot`** - Enqueue 更新全局状态以匹配提供的 [`Snapshot`](/docs/api-reference/core/Snapshot)。
 * **`set`** - Enqueue 设置原子或选择器的值。像其他地方一样，你可以直接提供新的值，或者提供一个返回新值并将当前值作为参数的更新器函数。当前值代表当前事务中迄今为止所有其他排队的状态变化。
 * **`reset`** - 将原子或选择器的值重置为其默认值。
+* **`transact_UNSTABLE`** - 执行一个事务。请参阅 [`useRecoilTransaction_UNSTABLE()` 的文档](/docs/api-reference/core/useRecoilTransaction)。
 
 ### 懒读取示例
 

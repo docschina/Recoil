@@ -279,6 +279,8 @@ function CurrentUserInfo() {
 }
 ```
 
+请注意，这种预获取是通过触发 `selectorFamily()` 来启动一个异步查询并填充选择器的缓存。如果你使用 `atomFamily()` 来代替，可以通过设置 atom 或 atom effect 来初始化，那么硬使用 [`useRecoilTransaction_UNSTABLE()`](/docs/api-reference/core/useRecoilTransaction) 而非 [`useRecoilCallback()](/docs/api-reference/core/useRecoilCallback)，因为尝试设置所提供的 `Snapshot` 的状态对 `<RecoilRoot>` 中的实时状态没有影响。
+
 ## 查询默认 Atom 值
 
 常见的模式是使用一个 atom 来代表本地可编辑的状态，但使用一个 selector 来查询默认值。

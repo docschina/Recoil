@@ -28,6 +28,8 @@ function selector<T>({
   ) => void,
 
   dangerouslyAllowMutability?: boolean,
+
+  cachePolicy_UNSTABLE?: CachePolicy,
 })
 ```
 
@@ -41,6 +43,11 @@ type GetCallback =
 type GetRecoilValue = <T>(RecoilValue<T>) => T;
 type SetRecoilState = <T>(RecoilState<T>, ValueOrUpdater<T>) => void;
 type ResetRecoilState = <T>(RecoilState<T>) => void;
+
+type CachePolicy =
+  | {eviction: 'lru', maxSize: number}
+  | {eviction: 'keep-all'}
+  | {eviction: 'most-recent'};
 ```
 
 - `key` - 一个在内部用来标识 selector 的唯一字符串。在整个应用中，该字符串必须相对于其他 atom 和 selector 保持唯一。如果用于持久化，则它需要在整个执行过程中保持稳定性。
@@ -52,6 +59,10 @@ type ResetRecoilState = <T>(RecoilState<T>) => void;
   - `set()` - 一个用来设置 Recoil 状态的函数。第一个参数是 Recoil 的 state，第二个参数是新的值。新值可以是一个更新函数，或一个 `DefaultValue` 类型的对象，用以传递更新操作。
   - - `reset()` - 一个用以重置上游 Recoil 状态的默认值的函数。它唯一的参数就是 Recoil 状态。
 - `dangerouslyAllowMutability` - 在某些情况下，我们可能希望允许存储在 atom 中的对象发生改变，而这些变化并不代表 status 的变更。使用这个选项可以覆盖开发模式下的 freezing 对象。
+- `cachePolicy_UNSTABLE` - 用于定义内部选择器缓存的行为。在有许多变化依赖选择器的应用中，这对控制内存占用非常有用。
+  - `eviction` - 可以设置为 `lru`（需要设置 `maxSize`），`keep-all`（默认值），或者设置为 `most-recent`。当缓存大小超过 `maxSize` 时，`lru` 缓存策略将从选择器缓存中驱逐最近较少使用的值。`keep-all` 策略将意味着所有选择器的依赖关系以及它们的值将无限期地存储在选择器缓存中。而 `most-recent` 策略将使用一个大小为 1 的缓存，并将只保留最近保存的依赖关系和它们的值。
+  - 注意，缓存会根据一个包含所有依赖关系及其值的 key 来存储选择器的值。这意味着内部选择器缓存的大小既取决于选择器值的大小，也取决于所有依赖关系的唯一值数量。
+  - 注意，默认的驱逐策略（目前是 "保持所有"）在未来可能会改变。
 
 ---
 
@@ -67,7 +78,7 @@ const mySelector = selector({
 ### 动态依赖
 
 只读 selector 有一个 `get` 方法，该方法会根据依赖关系计算 selector 的值。如果这些依赖项中的任何一个更新了，那么 selector 的值也将重新计算。求该 selector 的值时，其依赖关系是基于实际使用的 atoms 或 selectors 动态确定的。根据先前依赖项的值，你可以动态地使用不同的附加依赖项。Recoil 将自动更新当前的数据流图，因此 selector 只需订阅来自当前依赖关系集的更新。
-在这个示例中，`mySelector` 将取决于 `toggleState` 的 atom 以及依赖于 `toggleState` 状态的 `selector` 或 `selectorB`。
+在这个示例中，`mySelector` 将取决于 `toggleState` 的 atom 以及依赖于 `toggleState` 状态的 `selectorA` 或 `selectorB`。
 ```jsx
 const toggleState = atom({key: 'Toggle', default: false});
 
@@ -221,3 +232,35 @@ const menuItemState = selectorFamily({
   },
 });
 ```
+
+## 缓存策略配置
+
+`cachePolicy_UNSTABLE` 属性允许你配置选择器内部缓存的缓存行为。此属性可用于减少具有大量更改依赖项选择器的内存。目前，唯一可配置的选项是 `eviction`，但我们可能会在未来添加更多选项。
+
+你可以通过下方示例，了解如何使用该属性：
+
+```jsx
+const clockState = selector({
+  key: 'clockState',
+  get: ({get}) => {
+    const hour = get(hourState);
+    const minute = get(minuteState);
+    const second = get(secondState); // will re-run every second
+
+    return `${hour}:${minute}:${second}`;
+  },
+  cachePolicy_UNSTABLE: {
+    // Only store the most recent set of dependencies and their values
+    eviction: 'most-recent',
+  },
+});
+```
+
+在上述示例中，`clockState` 每秒都会重新计算，然后往内部添加一组新的依赖值，随着时间的推移，内部缓存无限增长，这可能会导致内存问题。使用 `most-recent` 驱逐缓存策略，内部选择器缓存将只保留最近的一组依赖项、它的值，以及基于这些依赖项的实际选择器的值，从而解决内存问题。
+
+目前的驱逐选项包括：
+- `lru` - 当大小超过 `maxSize` 时，从缓存中驱逐最近较少使用的值。
+- `most-recent` - 只保留最新的值。
+- `keep-all` (*默认值*) - 保留所有缓存，不进行驱逐。
+
+> **_注意:_** *默认的驱逐策略（目前为 `keep-all`）在未来可能会发生变化。*
