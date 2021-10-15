@@ -54,8 +54,13 @@ const itemsInCart = atom({
 function CartInfoDebug() {
   const logCartItems = useRecoilCallback(({snapshot}) => async () => {
     const numItemsInCart = await snapshot.getPromise(itemsInCart);
+<<<<<<< HEAD
     console.log('购物车中内容：', numItemsInCart);
   });
+=======
+    console.log('Items in cart: ', numItemsInCart);
+  }, []);
+>>>>>>> 22654cf003778c8558bf512bca45ed48d2675d72
 
   return (
     <div>
