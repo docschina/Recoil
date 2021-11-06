@@ -71,8 +71,13 @@ class MutableSnapshot {
 
 ## 快照导航
 
+<<<<<<< HEAD
 下面这个钩子可用于将当前的 Recoil 状态导航到提供的 `Snapshot`：
 - [`useGotoRecoilSnapshot()`](/docs/api-reference/core/useGotoRecoilSnapshot) —— 更新当前状态以匹配一个快照
+=======
+The following hook can be used for updating the current Recoil state to match the provided `Snapshot`:
+- [`useGotoRecoilSnapshot()`](/docs/api-reference/core/useGotoRecoilSnapshot) - Update current state to match a Snapshot
+>>>>>>> f22667fde5e7ed01b8bc634f5d0336f8ad270844
 
 
 ## 开发者工具
