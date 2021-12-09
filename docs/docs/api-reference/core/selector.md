@@ -134,7 +134,7 @@ const myQuery = selector({
 ### 示例 (同步)
 
 ```jsx
-import {atom, selector, useRecoilState, DefaultValue} from 'recoil';
+import {atom, selector, useRecoilState, DefaultValue, useResetRecoilState} from 'recoil';
 
 const tempFahrenheit = atom({
   key: 'tempFahrenheit',
@@ -170,7 +170,7 @@ function TempCelsius() {
       <br />
       <button onClick={addTenFahrenheit}>Add 10 Fahrenheit</button>
       <br />
-      <button onClick={reset}>>Reset</button>
+      <button onClick={reset}>Reset</button>
     </div>
   );
 }
