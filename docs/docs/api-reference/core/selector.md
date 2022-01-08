@@ -108,7 +108,11 @@ const proxySelector = selector({
 });
 ```
 
+<<<<<<< HEAD
 这个 selector 转换了数据，所以需要检查传入值是否是一个 `DefaultValue`。
+=======
+This selector transforms the data, so it needs to check if the incoming value is a `DefaultValue`.
+>>>>>>> 43447929c149e16cd6d2e3fd5014b389fc65f106
 ```jsx
 const transformSelector = selector({
   key: 'TransformSelector',
@@ -134,7 +138,7 @@ const myQuery = selector({
 ### 示例 (同步)
 
 ```jsx
-import {atom, selector, useRecoilState, DefaultValue} from 'recoil';
+import {atom, selector, useRecoilState, DefaultValue, useResetRecoilState} from 'recoil';
 
 const tempFahrenheit = atom({
   key: 'tempFahrenheit',
@@ -170,7 +174,7 @@ function TempCelsius() {
       <br />
       <button onClick={addTenFahrenheit}>Add 10 Fahrenheit</button>
       <br />
-      <button onClick={reset}>>Reset</button>
+      <button onClick={reset}>Reset</button>
     </div>
   );
 }
