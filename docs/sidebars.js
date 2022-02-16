@@ -51,6 +51,7 @@ module.exports = {
           'api-reference/core/useRecoilStateLoadable',
           'api-reference/core/useRecoilValueLoadable',
           'api-reference/core/useGetRecoilValueInfo',
+          'api-reference/core/useRecoilRefresher',
           'api-reference/core/isRecoilValue',
           // 'api-reference/core/DefaultValue',
         ],
@@ -76,6 +77,7 @@ module.exports = {
           'api-reference/core/useGotoRecoilSnapshot',
         ],
         Misc: [
+          'api-reference/core/useRecoilStoreID',
           'api-reference/core/useRecoilBridgeAcrossReactRoots',
         ],
       },

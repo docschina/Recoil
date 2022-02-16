@@ -283,14 +283,46 @@ function CurrentUserInfo() {
 
 ## 查询默认 Atom 值
 
+<<<<<<< HEAD
 常见的模式是使用一个 atom 来代表本地可编辑的状态，但使用一个 selector 来查询默认值。
+=======
+A common pattern is to use an atom to represent local editable state, but use a promise to query default values:
+>>>>>>> c5b5721e84d6ef11e81d8b9afcdb7151b40e2631
 
 ```jsx
 const currentUserIDState = atom({
   key: 'CurrentUserID',
+  default: myFetchCurrentUserID(),
+});
+```
+
+Or use a selector to defer the query or depend on other state.  Note that when using a selector the default atom value will remain dynamic, and update along with selector updates, until the atom is explicitly set by the user.
+
+```jsx
+const UserInfoState = atom({
+  key: 'UserInfo',
   default: selector({
-    key: 'CurrentUserID/Default',
-    get: () => myFetchCurrentUserID(),
+    key: 'UserInfo/Default',
+    get: ({get}) => myFetchUserInfo(get(currentUserIDState)),
+  }),
+});
+```
+
+This can also be used with atom families:
+
+```jsx
+const userInfoState = atomFamily({
+  key: 'UserInfo',
+  default: id  => myFetchUserInfo(id),
+});
+```
+
+```jsx
+const userInfoState = atomFamily({
+  key: 'UserInfo',
+  default: selectorFamily({
+    key: 'UserInfo/Default',
+    get: id => ({get}) => myFetchUserInfo(id, get(paramsState)),
   }),
 });
 ```
@@ -317,12 +349,49 @@ function UserInfo({userID}) {
 
 ## 查询刷新
 
+<<<<<<< HEAD
 当使用 selector 为数据查询建模时，重要的是要记住，selector 的计算总能为给定的状态提供一个一致的值。 selector 代表从其他 atom 和 selector 状态派生出来的状态。 因此，对于一个给定的输入，selector 的计算函数应该是幂等的，因为它可能被缓存或执行多次。 实际上，这意味着单一的选择器不应该被用于查询在应用程序的生命周期内会有变化的结果。
 
 你可以使用一些模式来处理易变的数据：
 
 ### 使用请求ID
 selector 的计算应该根据输入（依赖状态或族参数）为一个给定的状态提供一个一致的值。因此，你可以将请求 ID 作为族参数或依赖关系添加到你的查询中。 例如：
+=======
+When using selectors to model data queries, selector evaluation should always provide a consistent value for a given state.  Selectors represent state derived from other atom and selector states.  Thus, selector evaluation functions should be idempotent for a given input, as it may be cached or executed multiple times.  However, if selectors obtain data from data queries it may be helpful for them to re-query in order to refresh with newer data or re-try after a failure.  There are a few ways to achieve this:
+
+### `useRecoilRefresher()`
+
+The [`useRecoilRefresher_UNSTABLE()`](/docs/api-reference/core/useRecoilRefresher) hook can be used to get a callback which you can call to clear any caches and force it to re-evaluate.
+
+```jsx
+const userInfoQuery = selectorFamily({
+  key: 'UserInfoQuery',
+  get: userID => async () => {
+    const response = await myDBQuery({userID});
+    if (response.error) {
+      throw response.error;
+    }
+    return response.data;
+  }
+})
+
+function CurrentUserInfo() {
+  const currentUserID = useRecoilValue(currentUserIDState);
+  const currentUserInfo = useRecoilValue(userInfoQuery(currentUserID));
+  const refreshUserInfo = useRecoilRefresher_UNSTABLE(userInfoQuery(currentUserID));
+
+  return (
+    <div>
+      <h1>{currentUserInfo.name}</h1>
+      <button onClick={() => refreshUserInfo()}>Refresh</button>
+    </div>
+  );
+}
+```
+
+### Use a Request ID
+Selector evaluation should provide a consistent value for a given state based on its input (dependent state or family parameters).  So, you could add a request ID as either a family parameter or a dependency to your query.  For example:
+>>>>>>> c5b5721e84d6ef11e81d8b9afcdb7151b40e2631
 
 ```jsx
 const userInfoQueryRequestIDState = atomFamily({
@@ -338,7 +407,7 @@ const userInfoQuery = selectorFamily({
     if (response.error) {
       throw response.error;
     }
-    return response;
+    return response.data;
   },
 });
 
@@ -356,8 +425,13 @@ function CurrentUserInfo() {
 
   return (
     <div>
+<<<<<<< HEAD
       <h1>{currentUser.name}</h1>
       <button onClick={refreshUserInfo}>刷新</button>
+=======
+      <h1>{currentUserInfo.name}</h1>
+      <button onClick={refreshUserInfo}>Refresh</button>
+>>>>>>> c5b5721e84d6ef11e81d8b9afcdb7151b40e2631
     </div>
   );
 }
@@ -389,6 +463,44 @@ function RefreshUserInfo({userID}) {
 }
 ```
 
+<<<<<<< HEAD
 如果这是你想要的效果，但这种方法的一个缺点是，atom **目前**不支持接受 `Promise` 作为新值，以便在查询刷新时自动利用 React Suspense。 然而，如果需要的话，你可以存储一个对象，对加载状态和结果进行手动编码。
 
 还可以考虑 [atom effects](/docs/guides/atom-effects) 来查询原子的同步状态。
+=======
+Note that atoms do not *currently* support accepting a `Promise` as the new value.  So, you cannot currently put the atom in a pending state for React Suspense while the query refresh is pending, if that is your desired behavior.  However, you could store an object which manually encodes the current loading status as well as the actual results to explicitly handle this.
+
+Also consider [atom effects](/docs/guides/atom-effects) for query synchronization of atoms.
+
+### Retry query from error message
+
+Here's a fun little example to find and retry queries based on errors thrown and caught in an `<ErrorBoundary>`
+
+```jsx
+function QueryErrorMessage({error}) {
+  const snapshot = useRecoilSnapshot();
+  const selectors = useMemo(() => {
+    const ret = [];
+    for (const node of snapshot.getNodes_UNSTABLE({isInitialized: true})) {
+      const {loadable, type} = snapshot.getInfo_UNSTABLE(node);
+      if (loadable != null && loadable.state === 'hasError' && loadable.contents === error) {
+        ret.push(node);
+      }
+    }
+    return ret;
+  }, [snapshot, error]);
+  const retry = useRecoilCallback(({refresh}) =>
+    () => selectors.forEach(refresh),
+    [selectors],
+  );
+
+  return selectors.length > 0 && (
+    <div>
+      Error: {error.toString()}
+      Query: {selectors[0].key}
+      <button onClick={retry}>Retry</button>
+    </div>
+  );
+}
+```
+>>>>>>> c5b5721e84d6ef11e81d8b9afcdb7151b40e2631
