@@ -51,6 +51,7 @@ module.exports = {
           'api-reference/core/useRecoilStateLoadable',
           'api-reference/core/useRecoilValueLoadable',
           'api-reference/core/useGetRecoilValueInfo',
+          'api-reference/core/useRecoilRefresher',
           'api-reference/core/isRecoilValue',
           // 'api-reference/core/DefaultValue',
         ],
@@ -76,9 +77,20 @@ module.exports = {
           'api-reference/core/useGotoRecoilSnapshot',
         ],
         Misc: [
+          'api-reference/core/useRecoilStoreID',
           'api-reference/core/useRecoilBridgeAcrossReactRoots',
         ],
       },
     ],
   },
+  refine: {
+    Introduction: ['refine/Introduction'],
+    'API Reference': [
+      'refine/api/Utilities',
+      'refine/api/Checkers',
+      'refine/api/Primitive_Checkers',
+      'refine/api/Collection_Checkers',
+      'refine/api/Advanced_Checkers',
+    ],
+  }
 };
