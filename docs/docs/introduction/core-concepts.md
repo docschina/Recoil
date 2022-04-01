@@ -8,7 +8,11 @@ title: 核心概念
 
 ## Atom
 
+<<<<<<< HEAD
 Atom 是状态的单位。它们可更新也可订阅：当 atom 被更新，每个被订阅的组件都将使用新值进行重渲染。它们也可以在运行时创建。可以使用 atom 替代组件内部的 state。如果多个组件使用相同的 atom，则这些组件共享 atom 的状态。
+=======
+Atoms are units of state. They're updatable and subscribable: when an atom is updated, each subscribed component is re-rendered with the new value. They can be created at runtime, too. Atoms can be used in place of React local component state. If the same atom is used from multiple components, all those components share their state.
+>>>>>>> 29711661433bca9cb926b22a28e268887aaeba19
 
 Atom 是使用 `atom` 函数创建的：
 
