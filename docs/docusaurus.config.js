@@ -31,12 +31,17 @@ module.exports = {
   organizationName: 'facebookexperimental', // Usually your GitHub org/user name.
   projectName: 'Recoil', // Usually your repo name.
   themeConfig: {
+    announcementBar: {
+      id: 'support_ukraine',
+      content:
+        'Support Ukraine 🇺🇦 <a target="_blank" rel="noopener noreferrer" href="https://opensource.fb.com/support-ukraine">Help Provide Humanitarian Aid to Ukraine</a>.',
+      backgroundColor: '#20232a',
+      textColor: '#fff',
+      isCloseable: false,
+    },
     algolia: {
       apiKey: '9c5a009951e793525603922b8ca66628',
       indexName: 'recoiljs',
-    },
-    googleAnalytics: {
-      trackingID: 'UA-44373548-46',
     },
     image: 'img/og-image.png',
     navbar: {
@@ -55,6 +60,18 @@ module.exports = {
           position: 'left',
         },
         { to: 'blog', label: 'Blog', position: 'left' },
+        {
+          to: 'docs/recoil-sync/introduction',
+          activeBasePath: 'docs/recoil-sync',
+          label: 'Recoil Sync',
+          position: 'left',
+        },
+        {
+          to: 'docs/refine/Introduction',
+          activeBasePath: 'docs/refine',
+          label: 'Refine',
+          position: 'left',
+        },
         { to: 'resources', label: 'External Resources', position: 'left' },
         // Please keep GitHub link to the right for consistency.
         {
@@ -161,6 +178,9 @@ module.exports = {
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
+        },
+        googleAnalytics: {
+          trackingID: 'UA-44373548-46',
         },
       },
     ],
