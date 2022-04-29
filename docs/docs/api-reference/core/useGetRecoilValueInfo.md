@@ -3,18 +3,27 @@ title: useGetRecoilValueInfo_UNSTABLE()
 sidebar_label: useGetRecoilValueInfo()
 ---
 
+<<<<<<< HEAD
 此钩子函数允许组件 “窥视” atom 或者 selector 的当前状态、值和其他信息。这类似于 [`Snapshot`](docs/api-reference/core/Snapshot) 中的 [`getInfo_UNSTABLE()`](/docs/api-reference/core/Snapshot#debug-information) 方法。
+=======
+This hook allows a component to "peek" at the current state, value, and other information about an atom or selector.  This is similar to the `getInfo_UNSTABLE()` method in [`Snapshot`](/docs/api-reference/core/Snapshot#debug-information) and [atom effects](/docs/guides/atom-effects)
+>>>>>>> 2c79aa119b556979e5600f51f1cf98969a16dd62
 
 
 ```jsx
-function useGetRecoilValueInfo_UNSTABLE(): RecoilValue<T> => AtomInfo<T>;
+function useGetRecoilValueInfo_UNSTABLE(): RecoilValue<T> => RecoilValueInfo<T>;
 
-interface AtomInfo<T> {
+interface RecoilValueInfo<T> {
   loadable?: Loadable<T>;
   isActive: boolean;
   isSet: boolean;
+<<<<<<< HEAD
   isModified: boolean; // TODO 是否报告已修改的 selectors
   type: 'atom' | 'selector' | undefined; // 初始化之前暂时设定为 undefined
+=======
+  isModified: boolean; // TODO report modified selectors
+  type: 'atom' | 'selector';
+>>>>>>> 2c79aa119b556979e5600f51f1cf98969a16dd62
   deps: Iterable<RecoilValue<T>>;
   subscribers: {
     nodes: Iterable<RecoilValue<T>>,
@@ -46,7 +55,7 @@ function ButtonToShowCurrentSubscriptions() {
     const {subscribers} = getRecoilValueInfo(myAtom);
     console.debug(
       'Current Subscriber Nodes:',
-      Array.from(subscribers.nodes).map(({key})=>key),
+      Array.from(subscribers.nodes).map(({key}) => key),
     );
   }
 
