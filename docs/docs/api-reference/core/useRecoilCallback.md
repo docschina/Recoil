@@ -20,6 +20,7 @@ type CallbackInterface = {
   gotoSnapshot: Snapshot => void,
   set: <T>(RecoilState<T>, (T => T) | T) => void,
   reset: <T>(RecoilState<T>) => void,
+  refresh: <T>(RecoilValue<T>) => void,
   transact_UNSTABLE: ((TransactionInterface) => void) => void,
 };
 
@@ -32,12 +33,22 @@ function useRecoilCallback<Args, ReturnValue>(
 * **`callback`** - 用户回调函数，有一个提供回调接口的包装函数。改变状态的回调将被排队，以异步更新当前的 Recoil 状态。封装函数的类型签名与返回的回调函数的类型签名相匹配。
 * **`deps`** - 用于记忆回调的一组可选的依赖项。和 `useCallback()` 一样，产生的回调默认不会被备忘，每次渲染都会产生一个新的函数。你可以传递一个空数组，以始终返回相同的函数实例。如果你在 `deps` 数组中传递数值，如果任何对 dep 的引用平等性发生变化，一个新的函数将被使用。然后，这些值可以在你的回调主体中使用而不会变质。参见 [`useCallback`](https://reactjs.org/docs/hooks-reference.html#usecallback) 你可以 [更新 eslint](/docs/introduction/installation#eslint) 来帮助确保这一点被正确使用。
 
+<<<<<<< HEAD
 回调接口：
 * **`snapshot`** - [`Snapshot`](/docs/api-reference/core/Snapshot) 提供了一个只读的 Recoil 原子状态，当回调的当前事务开始时，它与 React 批次一起提交。 虽然原子值是静态的，但异步选择器可能仍在等待或解决。
 * **`gotoSnapshot`** - Enqueue 更新全局状态以匹配提供的 [`Snapshot`](/docs/api-reference/core/Snapshot)。
 * **`set`** - Enqueue 设置原子或选择器的值。像其他地方一样，你可以直接提供新的值，或者提供一个返回新值并将当前值作为参数的更新器函数。当前值代表当前事务中迄今为止所有其他排队的状态变化。
 * **`reset`** - 将原子或选择器的值重置为其默认值。
 * **`transact_UNSTABLE`** - 执行一个事务。请参阅 [`useRecoilTransaction_UNSTABLE()` 的文档](/docs/api-reference/core/useRecoilTransaction)。
+=======
+### Callback Interface
+* **`snapshot`** - The [`Snapshot`](/docs/api-reference/core/Snapshot) provides a read-only look at the Recoil atom state when the callback was called.  While the atom values are static, asynchronous selectors may still resolve.  Snapshots will be retained for the duration of sync or async callbacks, but if you store and use them beyond that scope then you need to [explicitly retain them](/docs/api-reference/core/Snapshot#asynchronous-use-of-snapshots).
+* **`gotoSnapshot`** - Enqueue updating the global state to match the provided [`Snapshot`](/docs/api-reference/core/Snapshot).
+* **`set`** - Enqueue setting the value of an atom or selector.  Like elsewhere, you may either provide the new value directly or an updater function that returns the new value and takes the current value as a parameter.  The current value represents all other enqueued state changes to date in the current transaction.
+* **`reset`** - Reset the value of an atom or selector to its default.
+* **`refresh`** - Refresh selector caches.
+* **`transact_UNSTABLE`** - Execute a transaction.  See the [`useRecoilTransaction_UNSTABLE()` documentation](/docs/api-reference/core/useRecoilTransaction).
+>>>>>>> 17166ccfd9f9ece5d116b1d40b8d9f48f3a2b9a1
 
 ### 懒读取示例
 
