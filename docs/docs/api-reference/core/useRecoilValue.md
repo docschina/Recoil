@@ -5,7 +5,13 @@ sidebar_label: useRecoilValue()
 
 返回给定 Recoil state 的值。
 
+<<<<<<< HEAD
 使用此 hook 会使组件隐式地订阅给定的 state。
+=======
+This hook will subscribe the component to re-render if there are changing in the Recoil state.
+
+Use `useRecoilValue_TRANSITION_SUPPORT_UNSTABLE()` for experimental support for [React 18 transitions](/docs/guides/transitions) based on mutating Recoil state.
+>>>>>>> a069b4c4e0fd284c88b1c1570e3d2818f8cdf503
 
 ---
 
