@@ -14,7 +14,7 @@ function isRecoilValue(value: mixed): boolean
 ### 示例
 
 ```jsx
-import {atom, isRecoilValue} from 'recoil';
+import {atom, selector, isRecoilValue} from 'recoil';
 
 const counter = atom({
   key: 'myCounter',
