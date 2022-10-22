@@ -7,6 +7,7 @@ sidebar_label: Snapshot
 
 ```jsx
 class Snapshot {
+<<<<<<< HEAD
   // 检查快照状态的访问器
   getLoadable: <T>(RecoilValue<T>) => Loadable<T>;
   getPromise: <T>(RecoilValue<T>) => Promise<T>;
@@ -16,6 +17,23 @@ class Snapshot {
   asyncMap: (MutableSnapshot => Promise<void>) => Promise<Snapshot>;
 
   // 开发者工具 API
+=======
+  retain(): () => void;
+  isRetained(): boolean;
+
+  // Accessors to inspect snapshot state
+  getLoadable: <T>(RecoilValue<T>) => Loadable<T>;
+  getPromise: <T>(RecoilValue<T>) => Promise<T>;
+
+  // API to transform state to a new immutable Snapshot
+  map: (MutableSnapshot => void) => Snapshot;
+  asyncMap: (MutableSnapshot => Promise<void>) => Promise<Snapshot>;
+
+  // Get a StoreID similar to useRecoilStoreID()
+  getStoreID: () => StoreID;
+
+  // Developer Tools API
+>>>>>>> 87746b5262f5e4ffda4f557daca0e984ce2a4d9c
   getID: () => SnapshotID;
   getNodes_UNSTABLE: ({
     isModified?: boolean,
@@ -32,6 +50,7 @@ function snapshot_UNSTABLE(initializeState?: (MutableSnapshot => void)): Snapsho
 
 Recoil 提供了以下钩子，用以根据当前状态获取快照。
 
+<<<<<<< HEAD
 - [`useRecoilCallback()`](/docs/api-reference/core/useRecoilCallback) - 对快照的异步访问
 - [`useRecoilSnapshot()`](/docs/api-reference/core/useRecoilSnapshot) - 对快照的同步访问
 - [`useRecoilTransactionObserver_UNSTABLE()`](/docs/api-reference/core/useRecoilTransactionObserver) - 订阅所有状态变化的快照
@@ -39,6 +58,17 @@ Recoil 提供了以下钩子，用以根据当前状态获取快照。
 ### 构建快照
 
 你也可以使用 `snapshot_UNSTABLE()` 工厂函数来构建一个新快照，该工厂函数可接受一个可选的初始化函数。该快照可用于 [测试](/docs/guides/testing) 或在 React 上下文之外评估 selectors。
+=======
+- [`useRecoilCallback()`](/docs/api-reference/core/useRecoilCallback) - Asynchronous access to a Snapshot.
+- [`useRecoilSnapshot()`](/docs/api-reference/core/useRecoilSnapshot) - Synchronous access to a Snapshot.
+  - Using this hook will subscribe your component to re-render for *all* Recoil state changes.
+- [`useRecoilTransactionObserver_UNSTABLE()`](/docs/api-reference/core/useRecoilTransactionObserver) - Subscribe to Snapshots for all state changes.
+
+
+### Creating a fresh Snapshot
+
+You can also build a fresh snapshot using the `snapshot_UNSTABLE()` factory.  This can be used for [testing](/docs/guides/testing) or evaluating selectors outside of a React context.  All atoms in the snapshot will start in their default state, however atom effects will still be run and can initialize atoms to dynamic values.  `snapshot_UNSTABLE()` also accepts an optional callback to initialize state, though atom effect initializations takes precedence.  Also note that selector caches are shared across Recoil roots and snapshots, though they can be cleared using [callbacks](/docs/api-reference/core/selector#returning-objects-with-callbacks).
+>>>>>>> 87746b5262f5e4ffda4f557daca0e984ce2a4d9c
 
 ## 读取快照
 
@@ -71,9 +101,47 @@ class MutableSnapshot {
 
 ## 快照导航
 
+<<<<<<< HEAD
 下面这个钩子可用于将当前的 Recoil 状态导航到提供的 `Snapshot`：
 - [`useGotoRecoilSnapshot()`](/docs/api-reference/core/useGotoRecoilSnapshot) —— 更新当前状态以匹配一个快照
+=======
+The following hook can be used for updating the current Recoil state to match the provided `Snapshot`:
+- [`useGotoRecoilSnapshot()`](/docs/api-reference/core/useGotoRecoilSnapshot) - Update current state to match a Snapshot
+>>>>>>> 87746b5262f5e4ffda4f557daca0e984ce2a4d9c
 
+## Asynchronous use of Snapshots
+
+Snapshots are only retained for the duration of the callback that obtained them.  To use them after that they should be explicitly retained using `retain()`.
+
+```jsx
+test('My Test', async () => {
+  const testSnapshot = snapshot_UNSTABLE();
+  const releaseSnapshot = initialSnapshot.retain();
+
+  try {
+    await something;
+    ... use testSnapshot ...
+  } finally {
+    releaseSnapshot();
+  }
+});
+```
+
+```jsx
+function MyComponent() {
+  const myCallback = useRecoilCallback(({snapshot}) => () => {
+    const release = snapshot.retain();
+    setTimeout(() => {
+      ... use snapshot ...
+      release();
+    }, 1000);
+  });
+
+  ...
+}
+```
+
+Note that asynchronous selectors must be actively used by some `<RecoilRoot>` or `Snapshot` in order to ensure they are not canceled.  If you are only accessing an asynchronous selector via snapshots they must be retained in order to guarantee you can observe the resolved value.
 
 ## 开发者工具
 
@@ -81,7 +149,11 @@ class MutableSnapshot {
 
 ### 快照 ID
 
+<<<<<<< HEAD
 每个已提交的状态或已改变的快照都有一个唯一的不透明的版本 ID，可通过 `getID()` 方法获得该 ID。这可以用来检测我们何时通过 `useGotoRecoilSnapshot()` 回滚了之前的快照。
+=======
+Each committed state or mutated Snapshot has a unique opaque version ID that can be obtained via `getID()`. This can be used to detect when we have gone back to a previous snapshot via [`useGotoRecoilSnapshot()`](/docs/api-reference/core/useGotoRecoilSnapshot).
+>>>>>>> 87746b5262f5e4ffda4f557daca0e984ce2a4d9c
 
 ### 枚举 atom 和 selector
 
@@ -104,7 +176,11 @@ class MutableSnapshot {
 
 ## 状态初始化
 
+<<<<<<< HEAD
 [`<RecoilRoot>`](/docs/api-reference/core/RecoilRoot) 组件和 `snapshot_UNSTABLE()` 工厂接受一个可选的 `initializeState` 参数，通过 `MutableSnapshot` 初始化状态。当你事先知道所有的 atom 时，这对加载持久化状态很有帮助，并且与服务器端渲染兼容，在这种情况下，状态应该与初始渲染同步设置。对于每个 atom 的初始化/持久化以及对动态 atom 的简单处理，可以参考 [atom 效果](/docs/guides/atom-effects)
+=======
+The [`<RecoilRoot>`](/docs/api-reference/core/RecoilRoot) component and `snapshot_UNSTABLE()` factory take an optional `initializeState` prop for initializing the state via a `MutableSnapshot`.  This can be helpful for loading persisted state when you know all atoms in advance and is compatible with server-side rendering where the state should be setup synchronously with the initial render.  For per-atom initialization/persistence and ease of working with dynamic atoms, consider [atom effects](/docs/guides/atom-effects).
+>>>>>>> 87746b5262f5e4ffda4f557daca0e984ce2a4d9c
 
 ```jsx
 function MyApp() {
