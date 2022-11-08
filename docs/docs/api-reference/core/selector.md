@@ -8,7 +8,6 @@ sidebar_label: selector()
 为了知道何时通知订阅该 selector 的组件重新渲染，Recoil 会自动管理 atom 以及 selector 的状态变化。如果一个 selector 的对象值被直接改变，它可能会绕过管理，以避免通知订阅它的组件。为了帮助检测 bug，Recoil 将在开发模式下 freeze selector 的值对象。
 
 ---
-
 ```jsx
 function selector<T>({
   key: string,
@@ -16,7 +15,7 @@ function selector<T>({
   get: ({
     get: GetRecoilValue,
     getCallback: GetCallback,
-  }) => T | Promise<T> | RecoilValue<T>,
+  }) => T | Promise<T> | Loadable<T> | WrappedValue<T> | RecoilValue<T>,
 
   set?: (
     {
@@ -28,7 +27,6 @@ function selector<T>({
   ) => void,
 
   dangerouslyAllowMutability?: boolean,
-
   cachePolicy_UNSTABLE?: CachePolicy,
 })
 ```
@@ -37,7 +35,7 @@ function selector<T>({
 type ValueOrUpdater<T> = T | DefaultValue | ((prevValue: T) => T | DefaultValue);
 type GetCallback =
   <Args, Return>(
-    fn: ({snapshot: Snapshot}) => (...Args) => Return,
+    callback: CallbackInterface => (...Args) => Return,
   ) => (...Args) => Return;
 
 type GetRecoilValue = <T>(RecoilValue<T>) => T;
@@ -50,6 +48,7 @@ type CachePolicy =
   | {eviction: 'most-recent'};
 ```
 
+<<<<<<< HEAD
 - `key` - 一个在内部用来标识 selector 的唯一字符串。在整个应用中，该字符串必须相对于其他 atom 和 selector 保持唯一。如果用于持久化，则它需要在整个执行过程中保持稳定性。
 - `get` - 一个评估派生 state 值的函数。它可以直接返回一个值，也可以返回一个异步的 `Promise` 或另一个代表相同类型的 atom 或 selector。它被传递给一个对象作为第一个参数，并包含如下属性：
   - `get` - 一个用来从其他 atom 或 selector 获取值的函数。所有传入该函数的 atom 或 selector 将会隐式地被添加到此 selector 的一个 **依赖** 列表中。如果这个 selector 的任何一个依赖发生改变，这个 selector 就会重新计算值。
@@ -63,6 +62,21 @@ type CachePolicy =
   - `eviction` - 可以设置为 `lru`（需要设置 `maxSize`），`keep-all`（默认值），或者设置为 `most-recent`。当缓存大小超过 `maxSize` 时，`lru` 缓存策略将从选择器缓存中驱逐最近较少使用的值。`keep-all` 策略将意味着所有选择器的依赖关系以及它们的值将无限期地存储在选择器缓存中。而 `most-recent` 策略将使用一个大小为 1 的缓存，并将只保留最近保存的依赖关系和它们的值。
   - 注意，缓存会根据一个包含所有依赖关系及其值的 key 来存储选择器的值。这意味着内部选择器缓存的大小既取决于选择器值的大小，也取决于所有依赖关系的唯一值数量。
   - 注意，默认的驱逐策略（目前是 "保持所有"）在未来可能会改变。
+=======
+- `key` - A unique string used to identify the selector internally. This string should be unique with respect to other atoms and selectors in the entire application.  It needs to be stable across executions if used for persistence.
+- `get` - A function that evaluates the value for the derived state.  It may return either a value directly, an asynchronous `Promise`, a `Loadable`, or another atom or selector representing the same type.  To set the selector value directly to something like a `Promise` or `Loadable`, you can wrap it with `selector.value(...)`.  This callback is passed an object as the first parameter containing the following properties:
+  - `get()` - a function used to retrieve values from other atoms/selectors. All atoms/selectors passed to this function will be implicitly added to a list of **dependencies** for the selector. If any of the selector's dependencies change, the selector will re-evaluate.
+  - `getCallback()` - a function for creating Recoil-aware callbacks with a [callback interface](/docs/api-reference/core/useRecoilCallback#callback-interface).  See [example](/docs/api-reference/core/selector#returning-objects-with-callbacks) below.
+- `set?` - If this property is set, the selector will return **writeable** state. A function that is passed an object of callbacks as the first parameter and the new incoming value.  The incoming value may be a value of type `T` or maybe an object of type `DefaultValue` if the user reset the selector.  The callbacks include:
+  - `get()` - a function used to retrieve values from other atoms/selectors. This function will not subscribe the selector to the given atoms/selectors.
+  - `set()` - a function used to set the values of upstream Recoil state. The first parameter is the Recoil state and the second parameter is the new value.  The new value may be an updater function or a `DefaultValue` object to propagate reset actions.
+  - `reset()` - a function used to reset to the default values of upstream Recoil state. The only parameter is the Recoil state.
+- `dangerouslyAllowMutability` - In some cases it may be desirable allow mutating of objects stored in selectors that don't represent state changes.  Use this option to override freezing objects in development mode.
+- `cachePolicy_UNSTABLE` - Defines the behavior of the internal selector cache. Can be useful to control the memory footprint in apps that have selectors with many changing dependencies.
+  - `eviction` - can be set to `lru` (which requires that a `maxSize` is set), `keep-all` (default), or `most-recent`. An `lru` cache will evict the least-recently-used value from the selector cache when the size of the cache exceeds `maxSize`. A `keep-all` policy will mean all selector dependencies and their values will be indefinitely stored in the selector cache. A `most-recent` policy will use a cache of size 1 and will retain only the most recently saved set of dependencies and their values.
+  - Note the cache stores the values of the selector based on a key containing all dependencies and their values. This means the size of the internal selector cache depends on both the size of the selector values as well as the number of unique values of all dependencies.
+  - Note the default eviction policy (currently `keep-all`) may change in the future.
+>>>>>>> a2b08f43c99cf0a826edffc2c8321f6d2ed9ef1f
 
 ---
 
@@ -108,7 +122,11 @@ const proxySelector = selector({
 });
 ```
 
+<<<<<<< HEAD
 这个 selector 转换了数据，所以需要检查传入值是否是一个 `DefaultValue`。
+=======
+This selector transforms the data, so it needs to check if the incoming value is a `DefaultValue`.
+>>>>>>> a2b08f43c99cf0a826edffc2c8321f6d2ed9ef1f
 ```jsx
 const transformSelector = selector({
   key: 'TransformSelector',
@@ -134,7 +152,7 @@ const myQuery = selector({
 ### 示例 (同步)
 
 ```jsx
-import {atom, selector, useRecoilState, DefaultValue} from 'recoil';
+import {atom, selector, useRecoilState, DefaultValue, useResetRecoilState} from 'recoil';
 
 const tempFahrenheit = atom({
   key: 'tempFahrenheit',
@@ -170,7 +188,7 @@ function TempCelsius() {
       <br />
       <button onClick={addTenFahrenheit}>Add 10 Fahrenheit</button>
       <br />
-      <button onClick={reset}>>Reset</button>
+      <button onClick={reset}>Reset</button>
     </div>
   );
 }
@@ -233,7 +251,29 @@ const menuItemState = selectorFamily({
 });
 ```
 
+<<<<<<< HEAD
 ## 缓存策略配置
+=======
+Example that can mutate state:
+
+```jsx
+const menuItemState = selectorFamily({
+  key: 'MenuItem',
+  get: itemID => ({get, getCallback}) => {
+    const name = get(itemNameQuery(itemID));
+    const onClick = getCallback(({refresh}) => () => {
+      refresh(itemInfoQuery(itemID));
+    });
+    return {
+      title: `Refresh data for ${name}`,
+      onClick,
+    };
+  },
+});
+```
+
+## Cache policy configuration
+>>>>>>> a2b08f43c99cf0a826edffc2c8321f6d2ed9ef1f
 
 `cachePolicy_UNSTABLE` 属性允许你配置选择器内部缓存的缓存行为。此属性可用于减少具有大量更改依赖项选择器的内存。目前，唯一可配置的选项是 `eviction`，但我们可能会在未来添加更多选项。
 
