@@ -33,6 +33,7 @@ module.exports = {
       'guides/asynchronous-data-queries',
       'guides/atom-effects',
       'guides/testing',
+      'guides/transitions',
       'guides/dev-tools',
       //   'guides/code-splitting',
     ],
@@ -51,6 +52,7 @@ module.exports = {
           'api-reference/core/useRecoilStateLoadable',
           'api-reference/core/useRecoilValueLoadable',
           'api-reference/core/useGetRecoilValueInfo',
+          'api-reference/core/useRecoilRefresher',
           'api-reference/core/isRecoilValue',
           // 'api-reference/core/DefaultValue',
         ],
@@ -76,9 +78,67 @@ module.exports = {
           'api-reference/core/useGotoRecoilSnapshot',
         ],
         Misc: [
+          'api-reference/core/useRecoilStoreID',
           'api-reference/core/useRecoilBridgeAcrossReactRoots',
         ],
       },
+      'api-reference/core/RecoilEnv',
     ],
   },
+  'recoil-sync': [
+    'recoil-sync/introduction',
+    'recoil-sync/sync-effect',
+    'recoil-sync/implement-store',
+    'recoil-sync/url-persistence',
+    {
+      'API Reference': [
+        'recoil-sync/api/RecoilSync',
+        'recoil-sync/api/syncEffect',
+        {
+          'URL Persistence': [
+            'recoil-sync/api/RecoilURLSync',
+            'recoil-sync/api/urlSyncEffect',
+            'recoil-sync/api/RecoilURLSyncJSON',
+            'recoil-sync/api/RecoilURLSyncTransit',
+          ],
+        },
+      ],
+    },
+  ],
+  refine: [
+    'refine/Introduction',
+    {
+      'API Reference': [
+        'refine/api/Utilities',
+        'refine/api/Checkers',
+        'refine/api/Primitive_Checkers',
+        'refine/api/Collection_Checkers',
+        'refine/api/Advanced_Checkers',
+      ],
+    },
+  ],
+  'recoil-relay': [
+    'recoil-relay/introduction',
+    'recoil-relay/environment',
+    'recoil-relay/graphql-queries',
+    'recoil-relay/graphql-mutations',
+    'recoil-relay/graphql-subscriptions',
+    'recoil-relay/graphql-effects',
+    {
+      'API Reference': [
+        'recoil-relay/api/EnvironmentKey',
+        'recoil-relay/api/RecoilRelayEnvironment',
+        'recoil-relay/api/RecoilRelayEnvironmentProvider',
+        'recoil-relay/api/graphQLSelector',
+        'recoil-relay/api/graphQLSelectorFamily',
+        {
+          'Atom Effects': [
+            'recoil-relay/api/graphQLQueryEffect',
+            'recoil-relay/api/graphQLSubscriptionEffect',
+            'recoil-relay/api/graphQLMutationEffect',
+          ],
+        },
+      ],
+    },
+  ],
 };
