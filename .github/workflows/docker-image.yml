@@ -39,6 +39,9 @@ jobs:
 
 
     - name: Build docs
+      uses: actions/setup-node@v4
+      with:
+        node-version: 14
       run: cd docs && yarn && yarn build && cd ..
 
     - name: Docker build
