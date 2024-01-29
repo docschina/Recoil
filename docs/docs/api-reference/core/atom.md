@@ -10,9 +10,10 @@ sidebar_label: atom()
 ```jsx
 function atom<T>({
   key: string,
-  default: T | Promise<T> | RecoilValue<T>,
 
-  effects_UNSTABLE?: $ReadOnlyArray<AtomEffect<T>>,
+  default?: T | Promise<T> | Loadable<T> | WrappedValue<T> | RecoilValue<T>,
+
+  effects?: $ReadOnlyArray<AtomEffect<T>>,
 
   dangerouslyAllowMutability?: boolean,
 }): RecoilState<T>
@@ -24,6 +25,7 @@ function atom<T>({
   - `dangerouslyAllowMutability` - 在某些情况下，我们可能希望允许存储在 atom 中的对象发生改变，而这些变化并不代表 status 的变更。使用这个选项可以覆盖开发模式下的 freezing 对象。
 =======
   - `key` - A unique string used to identify the atom internally. This string should be unique with respect to other atoms and selectors in the entire application.
+<<<<<<< HEAD
   - `default` - The initial value of the atom or a `Promise` or another atom or selector representing a value of the same type.  If a selector is used as the default, the atom may dynamically update if the default selector updates; once the atom is set then it will retain the value it was set to.
   - `effects_UNSTABLE` - An optional array of [Atom Effects](/docs/guides/atom-effects) for the atom.
   - `dangerouslyAllowMutability` - In some cases it may be desireable allow mutating of objects stored in atoms that don't represent state changes.  Use this option to override freezing objects in development mode.
@@ -32,6 +34,18 @@ function atom<T>({
 ---
 
 Recoil 管理 atom 的 state 变化，以便通知订阅该 atom 的组件何时重新渲染，所以你需使用下面列出的钩子函数来改变 atom 的 state。如果一个存储在 atom 中的对象被直接 mutated，它可能会绕过钩子，在没有正确触发订阅的情况下导致 state 的变化，为了帮助大家检测 bug，Recoil 会在开发模式下 freeze 存储在 atom 中的对象。
+=======
+  - `default` - The initial value of the atom.  It can also be a `Promise`, [`Loadable`](/docs/api-reference/core/Loadable), wrapped value, or another atom or selector of the same type representing the default value.
+    - If a selector is used as the default the atom will dynamically update as the default selector updates.  Once the atom is set, then it will retain that value unless the atom is reset.
+    - If no `default` is provided, as oppose to a value which could include `null` or `undefined`, the atom will start in a "pending" state and trigger Suspense until it is set.
+    - If you would like to set the default atom value directly to a `Promise`, `Loadable`, atom, selector, or function without unwrapping it, then you can wrap it with `atom.value(...)`.
+  - `effects` - An optional array of [Atom Effects](/docs/guides/atom-effects) for the atom.
+  - `dangerouslyAllowMutability` - In some cases it may be desireable to allow mutating of objects stored in atoms that don't represent state changes.  Use this option to override freezing objects in development mode.
+
+---
+
+Recoil manages atom state changes to know when to notify components subscribing to that atom to re-render, so you should use the hooks listed below to change atom state.  If an object stored in an atom was mutated directly it may bypass this and cause state changes without properly notifying subscribing components.  To help detect bugs like this Recoil will freeze objects stored in atoms in development mode.
+>>>>>>> 6e950cfeaab3549761bb8121905e895bfde23d40
 
 通常，你需要使用以下 hook 来与 atom 搭配使用。
 
