@@ -16,15 +16,25 @@ npm install recoil
 yarn add recoil
 ```
 
+Or if you're using [bower](https://bower.io/#install-bower):
+
+```shell
+bower install --save recoil
+```
+
 ### Bundler
 
 通过 npm 安装的 Recoil 与 [Webpack](https://webpack.js.org/) 或 [Rollup](https://rollupjs.org/) 等模块 bunlder 可以轻松匹配。
 
 ### 支持 ES5
 
+<<<<<<< HEAD
 Recoil 的构建没有转译成 ES5，我们也不支持在 ES5 下使用 Recoil。如果你需要兼容不支持 ES6 的浏览器，你可以通过 [Babel](https://babeljs.io/) 编译你的代码，并使用 [@babel/preset-env](https://babeljs.io/docs/en/babel-preset-env) 的 preset。然而，我们不建议你这样做，你可能会遇到问题。
 
 主要是，[像 React 这类的库](https://reactjs.org/docs/javascript-environment-requirements.html)，Recoil 依赖于 `Map` 和 `Set` 类型以及其他 ES6 的特性。使用 polyfill 来模拟这些特性可能会导致性能大大降低。
+=======
+Recoil builds are not transpiled to ES5, and we do not support the use of Recoil with ES5. If you need to support browsers that do not provide ES6 features natively, you can do so by compiling your code with [Babel](https://babeljs.io/) and using preset [@babel/preset-env](https://babeljs.io/docs/en/babel-preset-env). However, we do not support this and you may run into problems.  In particular, [just like React](https://reactjs.org/docs/javascript-environment-requirements.html), Recoil depends on the `Map` and `Set` types and other features of ES6. Emulation of these features using polyfills may result in poor performance.
+>>>>>>> 341e094708b902f28c91ccb35cb1d94dd96f887d
 
 ## CDN
 
