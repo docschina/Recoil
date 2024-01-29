@@ -8,24 +8,33 @@ sidebar_label: selectorFamily()
 `selectorFamily` 是一个功能强大的模式，类似于 [`selector`](/docs/api-reference/core/selector)，但允许你将参数传递给 `selector` 的 `get` 和 `set` 回调。`selectorFamily()` 工具函数的返回值是一个函数，该函数可以使用自定义的参数进行调用并会翻译一个 selector。对每个唯一参数值，该函数都将返回相同的 selector 实例。
 
 ---
-
+Read-only selector family:
 ```jsx
-function selectorFamily<T, Parameter>({
+function selectorFamily<T, P: Parameter>({
   key: string,
 
-  get: Parameter => ({get: GetRecoilValue}) => Promise<T> | RecoilValue<T> | T,
+  get: P => ({
+    get: GetRecoilValue
+    getCallback: GetCallback<T>,
+  }) =>
+    T | Promise<T> | Loadable<T> | WrappedValue<T> | RecoilValue<T>,
 
   dangerouslyAllowMutability?: boolean,
-}): Parameter => RecoilValueReadOnly<T>
+}): P => RecoilValueReadOnly<T>
 ```
 
+Writable selector family:
 ```jsx
-function selectorFamily<T, Parameter>({
+function selectorFamily<T, P: Parameter>({
   key: string,
 
-  get: Parameter => ({get: GetRecoilValue}) => Promise<T> | RecoilValue<T> | T,
+  get: P => ({
+    get: GetRecoilValue
+    getCallback: GetCallback<T>,
+  }) =>
+    T | Promise<T> | Loadable<T> | WrappedValue<T> | RecoilValue<T>,
 
-  set: Parameter => (
+  set: P => (
     {
       get: GetRecoilValue,
       set: SetRecoilValue,
@@ -37,16 +46,22 @@ function selectorFamily<T, Parameter>({
   dangerouslyAllowMutability?: boolean,
 
   cachePolicy_UNSTABLE?: CachePolicy,
-}): Parameter => RecoilState<T>
+}): P => RecoilState<T>
 ```
 
 Where
 
 ```jsx
 type ValueOrUpdater<T> =  T | DefaultValue | ((prevValue: T) => T | DefaultValue);
+
 type GetRecoilValue = <T>(RecoilValue<T>) => T;
 type SetRecoilValue = <T>(RecoilState<T>, ValueOrUpdater<T>) => void;
 type ResetRecoilValue = <T>(RecoilState<T>) => void;
+
+type GetCallback<T> =
+  <Args, Return>(
+    callback: ({node: RecoilState<T>, ...CallbackInterface}) => (...Args) => Return,
+  ) => (...Args) => Return;
 
 type CachePolicy =
   | {eviction: 'lru', maxSize: number}
@@ -65,7 +80,30 @@ type CachePolicy =
 
 ---
 
+<<<<<<< HEAD
 `selectorFamily` 本质上提供了从参数到选择器的映射。因为参数通常是使用族在调用站点上生成的，并且我们希望等效的参数重新使用相同的基础选择器，所以默认情况下它使用值相等而不是引用相等。（有一个不稳定的 API 可以调整此行为）。这对可用于参数的类型施加了限制。请使用原始类型或可以序列化的对象。Recoil 使用可以支持对象和数组的自定义序列化程序，某些容器（例如ES6 Sets和Maps）不改变对象键顺序，支持Symbols、Iterables，并可用 `toJSON` 属性来进行自定义序列化（例如类似不可变容器之类的库）。在参数中使用函数或可变对象（如 Promises）都有可能造成问题。
+=======
+The `selectorFamily()` essentially provides a map from the parameter to a selector.  You only need to provide a single key for the atom family and it will generate a unique key for each underlying selector.
+
+## Parameter Type
+```jsx
+type Primitive = void | null | boolean | number | string;
+interface HasToJSON {
+  toJSON(): Parameter;
+}
+type Parameter =
+  | Primitive
+  | HasToJSON
+  | $ReadOnlyArray<Parameter>
+  | $ReadOnly<{[string]: Parameter}>
+  | $ReadOnlySet<Parameter>
+  | $ReadOnlyMap<Parameter, Parameter>;
+```
+There are restrictions on the type you can use as the family `Parameter`.  They may be generated at different callsites and we want equivalent parameters to reference the same underlying selector.  Therefore, parameters are compared using value-equality and must be serializable.  Using functions or mutable objects, such as Promises, in parameters is problematic.  To be serializable it must be either:
+  * A primitive value
+  * An array, object, `Map`, or `Set` of serializable values
+  * Contain a `toJSON()` method which returns a serializable value, similar to `JSON.stringify()`
+>>>>>>> 65e1b237fdb7f22d8d71eab582c6767f69b9ec18
 
 ## 示例
 
