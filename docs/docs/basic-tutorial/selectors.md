@@ -2,7 +2,11 @@
 title: Selector
 ---
 
+<<<<<<< HEAD
 **Selector** 代表一个**派生状态**，你可以将派生状态视为将状态传递给以某种方式修改给定状态的纯函数的输出。
+=======
+A **selector** represents a piece of **derived state**. You can think of derived state as the output of passing state to a pure function that derives a new value from the said state.
+>>>>>>> a2b08f43c99cf0a826edffc2c8321f6d2ed9ef1f
 
 派生状态（Derived state）是一个强大的概念，因为它使我们可以构建依赖于其他数据的动态数据。 在我们的 Todo List 应用程序的中，以下内容被视为派生数据：
 
@@ -13,7 +17,7 @@ title: Selector
 
 ```javascript
 const todoListFilterState = atom({
-  key: 'todoListFilterState',
+  key: 'TodoListFilter',
   default: 'Show All',
 });
 ```
@@ -22,7 +26,7 @@ const todoListFilterState = atom({
 
 ```javascript
 const filteredTodoListState = selector({
-  key: 'filteredTodoListState',
+  key: 'FilteredTodoList',
   get: ({get}) => {
     const filter = get(todoListFilterState);
     const list = get(todoListState);
@@ -100,7 +104,7 @@ function TodoListFilters() {
 
 ```javascript
 const todoListStatsState = selector({
-  key: 'todoListStatsState',
+  key: 'TodoListStats',
   get: ({get}) => {
     const todoList = get(todoListState);
     const totalNum = todoList.length;
