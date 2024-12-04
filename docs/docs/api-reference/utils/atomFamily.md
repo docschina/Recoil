@@ -17,7 +17,7 @@ function atomFamily<T, Parameter>({
     | T
     | (Parameter => T | RecoilValue<T> | Promise<T>),
 
-  effects_UNSTABLE?:
+  effects?:
     | $ReadOnlyArray<AtomEffect<T>>
     | (P => $ReadOnlyArray<AtomEffect<T>>),
 
@@ -25,10 +25,17 @@ function atomFamily<T, Parameter>({
 }): Parameter => RecoilState<T>
 ```
 
+<<<<<<< HEAD
 - `key` —— 一个在内部用来标识 atom 的唯一字符串。在整个应用中，该字符串必须相对于其他 atom 和 selector 保持唯一。
 - `default` —— atom 的初始值。它可以是一个直接的值，一个代表默认值的`RecoilValue` 或 `Promise`，或者一个获得默认值的函数。回调函数被传递给 `atomFamily` 函数被调用时使用的参数的副本。
 - `effects_UNSTABLE` —— 一个可选的数组，或回调函数，用于根据 [Atom Effects](/docs/guides/atom-effects) 的族参数获取数组。
 - `dangerouslyAllowMutability` —— Recoil 依赖 atom 状态的变化来知道何时通知使用原 atom 组件重新渲染。如果一个 atom 的值发生了变异，它可能会绕过这个，并导致状态发生变化，而不正确地通知订阅组件。为了防止这种情况，所有存储的值都被冻结。在某些情况下，我们可能希望使用这个选项来覆盖这一点。
+=======
+- `key` - A unique string used to identify the atom internally. This string should be unique with respect to other atoms and selectors in the entire application.
+- `default` - The initial value of the atom. It may either be a value directly, a `RecoilValue` or `Promise` that represents the default value, or a function to get the default value. The callback function is passed a copy of the parameter used when the `atomFamily` function is called.
+- `effects` - An optional array, or callback to get the array based on the family parameter, of [Atom Effects](/docs/guides/atom-effects).
+- `dangerouslyAllowMutability` - Recoil depends on atom state changes to know when to notify components that use the atoms to re-render.  If an atom's value were mutated, it may bypass this and cause state to change without properly notifying subscribing components.  To help protect against this all stored values are frozen.  In some cases it may be desireable to override this using this option.
+>>>>>>> 9932f5e43056ea8d9f77816fde778800fd896582
 
 ---
 

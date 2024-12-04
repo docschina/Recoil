@@ -3,6 +3,7 @@ title: Atom Effects
 sidebar_label: Atom Effects
 ---
 
+<<<<<<< HEAD
 Atom Effects 是一个新的实验性 API，用于管理副作用和初始化 Recoil atom。它们有很多有用的应用，比如状态持久化、状态同步、管理历史、日志等。它们被定义为 atom 定义的一部分，所以每个 atom 都可以指定和组成它们自己的策略。这个 API 目前仍在发展中，因此被标记为 `_UNSTABLE`。
 
 ----
@@ -10,13 +11,22 @@ Atom Effects 是一个新的实验性 API，用于管理副作用和初始化 Re
 ***这个 API 目前正在开发中，未来会有变化。请继续关注……***
 
 ----
+=======
+Atom effects are an API for managing side-effects and synchronizing or initializing Recoil atoms.  They have a variety of useful applications such as state persistence, state synchronization, managing history, logging, &c.  They are similar to [React effects](https://reactjs.org/docs/hooks-effect.html), but are defined as part of the atom definition, so each atom can specify and compose their own policies.
+>>>>>>> 9932f5e43056ea8d9f77816fde778800fd896582
 
 *Atom effect* 是一个 *函数*，其定义如下：
 
 ```jsx
 type AtomEffect<T> = ({
+<<<<<<< HEAD
   node: RecoilState<T>, // 对 atom 本身的引用
   trigger: 'get' | 'set', // 触发 atom 初始化的行动
+=======
+  node: RecoilState<T>, // A reference to the atom itself
+  storeID: StoreID, // ID for the <RecoilRoot> or Snapshot store associated with this effect.
+  trigger: 'get' | 'set', // The action which triggered initialization of the atom
+>>>>>>> 9932f5e43056ea8d9f77816fde778800fd896582
 
   // 用于设置或重置 atom 值的回调。
   // 可以从 atom effect 函数中直接调用，以初始化
@@ -32,19 +42,30 @@ type AtomEffect<T> = ({
   // 订阅 atom 值的变化。
   // 由于这个 effect 自己的 setSelf() 的变化，该回调没有被调用。
   onSet: (
-    (newValue: T, oldValue: T | DefaultValue) => void,
+    (newValue: T, oldValue: T | DefaultValue, isReset: boolean) => void,
   ) => void,
 
+<<<<<<< HEAD
 }) => void | () => void; // 可以返回一个清理程序
 ```
 
 Atom effects 通过 `effects_UNSTABLE` 选项附加到 [atoms](/docs/api-reference/core/atom)。每个 atom 都可以引用这些 atom effect 函数的一个数组，当 atom 被初始化时，这些函数会按优先级顺序被调用。atom 在 `<RecoilRoot>` 内首次使用时被初始化，但如果它们未被使用并被清理，则可再次被重新初始化。Atom effect 函数可以返回一个可选的清理处理程序来管理清理的副作用。
+=======
+  // Callbacks to read other atoms/selectors
+  getPromise: <S>(RecoilValue<S>) => Promise<S>,
+  getLoadable: <S>(RecoilValue<S>) => Loadable<S>,
+  getInfo_UNSTABLE: <S>(RecoilValue<S>) => RecoilValueInfo<S>,
+}) => void | () => void; // Optionally return a cleanup handler
+```
+
+Atom effects are attached to [atoms](/docs/api-reference/core/atom) via the `effects` option.  Each atom can reference an array of these atom effect functions which are called in priority order when the atom is initialized.  Atoms are initialized when they are used for the first time within a `<RecoilRoot>`, but may be re-initialized again if they were unused and cleaned up.  The atom effect function may return an optional cleanup handler to manage cleanup side-effects.
+>>>>>>> 9932f5e43056ea8d9f77816fde778800fd896582
 
 ```jsx
 const myState = atom({
   key: 'MyKey',
   default: null,
-  effects_UNSTABLE: [
+  effects: [
     () => {
       ...effect 1...
       return () => ...cleanup effect 1...;
@@ -54,13 +75,17 @@ const myState = atom({
 });
 ```
 
+<<<<<<< HEAD
 [Atom 族](/docs/api-reference/utils/atomFamily) 也支持参数化以及非参数化的 effect ：
+=======
+[Atom families](/docs/api-reference/utils/atomFamily) support either parameterized or non-parameterized effects:
+>>>>>>> 9932f5e43056ea8d9f77816fde778800fd896582
 
 ```jsx
 const myStateFamily = atomFamily({
   key: 'MyKey',
   default: null,
-  effects_UNSTABLE: param => [
+  effects: param => [
     () => {
       ...effect 1 using param...
       return () => ...cleanup effect 1...;
@@ -70,9 +95,17 @@ const myStateFamily = atomFamily({
 });
 ```
 
+<<<<<<< HEAD
 ### 与 React Effects 相比
 
 Atom effect 大多可以通过 React `useEffect()` 来实现。然而，这组 atom 是在 React 上下文之外创建的，从 React 组件中管理 effect 会很困难，特别是对于动态创建的 atom。它们也不能用于初始化初始 atom 值或用于服务器端的渲染。使用 atom effect 还可以将 effect 与 atom 定义一起定位。
+=======
+See [`useGetRecoilValueInfo()`](/docs/api-reference/core/useGetRecoilValueInfo) for documentation about the information returned by  `getInfo_UNSTABLE()`.
+
+### Compared to React Effects
+
+Atom effects could mostly be implemented via React [`useEffect()`](https://reactjs.org/docs/hooks-reference.html#useeffect).  However, the set of atoms are created outside of a React context, and it can be difficult to manage effects from within React components, particularly for dynamically created atoms.  They also cannot be used to initialize the initial atom value or be used with server-side rendering.  Using atom effects also co-locates the effects with the atom definitions.
+>>>>>>> 9932f5e43056ea8d9f77816fde778800fd896582
 
 ```jsx
 const myState = atom({key: 'Key', default: null});
@@ -100,7 +133,11 @@ function MyApp(): React.Node {
 
 ### 与 Snapshots 相比
 
+<<<<<<< HEAD
 [`Snapshot hooks`](/docs/api-reference/core/Snapshot#hooks) API 也可以监视 atom 的状态变化，并且 [`<RecoilRoot>`](/docs/api-reference/core/RecoilRoot) 中的 `initializeState` prop 可以初始化初始渲染值。不过，这些 API 监控所有的状态变化，在管理动态 atom —— 特别是 atom 族时 —— 可能会很尴尬。有了 atom effect，副作用可以与 atom 定义一起按 atom 定义，多个规则的组成会变得很容易。
+=======
+The [`Snapshot hooks`](/docs/api-reference/core/Snapshot#hooks) API can also monitor atom state changes and the `initializeState` prop in [`<RecoilRoot>`](/docs/api-reference/core/RecoilRoot) can initialize values for initial render. However, these APIs monitor all state changes and can be awkward to manage dynamic atoms, particularly atom families.  With atom effects the side-effect can be defined per-atom alongside the atom definition, and multiple policies can be easily composed.
+>>>>>>> 9932f5e43056ea8d9f77816fde778800fd896582
 
 ## 日志示例
 
@@ -110,7 +147,7 @@ function MyApp(): React.Node {
 const currentUserIDState = atom({
   key: 'CurrentUserID',
   default: null,
-  effects_UNSTABLE: [
+  effects: [
     ({onSet}) => {
       onSet(newID => {
         console.debug("Current user ID:", newID);
@@ -144,7 +181,7 @@ const historyEffect = name => ({setSelf, onSet}) => {
 const userInfoState = atomFamily({
   key: 'UserInfo',
   default: null,
-  effects_UNSTABLE: userID => [
+  effects: userID => [
     historyEffect(`${userID} user info`),
   ],
 });
@@ -175,7 +212,7 @@ const syncStorageEffect = userID => ({setSelf, trigger}) => {
 const userInfoState = atomFamily({
   key: 'UserInfo',
   default: null,
-  effects_UNSTABLE: userID => [
+  effects: userID => [
     historyEffect(`${userID} user info`),
     syncStorageEffect(userID),
   ],
@@ -223,15 +260,17 @@ const localStorageEffect = key => ({setSelf, onSet}) => {
     setSelf(JSON.parse(savedValue));
   }
 
-  onSet(newValue => {
-    localStorage.setItem(key, JSON.stringify(newValue));
+  onSet((newValue, _, isReset) => {
+    isReset
+      ? localStorage.removeItem(key)
+      : localStorage.setItem(key, JSON.stringify(newValue));
   });
 };
 
 const currentUserIDState = atom({
   key: 'CurrentUserID',
   default: 1,
-  effects_UNSTABLE: [
+  effects: [
     localStorageEffect('current_user'),
   ]
 });
@@ -257,15 +296,18 @@ const localForageEffect = key => ({setSelf, onSet}) => {
       : new DefaultValue() // 如果没有存储值，则终止初始化
   ));
 
-  onSet(newValue => {
-    localStorage.setItem(key, JSON.stringify(newValue));
+  // Subscribe to state changes and persist them to localForage
+  onSet((newValue, _, isReset) => {
+    isReset
+      ? localForage.removeItem(key)
+      : localForage.setItem(key, JSON.stringify(newValue));
   });
 };
 
 const currentUserIDState = atom({
   key: 'CurrentUserID',
   default: 1,
-  effects_UNSTABLE: [
+  effects: [
     localForageEffect('current_user'),
   ]
 });
@@ -277,8 +319,13 @@ const currentUserIDState = atom({
 通过这种方法，你可以在值可用时异步调用 `setSelf()`。与初始化为 `Promise` 不同，最初将使用 atom 的默认值，所以 `<Suspense>` 不会显示回退，除非 atom 的默认值是 `Promise` 或异步 selector。如果 atom 在调用 `setSelf()` 之前被设置为一个值，那么它将被 `setSelf()` 覆盖。这种方法不仅限于 `await`，也适用于任何 `setSelf()` 的异步使用，例如 `setTimeout()`。
 
 ```jsx
+<<<<<<< HEAD
 const localForageEffect = key => ({setSelf, onSet}) => {
   // 如果有一个持久化的值，在加载时设置它
+=======
+const localForageEffect = key => ({setSelf, onSet, trigger}) => {
+  // If there's a persisted value - set it on load
+>>>>>>> 9932f5e43056ea8d9f77816fde778800fd896582
   const loadPersisted = async () => {
     const savedValue = await localForage.getItem(key);
 
@@ -287,19 +334,28 @@ const localForageEffect = key => ({setSelf, onSet}) => {
     }
   };
 
+<<<<<<< HEAD
   // 加载持久化的数据
   loadPersisted();
+=======
+  // Asynchronously set the persisted data
+  if (trigger === 'get') {
+    loadPersisted();
+  }
+>>>>>>> 9932f5e43056ea8d9f77816fde778800fd896582
 
   // Subscribe to state changes and persist them to localForage
-  onSet(newValue => {
-    localForage.setItem(key, JSON.stringify(newValue));
+  onSet((newValue, _, isReset) => {
+    isReset
+      ? localForage.removeItem(key)
+      : localForage.setItem(key, JSON.stringify(newValue));
   });
 };
 
 const currentUserIDState = atom({
   key: 'CurrentUserID',
   default: 1,
-  effects_UNSTABLE: [
+  effects: [
     localForageEffect('current_user'),
   ]
 });
@@ -329,7 +385,7 @@ const localStorageEffect = <T>(options: PersistenceOptions<T>) => ({setSelf, onS
 const currentUserIDState = atom<number>({
   key: 'CurrentUserID',
   default: 1,
-  effects_UNSTABLE: [
+  effects: [
     localStorageEffect({
       key: 'current_user',
       restorer: (value, defaultValue) =>
@@ -361,15 +417,17 @@ const localStorageEffect = <T>(options: PersistenceOptions<T>) => ({setSelf, onS
     options.restorer(savedValue ?? new DefaultValue(), new DefaultValue(), savedValues),
   );
 
-  onSet(newValue => {
-    localStorage.setItem(options.key, JSON.stringify(newValue));
+  onSet((newValue, _, isReset) => {
+    isReset
+      ? localForage.removeItem(key)
+      : localForage.setItem(key, JSON.stringify(newValue));
   });
 };
 
 const currentUserIDState = atom<number>({
   key: 'CurrentUserID',
   default: 1,
-  effects_UNSTABLE: [
+  effects: [
     localStorageEffect({
       key: 'current_user',
       restorer: (value, defaultValue, values) => {
@@ -395,4 +453,8 @@ Atom effects 也可以持久化并与浏览器的 URL 历史同步。这对于�
 
 ## 错误处理
 
+<<<<<<< HEAD
 如果在执行 atom effect 过程中出现了错误，那么 atom 将在错误状态下被初始化，并带有该错误。这可以在渲染时用 React 的 `<ErrorBoundary>` 机制来处理。
+=======
+If there is an error thrown during the execution of an atom effect, then the atom will be initialized in an error state with that error.  This can then be handled with the React `<ErrorBoundary>` mechanism at render time.
+>>>>>>> 9932f5e43056ea8d9f77816fde778800fd896582
