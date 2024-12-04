@@ -8,22 +8,31 @@ sidebar_label: selectorFamily()
 `selectorFamily` 是一个功能强大的模式，类似于 [`selector`](/docs/api-reference/core/selector)，但允许你将参数传递给 `selector` 的 `get` 和 `set` 回调。`selectorFamily()` 工具函数的返回值是一个函数，该函数可以使用自定义的参数进行调用并会翻译一个 selector。对每个唯一参数值，该函数都将返回相同的 selector 实例。
 
 ---
-
+Read-only selector family:
 ```jsx
 function selectorFamily<T, Parameter>({
   key: string,
 
-  get: Parameter => ({get: GetRecoilValue}) => Promise<T> | RecoilValue<T> | T,
+  get: Parameter => ({
+    get: GetRecoilValue
+    getCallback: GetCallback<T>,
+  }) =>
+    T | Promise<T> | Loadable<T> | WrappedValue<T> | RecoilValue<T>,
 
   dangerouslyAllowMutability?: boolean,
 }): Parameter => RecoilValueReadOnly<T>
 ```
 
+Writable selector family:
 ```jsx
 function selectorFamily<T, Parameter>({
   key: string,
 
-  get: Parameter => ({get: GetRecoilValue}) => Promise<T> | RecoilValue<T> | T,
+  get: Parameter => ({
+    get: GetRecoilValue
+    getCallback: GetCallback<T>,
+  }) =>
+    T | Promise<T> | Loadable<T> | WrappedValue<T> | RecoilValue<T>,
 
   set: Parameter => (
     {
@@ -44,9 +53,15 @@ Where
 
 ```jsx
 type ValueOrUpdater<T> =  T | DefaultValue | ((prevValue: T) => T | DefaultValue);
+
 type GetRecoilValue = <T>(RecoilValue<T>) => T;
 type SetRecoilValue = <T>(RecoilState<T>, ValueOrUpdater<T>) => void;
 type ResetRecoilValue = <T>(RecoilState<T>) => void;
+
+type GetCallback<T> =
+  <Args, Return>(
+    callback: ({node: RecoilState<T>, ...CallbackInterface}) => (...Args) => Return,
+  ) => (...Args) => Return;
 
 type CachePolicy =
   | {eviction: 'lru', maxSize: number}
