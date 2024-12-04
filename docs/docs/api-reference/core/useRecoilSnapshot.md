@@ -11,8 +11,41 @@ function useRecoilSnapshot(): Snapshot
 
 请慎重使用此钩子，因为它会导致组件重新渲染 *所有* 的 Recoil 状态变化。未来，我们希望能为提升性能提供防抖能力。
 
+<<<<<<< HEAD
 ### Link 示例
 定义一个 `<LinkToNewView>` 组件，该组件根据当前已改变的状态渲染一个带有 `href` 的 `<a>` 。在这个示例中 `uriFromSnapshot()` 是一个用户定义的函数，它会对 URI 中的当前状态进行编码，当再次加载页面时可以还原这个状态。
+=======
+### Debug Example
+```jsx
+function DebugObserver() {
+  const snapshot = useRecoilSnapshot();
+  const previousSnapshot = usePrevious(snapshot);
+  useEffect(() => {
+    console.debug('Changed Atoms:');
+    for (const node of snapshot.getNodes_UNSTABLE({isModified: true})) {
+      console.debug(node.key, snapshot.getLoadable(node));
+    }
+  }, [snapshot]);
+  return null;
+}
+
+function MyApp() {
+  return (
+    <RecoilRoot>
+      <DebugObserver />
+      ...
+    </RecoilRoot>
+  );
+}
+```
+
+### Error Boundary Example
+
+A [fun little example](/docs/guides/asynchronous-data-queries#retry-query-from-error-message) using snapshots in an error boundary to find, display, and retry selectors that threw an error.
+
+### Link Example
+Define a `<LinkToNewView>` component that renders an `<a>` anchor with an `href` based on the current state with a mutation applied.  In this example `uriFromSnapshot()` is some user-defined function which encodes the current state in the URI which can be restored when loading the page.
+>>>>>>> 75ebe35e2746981e2f6e3dffe6d83b6d1821b691
 
 ```jsx
 function LinkToNewView() {
