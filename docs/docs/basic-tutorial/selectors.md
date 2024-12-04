@@ -2,7 +2,11 @@
 title: Selector
 ---
 
+<<<<<<< HEAD
 **Selector** 代表一个**派生状态**，你可以将派生状态视为将状态传递给以某种方式修改给定状态的纯函数的输出。
+=======
+A **selector** represents a piece of **derived state**. You can think of derived state as the output of passing state to a pure function that derives a new value from the said state.
+>>>>>>> 5a53c91a3a0f27103776f701614df59b201ff8b2
 
 派生状态（Derived state）是一个强大的概念，因为它使我们可以构建依赖于其他数据的动态数据。 在我们的 Todo List 应用程序的中，以下内容被视为派生数据：
 
