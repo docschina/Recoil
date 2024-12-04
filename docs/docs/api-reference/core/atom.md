@@ -12,7 +12,7 @@ function atom<T>({
   key: string,
   default: T | Promise<T> | RecoilValue<T>,
 
-  effects_UNSTABLE?: $ReadOnlyArray<AtomEffect<T>>,
+  effects?: $ReadOnlyArray<AtomEffect<T>>,
 
   dangerouslyAllowMutability?: boolean,
 }): RecoilState<T>
@@ -25,9 +25,14 @@ function atom<T>({
 =======
   - `key` - A unique string used to identify the atom internally. This string should be unique with respect to other atoms and selectors in the entire application.
   - `default` - The initial value of the atom or a `Promise` or another atom or selector representing a value of the same type.  If a selector is used as the default, the atom may dynamically update if the default selector updates; once the atom is set then it will retain the value it was set to.
+<<<<<<< HEAD
   - `effects_UNSTABLE` - An optional array of [Atom Effects](/docs/guides/atom-effects) for the atom.
   - `dangerouslyAllowMutability` - In some cases it may be desireable allow mutating of objects stored in atoms that don't represent state changes.  Use this option to override freezing objects in development mode.
 >>>>>>> 7bffcb92ce0164c6bb5676ec991d1b0e6a449331
+=======
+  - `effects` - An optional array of [Atom Effects](/docs/guides/atom-effects) for the atom.
+  - `dangerouslyAllowMutability` - In some cases it may be desireable to allow mutating of objects stored in atoms that don't represent state changes.  Use this option to override freezing objects in development mode.
+>>>>>>> c5b5721e84d6ef11e81d8b9afcdb7151b40e2631
 
 ---
 
